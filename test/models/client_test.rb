@@ -36,4 +36,10 @@ class ClientTest < ActiveSupport::TestCase
 			assert_not @client.valid?, "#{invalid_address.inspect} should be invalid"
 		end
 	end	
+
+	test "email addresses should be unique" do
+		duplicate_client = @client.dup
+		@client.save
+		assert_not duplicate_client.valid?	
+	end
 end
