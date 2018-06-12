@@ -67,4 +67,14 @@ class ClientTest < ActiveSupport::TestCase
 		@client.save
 		assert_equal mixed_case_email.downcase, @client.reload.email
 	end	
+
+	test "password should be present (nonblank)" do
+		@client.password = @client.password_confirmation = " " * 6
+		assert_not @client.valid?
+	end
+
+	test "password should have a minimum length" do
+		@client.password = @client.password_confirmation = "a" * 5
+		assert_not @client.valid?
+	end	
 end
