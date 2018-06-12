@@ -39,6 +39,7 @@ class ClientTest < ActiveSupport::TestCase
 
 	test "email addresses should be unique" do
 		duplicate_client = @client.dup
+		duplicate_client.email = @client.email.upcase
 		@client.save
 		assert_not duplicate_client.valid?	
 	end
