@@ -58,4 +58,11 @@ class ClientTest < ActiveSupport::TestCase
 		@client.save
 		assert_not duplicate_client.valid?	
 	end
+
+	test "email addresses should be saved as lower-case" do
+		mixed_case_email = "Foo@ExAMPle.CoM"
+		@client.email = mixed_case_email
+		@client.save
+		assert_equal mixed_case_email.downcase, @client.reload.email
+	end	
 end
