@@ -2,11 +2,12 @@
 #
 # Table name: clients
 #
-#  id         :integer          not null, primary key
-#  email      :string
-#  name       :string
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id              :integer          not null, primary key
+#  email           :string
+#  name            :string
+#  password_digest :string
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
 #
 # Indexes
 #
@@ -17,7 +18,8 @@ require 'test_helper'
 
 class ClientTest < ActiveSupport::TestCase
 	def setup
-		@client = Client.new(name: "John Doe", email: "johndoe@gmail.com")
+		@client = Client.new(name: "John Doe", email: "johndoe@gmail.com",
+							password: "foobar", password_confirmation: "foobar")
 	end
 
   test "should be a valid client" do
