@@ -34,7 +34,7 @@ class ClientPasswordResetsController < ApplicationController
         @client.errors.add(:password, "can't be empty")
       elsif @client.update_attributes(user_params)
         client_login @client
-        flash|:success| = "Password has been reset."
+        flash[:success] = "Password has been reset."
         redirect_to @client
       else
         render "edit"
