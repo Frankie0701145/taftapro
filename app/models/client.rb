@@ -48,6 +48,11 @@ class Client < ApplicationRecord
 		update_attribute(:reset_sent_at, Time.zone.now)
 	end
 
+	# Sends password reset email.
+	def send_password_reset_email
+			ClientMailer.password_reset(self).deliver_now
+	end
+
 	private
 
 	def downcase_email

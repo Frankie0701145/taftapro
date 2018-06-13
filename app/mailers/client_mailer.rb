@@ -5,9 +5,8 @@ class ClientMailer < ApplicationMailer
   #
   #   en.client_mailer.account_activation.subject
   #
-  def account_activation
+  def account_activation(client)
     @greeting = "Hi"
-
     mail to: "to@example.org"
   end
 
@@ -16,9 +15,10 @@ class ClientMailer < ApplicationMailer
   #
   #   en.client_mailer.password_reset.subject
   #
-  def password_reset
-    @greeting = "Hi"
+  def password_reset(client)
+    @client=client
+    @greeting = "Hi, #{client.first_name}"
 
-    mail to: "to@example.org"
+    mail to: client.email, subject:"Password Reset"
   end
 end
