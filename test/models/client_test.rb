@@ -4,7 +4,8 @@
 #
 #  id              :integer          not null, primary key
 #  email           :string
-#  name            :string
+#  first_name      :string
+#  last_name       :string
 #  password_digest :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
@@ -18,7 +19,7 @@ require 'test_helper'
 
 class ClientTest < ActiveSupport::TestCase
 	def setup
-		@client = Client.new(name: "John Doe", email: "johndoe@gmail.com",
+		@client = Client.new(first_name: "John", last_name: "Doe", email: "johndoe@gmail.com",
 							password: "foobar", password_confirmation: "foobar")
 	end
 
@@ -26,10 +27,15 @@ class ClientTest < ActiveSupport::TestCase
     assert @client.valid?
   end  
   
-  test "name should be present" do
-  	@client.name = " "
+  test "first name should be present" do
+  	@client.first_name = " "
     assert_not @client.valid?   
   end  
+
+  test "last name should be present" do
+  	@client.last_name = " "
+    assert_not @client.valid?   
+  end    
 
   test "email should be present" do
   	@client.email = " "
