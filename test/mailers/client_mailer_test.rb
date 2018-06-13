@@ -11,15 +11,21 @@ class ClientMailerTest < ActionMailer::TestCase
     assert_match "Hi", mail.body.encoded
   end
 =end
+def setup
+  @client = Client.new(first_name: "John", last_name: "Doe", email: "johndoe@gmail.com",
+            password: "foobar", password_confirmation: "foobar")
+end
 
-=begin
   test "password_reset" do
-    mail = ClientMailer.password_reset()
-    assert_equal "Password reset", mail.subject
-    assert_equal ["to@example.org"], mail.to
-    assert_equal ["from@example.com"], mail.from
+
+    @client.reset_token = Client.new_token
+    mail = ClientMailer.password_reset( @client)
+    assert_equal "Password Reset", mail.subject
+    assert_equal [@client.email], mail.to
+    assert_equal ["taftapro@gmail.com"], mail.from
+    assert_match @client.reset_token,   mail.body.encoded
     assert_match "Hi", mail.body.encoded
   end
-=end
+
 
 end
