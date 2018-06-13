@@ -1,7 +1,7 @@
 <ul>
 	<% @professionals.each do |professional| %>
 		<li>
-			<%= professional.first_name %> <br>
+			<%= link_to("#{professional.first_name}", professional) %> <br>
 			<%= professional.service.capitalize %>
 		</li>
 	<% end %>
