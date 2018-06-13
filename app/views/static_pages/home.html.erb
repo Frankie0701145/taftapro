@@ -5,3 +5,30 @@
 	</div>
 	<div class="col-md-4"></div>
 </div>
+
+<div class="row">
+	<div class="col-md-6 offset-md-3">
+		<%= form_for @search_form, url: search_service_url do |f| %>
+			<div class="input-group">
+				<%= f.text_field :service, class: "form-control", placeholder: "Service" %>
+				<%= f.text_field :location, class: "form-control", placeholder: "City, Country", id: "geo-input" %>
+				<div class="input-group-append">
+					<%= f.submit "Find Professional", class: "btn btn-info" %>	
+				</div>
+				
+			</div>
+		<% end %>
+		 <div id='mydiv' style='display:none'>
+		   TEST
+		 </div>		
+	</div>
+</div>
+
+<script type='text/javascript'>
+   $('#mydiv').show();
+
+   $(function() {
+	  $("#geo-input").geocomplete();
+	});  
+ </script>
+
