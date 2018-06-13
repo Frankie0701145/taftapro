@@ -1,2 +1,28 @@
-<h1>ClientPasswordResets#new</h1>
-<p>Find me in app/views/client_password_resets/new.html.erb</p>
+
+<!--The reset password view-->
+
+  <div class="container">
+
+    <div class="row mt-4 pt-5">
+
+      <div class="col-6 mx-auto border border-white shadow-lg p-4 bg-white rounded mt-4">
+
+          <h3 class="text-center">Reset Password</h3>
+
+          <%= form_for :client_password_reset, url:client_password_resets_path do|f| %>
+
+              <div class="form-group">
+                <%= f.label :email %>
+                <%= f.email_field :email, class: 'form-control' %>
+              </div>
+
+
+              <%= f.submit "Submit", class: 'btn btn-primary btn-block mt-2'%>
+
+          <% end %>
+
+      </div>
+
+    </div>
+
+  </div>

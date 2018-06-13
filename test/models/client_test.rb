@@ -7,6 +7,8 @@
 #  first_name      :string
 #  last_name       :string
 #  password_digest :string
+#  reset_digest    :string
+#  reset_sent_at   :datetime
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #
