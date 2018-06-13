@@ -4,7 +4,8 @@
 #
 #  id              :integer          not null, primary key
 #  email           :string
-#  name            :string
+#  first_name      :string
+#  last_name       :string
 #  password_digest :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
@@ -16,7 +17,7 @@
 
 class Client < ApplicationRecord
 	before_save :downcase_email
-	validates :name, :email, presence: true
+	validates :first_name, :last_name, :email, presence: true
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 	validates :email, presence: true, length: { maximum: 255 },
 					format: { with: VALID_EMAIL_REGEX },
