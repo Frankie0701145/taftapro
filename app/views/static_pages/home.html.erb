@@ -1,13 +1,13 @@
+<div class="home_banner">
 <div class="row">
-	<div class="col-md-4"></div>
-	<div class="col-md-4">
-		<%= link_to("Sign up", signup_path)%>
+	<div class="col-md-6 offset-md-3 text-center">
+	<h1>Get stuff done!</h1>
+	<p>Find a professional to help you do almost anything.</p>		
 	</div>
-	<div class="col-md-4"></div>
 </div>
 
 <div class="row">
-	<div class="col-md-6 offset-md-3">
+	<div class="col-md-6 offset-md-3 mt-7">
 		<%= form_for @search_form, url: search_service_url, method: :get do |f| %>
 			<div class="input-group">
 				<%= f.text_field :service, class: "form-control", placeholder: "Service" %>
@@ -19,7 +19,7 @@
 		<% end %>
 	</div>
 </div>
-
+</div>
 <script type='text/javascript'>
    $(function() {
 	  $("#geo-input").geocomplete();
