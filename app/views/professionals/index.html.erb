@@ -1,0 +1,8 @@
+<ul>
+	<% @professionals.each do |professional| %>
+		<li>
+			<%= professional.first_name %> <br>
+			<%= professional.service.title %>
+		</li>
+	<% end %>
+</ul>

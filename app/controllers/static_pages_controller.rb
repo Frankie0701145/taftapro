@@ -4,6 +4,8 @@ class StaticPagesController < ApplicationController
   end
 
   def search_service
+  	@professionals = Professional.near(params[:search_service_by_location_form][:location], 50, :units => :km) &&
+  					Professional.where(service: params[:search_service_by_location_form][:service])
   end
 
   def about

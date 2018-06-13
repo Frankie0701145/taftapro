@@ -10,6 +10,7 @@
 #  last_name  :string
 #  latitude   :float
 #  longitude  :float
+#  service    :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
