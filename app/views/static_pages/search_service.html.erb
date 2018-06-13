@@ -1,8 +1,10 @@
 <ul>
-	<% @professionals.each do |professional| %>
-		<li>
-			<%= link_to("#{professional.first_name}", professional) %> <br>
-			<%= professional.service.capitalize %>
-		</li>
+	<% if @professionals && @professionals.count > 0 %>
+		<% @professionals.each do |professional| %>
+			<li>
+				<%= link_to("#{professional.first_name}", professional) %> <br>
+				<%= professional.service.capitalize %>
+			</li>
+		<% end %>
 	<% end %>
 </ul>
