@@ -1,28 +1,20 @@
-
-<div class="top_padder">
 <div class="row">
-	<div class="col-md-6 offset-md-3 text-center">
-	<h1>Welcome back, <%= @client.first_name %>!</h1>
-	<p>Find a professional to help you do almost anything.</p>		
-	</div>
-</div>
-
-<div class="row">
-	<div class="col-md-6 offset-md-3 mt-7">
+  <div class="col-md-12">
 		<%= form_for SearchServiceByLocationForm.new, url: search_service_url, method: :get do |f| %>
 			<div class="input-group">
 				<%= f.text_field :service, class: "form-control", placeholder: "Service" %>
 				<%= f.text_field :location, class: "form-control", placeholder: "City, Country", id: "geo-input" %>
 				<div class="input-group-append">
-					<%= f.submit "Find Professional", class: "btn btn-info" %>	
+					<%= f.submit "Find a Professional", class: "btn btn-info" %>	
 				</div>		
 			</div>
 		<% end %>
-	</div>
+  </div>
 </div>
-</div>
+
 <script type='text/javascript'>
    $(function() {
 	  $("#geo-input").geocomplete();
 	});   
 </script>
+
