@@ -10,10 +10,6 @@ module ClientSessionsHelper
     @current_client ||= Client.find_by(id: session[:client_id])
   end
 
-  #Returns true if the client is logged in, false otherwise.
-  def Client_logged_in?
-    !current_client.nil?
-  end
 
   #Logs out the current client
   def client_logout

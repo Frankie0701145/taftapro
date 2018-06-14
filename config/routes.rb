@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
-  get 'client_password_resets/new'
-  get 'client_password_resets/edit'
+  
   root 'static_pages#home'
   #the routes for the client login and logout
   get     "/client/login",  to:"client_sessions#new"

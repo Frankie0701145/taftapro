@@ -1,5 +1,6 @@
 class ClientPasswordResetsController < ApplicationController
-  before_action :get_user,   only: [:edit, :update]
+  before_action :get_client,         only: [:edit, :update]
+  before_action :valid_client,       only: [:edit, :update]#authenticates if the rest token matches with th received reset_token
   before_action :check_expiration, only: [:edit, :update] #to check if the reset link has expired
 
   def new
@@ -32,7 +33,8 @@ class ClientPasswordResetsController < ApplicationController
   def update
       if params[:client][:password].empty?
         @client.errors.add(:password, "can't be empty")
-      elsif @client.update_attributes(user_params)
+        render "edit"
+      elsif @client.update_attributes(client_params)
         client_login @client
         flash[:success] = "Password has been reset."
         redirect_to @client
@@ -42,28 +44,29 @@ class ClientPasswordResetsController < ApplicationController
   end
 
   private
-
-    def user_params
-      params.require(:user).permit(:password, :password_confirmation)
+    #method to confirm the password and confirm password match
+    def client_params
+      params.require(:client).permit(:password, :password_confirmation)
     end
 
     # Before filters
-
-    def get_user
+    #method to find the client
+    def get_client
       @client = Client.find_by(email: params[:email])
     end
 
     #confirm a valid client
-    def valid_user
+    def valid_client
       unless(@client && @client.authenticated?( :reset, params[:id]))
         redirect_to root_url
       end
     end
 
+
     def check_expiration
       if @client.password_reset_expired?
         flash[:danger] = "Password reset has expired."
-        redirect_to new_client_password_reset
+        redirect_to new_client_password_reset_url
       end
     end
 

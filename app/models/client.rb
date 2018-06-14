@@ -53,6 +53,15 @@ class Client < ApplicationRecord
 			ClientMailer.password_reset(self).deliver_now
 	end
 
+	# Returns true if the given token matches the digest.
+	def authenticated?(attribute, token)
+		
+		digest = self.send("#{attribute}_digest")
+		return false if digest.nil?
+		BCrypt::Password.new(digest).is_password?(token)
+
+	end
+
 	# Returns true if a password reset has expired.
 	def password_reset_expired?
 		reset_sent_at < 2.hours.ago
