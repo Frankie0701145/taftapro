@@ -1,0 +1,10 @@
+  
+  <%= @greeting %>,
+  Here is the quotation you requested from <%= @professional.full_name %>:
+  
+  <%= @professional.quotation.details %>
+  
+
+  
+  <%= link_to "View Professional's profile", professional_url(@professional), class: "btn btn-primary btn-block" %> 
+  

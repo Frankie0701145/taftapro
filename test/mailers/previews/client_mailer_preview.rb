@@ -13,4 +13,11 @@ class ClientMailerPreview < ActionMailer::Preview
     ClientMailer.password_reset(client)
   end
 
+  def quotation
+    client = Client.first
+    professional = Professional.last
+    client.reset_token = Client.new_token
+    ClientMailer.quotation(client, professional: professional)
+  end  
+
 end
