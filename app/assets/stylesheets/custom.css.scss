@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+body {
+	font-family: 'Montserrat', sans-serif;
+}
+
+.topnav a{
+	text-decoration: none;
+	color: white;
+	margin-right: 30px;
+}
+
+.topnav a:hover{
+	text-decoration: none;
+	color: #CCCCCC;
+	margin-right: 30px;
+}
+
+.home_banner {
+	margin-top: 210px;
+}
+
+.user-name {
+	font-style: italic;
+}
+
+#error_explanation {
+	color: red;
+	ul {
+		color: red;
+		margin: 0 0 30px 0;
+	}
+}

@@ -11,7 +11,7 @@ module ClientSessionsHelper
   end
 
   #Returns true if the client is logged in, false otherwise.
-  def Client_logged_in?
+  def client_logged_in?
     !current_client.nil?
   end
 

@@ -7,6 +7,7 @@ class ClientsController < ApplicationController
   	@client = Client.new(client_params)
   	if @client.save
   		flash[:success] = "You have successfully registered."
+      client_login(@client)
   		redirect_to @client
   	else
   		render 'new'
