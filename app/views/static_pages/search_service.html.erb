@@ -1,0 +1,16 @@
+<% if @professionals && @professionals.count > 0 %>
+<h3>Showing results for <strong><%= "'#{@service}'"%> <%= "#{@location}"%></strong> </h3>
+<ul>
+	
+		<% @professionals.each do |professional| %>
+			<li>
+				<%= link_to("#{professional.first_name}", professional) %> <br>
+				<%= professional.service.capitalize %> <br>
+				<%= professional.address %>
+			</li>
+		<% end %>
+	
+</ul>
+<% else %>
+<h3>There are no results for <strong><%= "'#{@service}'"%> <%= "#{@location}"%></strong> </h3>
+<% end %>

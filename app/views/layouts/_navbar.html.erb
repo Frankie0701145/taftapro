@@ -1,3 +1,18 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark mt-0">
-    <h3><%=link_to "TaftaPro", "#"%></h3>
-</nav>
+
+<div class="topnav">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark mt-0">
+		<div class="container-fluid navigator">
+			<h3><%=link_to "TaftaPro", root_url %></h3>
+			<ul class="nav navbar-nav navbar-right">
+				<% if client_logged_in? %>
+				<li><%=link_to "Logged in as, #{current_client.first_name}", '#', class: "user-name" %></li>
+				<li><%=link_to "Log out", client_logout_path, method: :delete %></li>	
+				<% else %>
+				<li><%=link_to "Join as a Pro", "#"%></li>
+				<li><%=link_to "Sign up", signup_path %></li>
+				<li><%=link_to "Log in", client_login_path%></li>
+				<% end %>
+			</ul>    	
+		</div>
+	</nav>	
+</div>

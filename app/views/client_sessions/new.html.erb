@@ -4,7 +4,7 @@
 
     <div class="col-6 mx-auto border border-white shadow-lg p-4 bg-white rounded mt-4">
 
-      <h3 class="text-center">LogIn  As Client</h3>
+      <h3 class="text-center">Log In</h3>
 
       <%=form_for(:client_session, url:client_login_path, class:"p-4") do|f|%>
 
@@ -18,7 +18,7 @@
             <%=f.password_field :password, class:"form-control" %>
           </div>
 
-          <%=f.submit "Log In", class:"btn btn-primary btn-block mt-2"%>
+          <%=f.submit "Log In", class:"btn btn-info btn-block mt-2"%>
 
       <%end%>
       <p class="mt-2">Forgot Password? <%= link_to "Forgot Password", new_client_password_reset_path%></p>
