@@ -9,4 +9,10 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+
+  #Returns true if the client is logged in, false otherwise.
+  def client_is_logged_in?
+    !session[:client_id].nil?
+  end
+
 end

@@ -19,6 +19,8 @@ ActiveRecord::Schema.define(version: 2018_06_13_172047) do
     t.string "password_digest"
     t.string "first_name"
     t.string "last_name"
+    t.string "reset_digest"
+    t.datetime "reset_sent_at"
     t.index ["email"], name: "index_clients_on_email", unique: true
   end
 

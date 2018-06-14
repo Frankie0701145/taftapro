@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get '/signup', to: 'clients#new'
   get '/search_service', to: 'static_pages#search_service'
   resources :clients
+  resources :client_password_resets,  only: [:new, :create, :edit, :update]
   resources :professionals
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
