@@ -94,7 +94,7 @@
 		  <h3><strong><%= "#{@professional.first_name} #{@professional.last_name}" %></strong></h3>
 		  <h5>Service: <strong><%= @professional.service %></strong></h5>
 		  <h5>Location: <strong><%= "#{@professional.city}, #{@professional.country}" %></strong></h5>
-		  <%= link_to "Request a Quotation", '#', class: "btn btn-primary" %>
+		  <%= link_to "Request a Quotation", request_quotation_path(client_id: current_client.id, professional_id: @professional.id), class: "btn btn-primary" %>
 		</div>	
 	</div>			
 

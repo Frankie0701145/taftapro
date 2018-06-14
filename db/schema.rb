@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_13_172047) do
+ActiveRecord::Schema.define(version: 2018_06_14_175252) do
 
   create_table "clients", force: :cascade do |t|
     t.string "email"
@@ -35,6 +35,14 @@ ActiveRecord::Schema.define(version: 2018_06_13_172047) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "service"
+  end
+
+  create_table "quotations", force: :cascade do |t|
+    t.string "details"
+    t.integer "professional_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["professional_id"], name: "index_quotations_on_professional_id"
   end
 
 end

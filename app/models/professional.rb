@@ -19,7 +19,12 @@ class Professional < ApplicationRecord
 	validates :first_name, :last_name, :email, :city, :country, presence: true
 	geocoded_by :address
 	after_validation :geocode, if: :address_changed?
+	has_one :quotation
 
+	def full_name
+		"#{first_name} #{last_name}"
+	end
+	
 	def address
 		[city, country].compact.join(", ")
 	end

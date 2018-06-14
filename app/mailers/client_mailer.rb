@@ -21,4 +21,12 @@ class ClientMailer < ApplicationMailer
 
     mail to: client.email, subject:"Password Reset"
   end
+
+  def quotation(client, professional: professional)
+    @client = client
+    @professional = professional
+    @greeting = "Hi, #{client.first_name}"
+
+    mail to: client.email, subject: "Your Quotation Request"    
+  end
 end

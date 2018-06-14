@@ -10,7 +10,7 @@ class ClientSessionsController < ApplicationController
     if client && client.authenticate(params[:client_session][:password])
       #loggin in the user
       client_login(client)
-      redirect_to client
+      redirect_back_or client
     else
       #render the login page again this time with a flash message
       flash.now[:danger]="Invalid password or email"

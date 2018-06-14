@@ -1,4 +1,6 @@
 class ClientsController < ApplicationController
+  before_action :logged_in_client, only: [:get_quotation]
+  
   def new
   	@client = Client.new
   end
@@ -16,6 +18,13 @@ class ClientsController < ApplicationController
 
   def show
   	@client = Client.find(params[:id])
+  end
+
+  def get_quotation
+    professional = Professional.find(params[:professional_id])
+    current_client.request_quotation(professional)
+    redirect_to professional
+    flash[:success] = "The quotation has been sent to your email."
   end
 
   private

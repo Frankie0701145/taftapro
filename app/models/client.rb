@@ -53,6 +53,10 @@ class Client < ApplicationRecord
 			ClientMailer.password_reset(self).deliver_now
 	end
 
+	def request_quotation(professional)
+		ClientMailer.quotation(self, professional: professional).deliver_now
+	end
+
 	# Returns true if the given token matches the digest.
 	def authenticated?(attribute, token)
 		
