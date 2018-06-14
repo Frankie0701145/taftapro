@@ -1,1 +1,29 @@
 <%= @professional.first_name %>
+<div id="map" style="width:300px;height:300px"></div>
+<%= hidden_field_tag("latitude", "#{@professional.latitude}") %>
+<%= hidden_field_tag("longitude", "#{@professional.longitude}") %>
+
+<script> 
+function searchProfessionalLocation() {
+	var lat = document.getElementById('latitude').value;
+	var lon = document.getElementById('longitude').value;
+  var location = new google.maps.LatLng(lat, lon);
+
+  var mapCanvas = document.getElementById("map");
+  var mapOptions = {center: location, zoom: 7};
+  var map = new google.maps.Map(mapCanvas,mapOptions);
+
+  var city = new google.maps.Circle({
+    center: location,
+    radius: 50000,
+    strokeColor: "#0000FF",
+    strokeOpacity: 0.8,
+    strokeWeight: 2,
+    fillColor: "#0000FF",
+    fillOpacity: 0.4
+  });
+  city.setMap(map);
+}
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDSqlenOHStWc1MdDufLvSzIXdum5UREsc&callback=searchProfessionalLocation"></script>

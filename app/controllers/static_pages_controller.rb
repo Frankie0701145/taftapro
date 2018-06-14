@@ -4,9 +4,13 @@ class StaticPagesController < ApplicationController
   end
 
   def search_service
-  	if !params[:search_service_by_location_form][:location].empty? && 
-  		!params[:search_service_by_location_form][:service].empty?
-  		@professionals = Professional.near(params[:search_service_by_location_form][:location]) &&
+  	@location = params[:search_service_by_location_form][:location]
+  	@service = params[:search_service_by_location_form][:service]
+  	if !@location.empty? && !@service.empty?
+  			
+  		@location = params[:search_service_by_location_form][:location]
+
+  		@professionals = Professional.near(@location) &&
   					Professional.where(service: params[:search_service_by_location_form][:service])  		
   	elsif params[:search_service_by_location_form][:location].empty?
   		flash.now[:info] = "There's no results for the location you have entered."
