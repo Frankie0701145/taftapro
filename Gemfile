@@ -37,6 +37,7 @@ gem 'bootstrap', '~> 4.1.1'
 gem 'jquery-rails'
 gem 'geocoder'
 gem 'font-awesome-rails'
+gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
