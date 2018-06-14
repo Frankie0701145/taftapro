@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'taftapro@gmail.com'
+  default from: 'noreply@taftapro.com'
   layout 'mailer'
 end

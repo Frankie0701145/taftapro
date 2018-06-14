@@ -22,7 +22,7 @@ end
     mail = ClientMailer.password_reset( @client)
     assert_equal "Password Reset", mail.subject
     assert_equal [@client.email], mail.to
-    assert_equal ["taftapro@gmail.com"], mail.from
+    assert_equal ["noreply@taftapro.com"], mail.from
     assert_match @client.reset_token,   mail.body.encoded
     assert_match "Hi", mail.body.encoded
   end
