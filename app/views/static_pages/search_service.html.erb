@@ -5,7 +5,7 @@
 	
 		<% @professionals.each do |professional| %>
 			<li>
-				<%= link_to("#{professional.first_name}", professional) %> <br>
+				<%= link_to("#{professional.full_name}", professional) %> <br>
 				<%= professional.service.capitalize %> <br>
 				<%= professional.address %>
 			</li>
