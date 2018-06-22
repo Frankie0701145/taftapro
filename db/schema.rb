@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_14_175252) do
+ActiveRecord::Schema.define(version: 2018_06_21_214701) do
 
   create_table "clients", force: :cascade do |t|
     t.string "email"
@@ -43,6 +43,17 @@ ActiveRecord::Schema.define(version: 2018_06_14_175252) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["professional_id"], name: "index_quotations_on_professional_id"
+  end
+
+  create_table "requests", force: :cascade do |t|
+    t.text "description"
+    t.string "user_email"
+    t.string "first_name"
+    t.string "last_name"
+    t.string "service"
+    t.string "location"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
