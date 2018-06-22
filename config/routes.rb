@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   delete  "/client/logout",  to:"client_sessions#destroy"
   get '/about', to: 'static_pages#about'
   get '/signup', to: 'clients#new'
+  get "/professional/signup", to: 'professionals#new' #the route to the professional signup
   get '/search_service', to: 'static_pages#search_service'
   get '/request_quotation', to: 'clients#get_quotation'
   resources :clients
