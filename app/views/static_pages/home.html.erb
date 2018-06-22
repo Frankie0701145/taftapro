@@ -1,28 +1,77 @@
 <div class="home_banner">
-<div class="row">
-	<div class="col-md-6 offset-md-3 text-center">
-	<h1>Get stuff done!</h1>
-	<p>Find a professional to help you do almost anything.</p>		
+	<div class="row">
+		<div class="col-md-6 offset-md-3 text-center">
+			<h1>Get stuff done!</h1>
+			<p>Find a professional to help you do almost anything.</p>    
+		</div>
 	</div>
-</div>
 
-<div class="row">
-	<div class="col-md-6 offset-md-3 mt-7">
-		<%= form_for SearchServiceByLocationForm.new, url: search_service_url, method: :get do |f| %>
+	<div class="row">
+		<div class="col-md-6 offset-md-3 mt-7">
+			<%= form_for SearchServiceByLocationForm.new, url: search_service_url, method: :get do |f| %>
 			<div class="input-group">
 				<%= f.text_field :service, class: "form-control", placeholder: "Service" %>
 				<%= f.text_field :location, class: "form-control", placeholder: "City, Country", id: "geo-input" %>
 				<div class="input-group-append">
-					<%= f.submit "Find Professional", class: "btn btn-info" %>	
-				</div>		
+					<%= f.submit "Find Professional", class: "btn btn-info" %>  
+				</div>    
 			</div>
-		<% end %>
+			<% end %>
+		</div>
+	</div>
+
+	<!-- DescriptionModal -->
+	<div id="descriptionModal" class="modal">
+
+		<!-- Modal content -->
+		<div class="modal-content">
+			<div class="modal-header">
+				<span class="close">&times;</span>
+				<h2>TaftaPro</h2>
+			</div>
+			<div class="modal-body">
+			<p>Please enter a detailed description of what you need done so that we can match you with the right pros</p>
+				<%#= form_for Request.new %>
+					<%#= f.text_field :description, class: "form-control", placeholder: "Description" %>
+					<%#= f.submit "Next", class: "btn btn-info" %>
+				<%# end %>
+			</div>
+<!-- 			<div class="modal-footer">
+				<h3> <%#= link_to "Next", mark_subtopic_as_completed_path(:completed_subtopic_id => "#{@subtopic.id}") %> </h3>
+			</div> -->
+		</div>
+
 	</div>
 </div>
-</div>
 <script type='text/javascript'>
-   $(function() {
-	  $("#geo-input").geocomplete();
+	$(function() {
+		$("#geo-input").geocomplete();
 	});   
+
+	// Get the modal
+	var modal = document.getElementById('descriptionModal');
+
+	// Get the button that opens the modal
+	var btn = document.getElementById("openDescriptionModal");
+
+	// Get the <span> element that closes the modal
+	var span = document.getElementsByClassName("close")[0];
+
+	// When the user clicks the button, open the modal 
+	btn.onclick = function() {
+	    modal.style.display = "block";
+	}
+
+	// When the user clicks on <span> (x), close the modal
+	span.onclick = function() {
+	    modal.style.display = "none";
+	}
+
+	// When the user clicks anywhere outside of the modal, close it
+	window.onclick = function(event) {
+	    if (event.target == modal) {
+	        modal.style.display = "none";
+	    }
+	}	
 </script>
 

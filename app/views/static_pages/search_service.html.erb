@@ -1,5 +1,19 @@
 <%= render 'layouts/searchbar' %>
 <% if @professionals && @professionals.count > 0 %>
+<h3>There are <%= "#{@professionals.count}" %> pros near you.  </h3>
+<p>Please enter a detailed description of what you need done so that we can match you with the right one.</p>
+<%= form_for Request.new, class: "modal fade" do |f| %>
+	<%= f.text_area :description, class: "form-control" %>
+	<%= f.email_field :user_email, class: "form-control", placeholder: "Where should we send your matches" %>
+	<%= f.label "Please enter your full name" %>
+	<%= f.text_field :first_name, class: "form-control" %>
+	<%= f.text_field :last_name, class: "form-control" %>
+	<%= f.hidden_field :location, :value => @location %>
+	<%= f.hidden_field :service, :value => @service %>
+
+	<%= f.submit "Submit" %>
+<% end %>
+
 <h3>Showing results for <strong><%= "'#{@service}'"%> <%= "#{@location}"%></strong> </h3>
 <ul>
 	

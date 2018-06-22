@@ -16,8 +16,8 @@ class ClientMailerPreview < ActionMailer::Preview
   def quotation
     client = Client.first
     professional = Professional.last
-    client.reset_token = Client.new_token
-    ClientMailer.quotation(client, professional: professional)
+    request = Request.last
+    ClientMailer.quotation(client, professional: professional, request: request)
   end  
 
 end

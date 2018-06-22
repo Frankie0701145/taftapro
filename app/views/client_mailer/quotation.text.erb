@@ -1,10 +1,10 @@
-  
-  <%= @greeting %>,
-  Here is the quotation you requested from <%= @professional.full_name %>:
-  
-  <%= @professional.quotation.details %>
-  
+    <%= @greeting %>,
 
-  
-  <%= link_to "View Professional's profile", professional_url(@professional), class: "btn btn-primary btn-block" %> 
-  
+    A client is seeking your services. Please review the below details about the request and reply to the client with a quotation.
+
+    Client' name: <%= "#{@client.first_name} #{@client.last_name}"%>
+    Searching for: <%= @request.service %>
+  	Location: <%= @request.location %>
+    Description of work: <%= @request.description %>
+
+	<%= link_to "Send a Quote", "#" %> 

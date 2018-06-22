@@ -2,13 +2,16 @@
     <%= @greeting %>,
   </p>
   <p>
-    Here is the quotation you requested from <%= @professional.full_name %>:
+    A client is seeking your services. Please review the below details about the request and reply to the client with a quotation.
   </p>
 
   <p>
-  	<%= @professional.quotation.details %>
+    Client' name: <%= "#{@client.first_name} #{@client.last_name}"%>
+    Searching for: <%= @request.service %>
+  	Location: <%= @request.location %>
+    Description of work: <%= @request.description %>
   </p>
 
   <p>
-	<%= link_to "View Professional's profile", professional_url(@professional), class: "btn btn-primary btn-block" %> 
+	<%= link_to "Send a Quote", "#", class: "btn btn-primary btn-block" %> 
   </p>
