@@ -19,7 +19,7 @@
 class Professional < ApplicationRecord
 
 	before_save :downcase_email
-	validates :first_name, :last_name, :email, :city, :country, presence: true
+	validates :first_name, :last_name, :email, :city, :country, :service, presence: true
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 	validates :email, presence: true, length: { maximum: 255 },
 					format: { with: VALID_EMAIL_REGEX },
@@ -28,7 +28,7 @@ class Professional < ApplicationRecord
 	validates :password, presence: true, length: { minimum: 6 }
 	geocoded_by :address
 	after_validation :geocode, if: :address_changed?
-	has_one :quotation	
+	has_one :quotation
 
 	def full_name
 		"#{first_name} #{last_name}"
