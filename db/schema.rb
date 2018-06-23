@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 2018_06_23_093310) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "service"
+    t.string "password_digest"
   end
 
   create_table "quotations", force: :cascade do |t|
