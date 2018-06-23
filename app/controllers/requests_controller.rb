@@ -21,6 +21,7 @@ class RequestsController < ApplicationController
 				@client.request_quotation(professional: pro, request: request)
 			end
 			client_login @client
+			flash[:success] = "We will notify you when the professionals send you a quote."
 			redirect_to client_path(@client)
 		end
 	end

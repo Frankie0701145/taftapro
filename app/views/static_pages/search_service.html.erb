@@ -1,31 +1,44 @@
 <%= render 'layouts/searchbar' %>
-<% if @professionals && @professionals.count > 0 %>
-<h3>There are <%= "#{@professionals.count}" %> pros near you.  </h3>
-<p>Please enter a detailed description of what you need done so that we can match you with the right one.</p>
-<%= form_for @request, class: "modal fade" do |f| %>
-	<%= f.text_area :description, class: "form-control" %>
-	<%= f.email_field :user_email, class: "form-control", placeholder: "Where should we send your matches" %>
-	<%= f.label "Please enter your full name" %>
-	<%= f.text_field :first_name, class: "form-control" %>
-	<%= f.text_field :last_name, class: "form-control" %>
-	<%= f.hidden_field :location, :value => @location %>
-	<%= f.hidden_field :service, :value => @service %>
 
-	<%= f.submit "Submit" %>
-<% end %>
 
-<h3>Showing results for <strong><%= "'#{@service}'"%> <%= "#{@location}"%></strong> </h3>
-<ul>
-	
-		<% @professionals.each do |professional| %>
-			<li>
-				<%= link_to("#{professional.full_name}", professional) %> <br>
-				<%= professional.service.capitalize %> <br>
-				<%= professional.address %>
-			</li>
-		<% end %>
-	
-</ul>
-<% else %>
-<h3>There are no results for <strong><%= "'#{@service}'"%> <%= "#{@location}"%></strong> </h3>
-<% end %>
+<div class="container">
+
+  <div class="row mt-4 pt-5">
+
+    <div class="col-6 mx-auto border border-white shadow-lg p-4 bg-white rounded mt-1">
+      <h3>There are <%= "#{@professionals.count}" %> pros near you.  </h3>
+      <% if @professionals && @professionals.count > 0 %>
+      <%= form_for @request, class: "modal fade" do |f| %>
+      <div class="form_group">
+        <%= f.label "Please enter a detailed description of what you need done so that we can match you with the right one."%>
+        <%= f.text_area :description, class: "form-control" %>
+      </div>
+      <div class="form_group">
+        <%= f.label "Where should we send your matches", class: "mt-1" %>
+        <%= f.email_field :user_email, class: "form-control", placeholder: "Email" %>
+      </div>
+
+      <div class="form_group">
+        <%= f.label "Your name", class: "mt-1" %>
+        <%= f.text_field :first_name, class: "form-control", placeholder: "First Name" %>
+      </div>
+
+      <div class="form_group">
+      	<br>
+      	<%= f.text_field :last_name, class: "form-control", placeholder: "Last Name" %>
+      </div>
+
+      <%= f.hidden_field :location, :value => @location %>
+      <%= f.hidden_field :service, :value => @service %>
+
+      <%= f.submit "Submit", class: "btn btn-info btn-block mt-1" %>
+      <% end %>
+      <% else %>
+      <h3>There are no results for <strong><%= "'#{@service}'"%> <%= "#{@location}"%></strong> </h3>
+      <% end %>     
+
+    </div>
+
+  </div>
+
+</div>
