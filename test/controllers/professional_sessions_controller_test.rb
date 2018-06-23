@@ -2,7 +2,7 @@ require 'test_helper'
 
 class ProfessionalSessionsControllerTest < ActionDispatch::IntegrationTest
   test "should get new" do
-    get professional_sessions_new_url
+    get professional_login_path
     assert_response :success
   end
 
