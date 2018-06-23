@@ -11,6 +11,7 @@ class ProfessionalsController < ApplicationController
   def create
     @professional = Professional.new(professional_params)
     if @professional.save
+    	professional_login(@professional)
       flash[:success] = "You have successfully registered."
       redirect_to @professional
     else
