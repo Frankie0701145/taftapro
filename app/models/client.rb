@@ -27,13 +27,21 @@ class Client < ApplicationRecord
 					format: { with: VALID_EMAIL_REGEX },
 					uniqueness: { case_sensitive: false }
 	has_secure_password
-	validates :password, presence: true, length: { minimum: 6 }
+	validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+
+	def full_name
+		"#{first_name} #{last_name}"
+	end
 
 	# Returns the hash digest of the given string.
 	def Client.digest(string)
 		cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
 																									BCrypt::Engine.cost
 		BCrypt::Password.create(string, cost: cost)
+	end
+
+	def Client.create_password
+		SecureRandom.hex(3)
 	end
 
 	# Returns a random token.

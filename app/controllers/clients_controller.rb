@@ -18,6 +18,14 @@ class ClientsController < ApplicationController
 
   def show
   	@client = Client.find(params[:id])
+    @quotation = Quotation.new
+    if !params[:professional_id].empty?
+      client_logout if current_client
+      @professional = Professional.find(params[:professional_id])
+      if @professional
+        professional_login @professional
+      end
+    end
   end
 
   def get_quotation

@@ -4,6 +4,7 @@ class StaticPagesController < ApplicationController
   end
 
   def search_service
+    @request = Request.new
   	@location = params[:search_service_by_location_form][:location]
   	@service = params[:search_service_by_location_form][:service]
   	if !@location.empty? && !@service.empty?

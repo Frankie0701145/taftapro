@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get '/signup', to: 'clients#new'
   get '/search_service', to: 'static_pages#search_service'
   get '/request_quotation', to: 'clients#get_quotation'
+  post 'upload_quotation', to: 'professionals#upload_quotation'
   resources :clients
   resources :client_password_resets,  only: [:new, :create, :edit, :update]
   resources :professionals
