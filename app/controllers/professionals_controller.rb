@@ -44,7 +44,7 @@ class ProfessionalsController < ApplicationController
   end
 
   def quotation_params
-    params.require(:quotation).permit(:quotation_document, :professional_id)
+    params.require(:quotation).permit(:quotation_document, :professional_id, :client_id)
   end
 
 end

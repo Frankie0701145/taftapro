@@ -19,7 +19,7 @@ class ClientsController < ApplicationController
   def show
   	@client = Client.find(params[:id])
     @quotation = Quotation.new
-    if !params[:professional_id].empty?
+    if params[:professional_id] && !params[:professional_id].empty?
       client_logout if current_client
       @professional = Professional.find(params[:professional_id])
       if @professional
@@ -33,6 +33,10 @@ class ClientsController < ApplicationController
     current_client.request_quotation(professional)
     redirect_to professional
     flash[:success] = "The quotation has been sent to your email."
+  end
+
+  def quotations
+    @quotations = Quotation.where(client_id: current_client.id)
   end
 
   private

@@ -7,6 +7,7 @@
 #  quotation_document :string
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
+#  client_id          :integer
 #  professional_id    :integer
 #
 # Indexes
