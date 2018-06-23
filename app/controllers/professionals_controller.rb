@@ -1,5 +1,5 @@
 class ProfessionalsController < ApplicationController
-  before_action :logged_in_client, only: [:show]
+  # before_action :logged_in_client, only: [:show]
 
   def new
     @professional = Professional.new()
@@ -12,7 +12,7 @@ class ProfessionalsController < ApplicationController
     @professional = Professional.new(professional_params)
     if @professional.save
       flash[:success] = "You have successfully registered."
-  
+      redirect_to @professional
     else
       render 'new'
     end
