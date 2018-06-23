@@ -15,14 +15,14 @@
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  description: MyText
-  user_id: 1
-  service: MyString
-  location: MyString
+# one:
+#   description: MyText
+#   user_id: 1
+#   service: MyString
+#   location: MyString
 
-two:
-  description: MyText
-  user_id: 1
-  service: MyString
-  location: MyString
+# two:
+#   description: MyText
+#   user_id: 1
+#   service: MyString
+#   location: MyString
