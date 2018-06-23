@@ -88,4 +88,10 @@ class ProfessionalTest < ActiveSupport::TestCase
 		assert_equal mixed_case_email.downcase, @professional.reload.email
 	end
 
+  #service validation test
+  test "service should be present" do
+  	@professional.service = " "
+    assert_not @professional.valid?
+  end
+
 end
