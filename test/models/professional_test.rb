@@ -11,6 +11,8 @@
 #  latitude        :float
 #  longitude       :float
 #  password_digest :string
+#  reset_digest    :string
+#  reset_sent_at   :datetime
 #  service         :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
