@@ -1,4 +1,6 @@
 class ProfessionalPasswordResetsController < ApplicationController
+  before_action :get_user, only: [:edit, :update]
+
   def new
   end
 
@@ -22,4 +24,10 @@ class ProfessionalPasswordResetsController < ApplicationController
 
   def edit
   end
+  private
+
+    def get_user
+      @professional= Professional.find_by(email: params[:email])
+    end
+
 end
