@@ -14,5 +14,8 @@ class ActiveSupport::TestCase
   def client_is_logged_in?
     !session[:client_id].nil?
   end
+  def professional_is_logged_in?
+    !session[:professional_id].nil?
+  end
 
 end

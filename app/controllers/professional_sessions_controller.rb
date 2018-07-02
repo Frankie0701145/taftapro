@@ -16,6 +16,9 @@ class ProfessionalSessionsController < ApplicationController
       flash.now[:danger] = "Invalid password/email"
       render "new"
     end
-
+  end
+  def destroy
+    professional_logout
+    redirect_to root_url
   end
 end

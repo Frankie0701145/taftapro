@@ -34,7 +34,7 @@ class ProfessionalPasswordResetsController < ApplicationController
       render "edit"
     elsif @professional.update_attributes(professional_params)
       professional_login @professional
-      flash[:sucess] = "Password has been reset"
+      flash[:success] = "Password has been reset"
       redirect_to @professional
     else
       render "edit"
