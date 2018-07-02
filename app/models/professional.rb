@@ -66,7 +66,15 @@ class Professional < ApplicationRecord
 	def send_password_reset_email
 			ProfessionalMailer.password_reset(self).deliver_now
 	end
+	# Returns true if the given token matches the digest.
+	def authenticated?(attribute, token)
 
+		digest = self.send("#{attribute}_digest")
+		return false if digest.nil?
+		BCrypt::Password.new(digest).is_password?(token)
+
+	end
+	
 	#private methods placed hear
 	private
 	#method to convert email to lower case

@@ -1,6 +1,6 @@
 class ProfessionalPasswordResetsController < ApplicationController
-  before_action :get_user, only: [:edit, :update]
-
+  before_action :get_professional, only: [:edit, :update]
+  before_action :valid_professional, only: [:edit, :update]
   def new
   end
 
@@ -16,7 +16,7 @@ class ProfessionalPasswordResetsController < ApplicationController
         #redirecting to the root url
         redirect_to root_url
       else
-        #if the email address is not found create a warning flash message to tell the user for the issue
+        #if the email address is not found create a warning flash message to tell the professional for the issue
         flash.now[:danger]= "There is no professional with that email address"
         render "new"
       end
@@ -25,9 +25,15 @@ class ProfessionalPasswordResetsController < ApplicationController
   def edit
   end
   private
-
-    def get_user
+    #retrieves the current professional
+    def get_professional
       @professional= Professional.find_by(email: params[:email])
     end
-
+    #confirms a valid professional
+    def valid_professional
+      unless(@professional &&
+            @professional.authenticated?(:reset,params[:id]))
+        redirect_to root_url
+      end
+    end
 end
