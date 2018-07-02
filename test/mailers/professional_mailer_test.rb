@@ -1,12 +1,21 @@
 require 'test_helper'
 
 class ProfessionalMailerTest < ActionMailer::TestCase
-  test "password_reset" do
-    mail = ProfessionalMailer.password_reset
-    assert_equal "Password reset", mail.subject
-    assert_equal ["to@example.org"], mail.to
-    assert_equal ["from@example.com"], mail.from
-    assert_match "Hi", mail.body.encoded
+
+  def setup
+    @professional = Professional.new(first_name: "John", last_name: "Doe", email: "johndoe@gmail.com",
+              password: "foobar", password_confirmation: "foobar")
+  end
+
+  test "Professional password_reset" do
+    @professional.reset_token = Professional.new_token
+    mail = ProfessionalMailer.password_reset( @professional)
+    assert_equal "Password Reset", mail.subject
+    assert_equal [@professional.email], mail.to
+    assert_equal ["noreply@taftapro.com"], mail.from
+    assert_match @professional.reset_token,   mail.body.encoded
+    assert_match CGI.escape(@professional.email), mail.body.encoded
+
   end
 
 end
