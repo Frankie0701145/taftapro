@@ -19,6 +19,7 @@
 #
 
 class Professional < ApplicationRecord
+	attr_accessor :reset_token
 
 	before_save :downcase_email
 	validates :first_name, :last_name, :email, :city, :country, :service, presence: true
@@ -42,6 +43,28 @@ class Professional < ApplicationRecord
 
 	def address_changed?
 		city_changed? || country_changed?
+	end
+
+	#Returns a random token
+	def Professional.new_token
+		SecureRandom.urlsafe_base64
+	end
+
+	# Returns the hash digest of the given string.
+	def Professional.digest(string)
+		cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
+																									BCrypt::Engine.cost
+		BCrypt::Password.create(string, cost: cost)
+	end
+	#Sets the password reset attributes and saves it to the client model
+	def create_reset_digest
+		self.reset_token = Professional.new_token
+		update_attribute(:reset_digest, Professional.digest(reset_token))
+		update_attribute(:reset_sent_at, Time.zone.now)
+	end
+	# Sends password reset email.
+	def send_password_reset_email
+			ProfessionalMailer.password_reset(self).deliver_now
 	end
 
 	#private methods placed hear
