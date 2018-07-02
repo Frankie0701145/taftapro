@@ -5,9 +5,12 @@ class ProfessionalMailer < ApplicationMailer
   #
   #   en.professional_mailer.password_reset.subject
   #
-  def password_reset
-    @greeting = "Hi"
 
-    mail to: "to@example.org"
+  #password reset method for the professional mailer
+  def password_reset(professional)
+    @professional = professional
+    @greeting = "Hi, #{@professional.first_name}"
+
+    mail to: @professional.email, subject: "Password Reset"
   end
 end
