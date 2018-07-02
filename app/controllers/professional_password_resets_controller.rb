@@ -1,6 +1,8 @@
 class ProfessionalPasswordResetsController < ApplicationController
-  before_action :get_professional, only: [:edit, :update]
+  before_action :get_professional,   only: [:edit, :update]
   before_action :valid_professional, only: [:edit, :update]
+  before_action :check_expiration,   only: [:edit, :update]
+
   def new
   end
 
@@ -24,7 +26,27 @@ class ProfessionalPasswordResetsController < ApplicationController
 
   def edit
   end
+
+  def update
+      #checking to see if the submited password is empty
+    if params[:professional][:password].empty?
+      @professional.errors.add(:password, "can't be empty")
+      render "edit"
+    elsif @professional.update_attributes(professional_params)
+      professional_login @professional
+      flash[:sucess] = "Password has been reset"
+      redirect_to @professional
+    else
+      render "edit"
+    end
+  end
+
   private
+    #method to restrict the user input to only password and password confirmation
+    def professional_params
+      params.require(:professional).permit(:password, :password_confirmation)
+    end
+    #before filters
     #retrieves the current professional
     def get_professional
       @professional= Professional.find_by(email: params[:email])
@@ -34,6 +56,13 @@ class ProfessionalPasswordResetsController < ApplicationController
       unless(@professional &&
             @professional.authenticated?(:reset,params[:id]))
         redirect_to root_url
+      end
+    end
+    #checks expiration of reset reset_token
+    def check_expiration
+      if @professional.password_reset_expired?
+        flash[:danger]="Password reset has expired."
+        redirect_to new_professional_password_reset_url
       end
     end
 end

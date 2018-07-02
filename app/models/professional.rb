@@ -74,7 +74,11 @@ class Professional < ApplicationRecord
 		BCrypt::Password.new(digest).is_password?(token)
 
 	end
-	
+	# Returns true if a password reset has expired.
+	def password_reset_expired?
+		reset_sent_at < 2.hours.ago
+	end
+
 	#private methods placed hear
 	private
 	#method to convert email to lower case
