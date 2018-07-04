@@ -12,4 +12,11 @@ class ApplicationController < ActionController::Base
 			redirect_to client_login_url
 		end
 	end
+  def logged_in_professional
+    unless professional_logged_in
+      store_location
+      flash[:danger]= "Please log in to continue"
+      redirect_to professional_login_url
+    end
+  end
 end

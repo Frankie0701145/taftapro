@@ -1,5 +1,5 @@
 class ProfessionalsController < ApplicationController
-  # before_action :logged_in_client, only: [:show]
+  before_action :logged_in_professional, only: [:edit, :update]
 
   def new
     @professional = Professional.new()
