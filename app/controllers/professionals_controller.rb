@@ -24,6 +24,7 @@ class ProfessionalsController < ApplicationController
   end
 
   def edit
+    @professional = Professional.find(params[:id])
   end
 
   def upload_quotation
