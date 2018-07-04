@@ -7,7 +7,7 @@
 
       <div class="d-flex justify-content-between">
           <h3>Personal Information</h3>
-          <button id="editPersonal" class="btn btn-info btn-sm mt-2 mb-3">Edit</button>
+          <button class="btn btn-info btn-sm mt-2 mb-3" onclick="editPersonal()" id="personalEdit">Edit</button>
       </div>
 
       <%= form_for( @professional, url: professional_path( params[:id] ))  do |f|%>
@@ -15,12 +15,12 @@
         <div class="row p-3">
           <div class="col-xs-6 col-sm-6 col-md-6">
             <div class="form-group">
-              <%= f.text_field :first_name, class: "form-control input-sm", placeholder: "First Name", :disabled=>true %>
+              <%= f.text_field :first_name, class: "form-control input-sm personalInfo", placeholder: "First Name", :disabled=>true %>
             </div>
           </div>
           <div class="col-xs-6 col-sm-6 col-md-6">
             <div class="form-group">
-              <%= f.text_field :last_name, class: "form-control input-sm", placeholder: "Last Name", :disabled=>true %>
+              <%= f.text_field :last_name, class: "form-control input-sm personalInfo", placeholder: "Last Name", :disabled=>true %>
             </div>
           </div>
         </div>
@@ -28,46 +28,71 @@
         <div class="row p-3">
           <div class="col-xs-6 col-sm-6 col-md-6">
             <div class="form-group">
-              <%= f.text_field :city, class: "form-control input-sm", placeholder: "City", :disabled=>true %>
+              <%= f.text_field :city, class: "form-control input-sm personalInfo", placeholder: "City", :disabled=>true %>
             </div>
           </div>
           <div class="col-xs-6 col-sm-6 col-md-6">
               <div class="form-group">
-                <%= f.text_field :country, class: "form-control input-sm", placeholder: "Country", :disabled=>true %>
+                <%= f.text_field :country, class: "form-control input-sm personalInfo", placeholder: "Country", :disabled=>true %>
               </div>
           </div>
         </div>
         <!--Service-->
         <div class="form-group p-3">
-          <%= f.text_field :service, class: "form-control input-sm", placeholder: "Service", :disabled=>true %>
+          <%= f.text_field :service, class: "form-control input-sm personalInfo", placeholder: "Service", :disabled=>true %>
         </div>
         <div class="form-group">
-          <%= f.submit "Save", class: "btn btn-success mt-2", :disabled=>true %>
+          <%= f.submit "Save", class: "btn btn-success mt-2", :disabled=>true, :id=> "personalSave" %>
         </div>
       <%end%>
 
       <hr>
+    <!--Business Information-->
       <div class="d-flex justify-content-between">
         <h3>Business Information</h3>
-        <button id="editBusiness" class="btn btn-info btn-sm mt-2">Edit</button>
+        <button class="btn btn-info btn-sm mt-2" onclick="editBusiness()" id="businessEdit">Edit</button>
       </div>
-    <!--Business Information-->
+
       <%= form_for(@professional, url: professional_path( params[:id])) do |f|%>
 
         <div class="form-group p-3">
-            <%=f.text_field :business_name, class: "form-control input-sm p-2", placeholder: "Business_name"%>
+            <%=f.text_field :business_name, class: "form-control input-sm p-2 businessInfo", placeholder: "Business_name", :disabled=>true%>
             <div>If you don't have business name just write your name</div>
         </div>
         <div class="form-group p-3">
-            <%=f.text_area :uniqueness_comment, class: "form-control ", placeholder: "Write a brief description how your service is unique. Maximum 50 characters"%>
+            <%=f.text_area :uniqueness_comment, class: "form-control businessInfo", placeholder: "Write a brief description how your service is unique. Maximum 50 characters", :disabled=>true%>
             <div>Write a brief decription of how your service is unique.</div>
         </div>
         <div class="form-group">
-            <%= f.submit "Save", class: "btn btn-success mt-2", :disabled=>true %>
+            <%= f.submit "Save", class: "btn btn-success mt-2", :disabled=>true, :id=> "businessSave" %>
         </div>
       <%end%>
-
-
     </div>
-
   </div>
+
+  <script type="text/javascript">
+      function editPersonal(){
+            console.log("Yeah");
+            var personalInfoField = document.getElementsByClassName("personalInfo");
+
+            for(var i=0; i < personalInfoField.length; i++){
+
+              personalInfoField[i].disabled=false;
+
+            }
+            document.getElementById("personalSave").disabled=false;
+            document.getElementById("personalEdit").disabled=true;
+      }
+      function editBusiness(){
+            console.log("Yeah");
+            var businessInfoField = document.getElementsByClassName("businessInfo");
+
+            for(var i=0; i < businessInfoField.length; i++){
+
+              businessInfoField[i].disabled=false;
+
+            }
+            document.getElementById("businessSave").disabled=false;
+            document.getElementById("businessEdit").disabled=true;
+      }
+  </script>
