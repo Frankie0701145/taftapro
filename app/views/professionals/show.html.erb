@@ -1,7 +1,14 @@
 <% if !current_client %>
+<% unless @professional.uniqueness_comment || @professional.business_name%>
+<div class="container alert alert-danger">
+	<p class=text-center>
+		Please fill in your business information to increase the chance of getting a client
+	</p>
+</div>
+<%end%>
 <div class="row">
 	<div class="col-md-6 offset-md-3">
-		<h3 class="mt-3">Welcome back <%= @professional.first_name %>! </h3>
+		<h3 class="mt-3">Welcome, <%= @professional.first_name %>! </h3>
 	</div>
 </div>
 <% else %>
@@ -97,14 +104,14 @@
 				</div>
 				<div class="pull-right" style="margin-left:10px;">0</div>
 			</div>
-		</div>	
+		</div>
 		<div class="col-sm-5 text-center">
 		  <h3><strong><%= "#{@professional.first_name} #{@professional.last_name}" %></strong></h3>
 		  <h5>Service: <strong><%= @professional.service %></strong></h5>
 		  <h5>Location: <strong><%= "#{@professional.city}, #{@professional.country}" %></strong></h5>
 		  <%#= link_to "Request a Quotation", request_quotation_path(client_id: current_client.id, professional_id: @professional.id), class: "btn btn-primary" %>
-		</div>	
-	</div>			
+		</div>
+	</div>
 
 	<div class="row">
 		<div class="col-sm-7">
@@ -153,7 +160,7 @@
 </div><!-- /container -->
 <% end %>
 
-<script> 
+<script>
 function searchProfessionalLocation() {
 	var lat = document.getElementById('latitude').value;
 	var lon = document.getElementById('longitude').value;
