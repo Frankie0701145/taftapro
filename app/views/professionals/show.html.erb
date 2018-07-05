@@ -1,8 +1,12 @@
 <% if professional_logged_in?%>
-	<% if @professional.business_name.empty? || @professional.uniqueness_comment.empty? %>
-	<div class="alert alert-warning text-center" role="alert">
-			Please complete your Business information to increase your chance of getting a client by clinking the following. <%=link_to "Profile", edit_professional_path%>
-	</div>
+	<% if @professional.business_name.nil? || @professional.uniqueness_comment.nil? %>
+		<div class="alert alert-warning text-center" role="alert">
+				Please complete your Business information to increase your chance of getting a client by clinking the following. <%=link_to "Profile", edit_professional_path%>
+		</div>
+	<%elsif @professional.business_name.empty? || @professional.uniqueness_comment.empty?%>
+		<div class="alert alert-warning text-center" role="alert">
+				Please complete your Business information to increase your chance of getting a client by clinking the following. <%=link_to "Profile", edit_professional_path%>
+		</div>
 	<%end%>
 <%end%>
 
