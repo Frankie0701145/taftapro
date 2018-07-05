@@ -26,6 +26,16 @@ class ProfessionalsController < ApplicationController
   def edit
     @professional = Professional.find(params[:id])
   end
+  def update
+    @professional=current_professional
+    if @professional.update_attributes(professional_edit_profile_params)
+      flash.now[:success]="Profile Saved successfully"
+      render "edit"
+    else
+      flash.now[:danger]="The profile was not saved"
+      render "edit"
+    end
+  end
 
   def upload_quotation
     @quotation = Quotation.new(quotation_params)
@@ -43,6 +53,9 @@ class ProfessionalsController < ApplicationController
 
   def professional_params
     params.require(:professional).permit(:first_name, :last_name, :email, :password, :password_confirmation, :service, :city, :country)
+  end
+  def professional_edit_profile_params
+    params.require(:professional).permit(:first_name, :last_name, :service, :city, :country, :uniqueness_comment, :business_name)
   end
 
   def quotation_params

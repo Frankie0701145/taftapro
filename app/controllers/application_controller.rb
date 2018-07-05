@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
 		end
 	end
   def logged_in_professional
-    unless professional_logged_in
+    unless professional_logged_in?
       store_location
       flash[:danger]= "Please log in to continue"
       redirect_to professional_login_url
