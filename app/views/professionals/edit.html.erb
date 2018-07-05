@@ -61,8 +61,8 @@
             <div>If you don't have business name just write your name</div>
         </div>
         <div class="form-group p-3">
-            <%=f.text_area :uniqueness_comment, class: "form-control businessInfo", placeholder: "Write a brief description how your service is unique. Maximum 50 characters", :disabled=>true%>
-            <div>Write a brief decription of how your service is unique.</div>
+            <%=f.text_area :uniqueness_comment, class: "form-control businessInfo", placeholder: "Write a business Quote.Maximum 100 characters", :disabled=>true, :maxlength=>"100"%>
+            <div>Write a business Quote.Maximum 100 characters.</div>
         </div>
         <div class="form-group">
             <%= f.submit "Save", class: "btn btn-success mt-2", :disabled=>true, :id=> "businessSave" %>

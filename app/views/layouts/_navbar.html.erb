@@ -9,8 +9,8 @@
 				<li><%=link_to "Logged in as, #{current_client.first_name}", '#', class: "user-name" %></li>
 				<li><%=link_to "Log out", client_logout_path, method: :delete %></li>
 				<% elsif professional_logged_in? %>
-				<li><%=link_to "Logged in as, #{current_professional.first_name}", professional_path, class: "user-name" %></li>
-				<li><%=link_to "Profile", edit_professional_path%></li>
+				<li><%=link_to "Logged in as, #{current_professional.first_name}", professional_path(session[:professional_id]), class: "user-name" %></li>
+				<li><%=link_to "Profile", edit_professional_path(session[:professional_id])%></li>
 				<li><%=link_to "Log out", professional_logout_path, method: :delete %></li>
 				<% else %>
 				<li><%=link_to "Join as a Pro", professional_signup_path%></li>
