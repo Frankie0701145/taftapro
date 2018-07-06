@@ -107,7 +107,10 @@
 		  <h5>Service: <strong><%= @professional.service %></strong></h5>
 		  <h5>Location: <strong><%= "#{@professional.city}, #{@professional.country}" %></strong></h5>
 			<h5>Business Name: <strong><%= "#{@professional.business_name}" %></strong></h5>
-		  <%#= link_to "Request a Quotation", request_quotation_path(client_id: current_client.id, professional_id: @professional.id), class: "btn btn-primary" %>
+			<%if !professional_logged_in?%>
+				<button type="button" name="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalCenter">Request Quotation</button>
+			  <%#= link_to "Request a Quotation", request_quotation_path(client_id: current_client.id, professional_id: @professional.id), class: "btn btn-primary" %>
+			<%end%>
 		</div>
 	</div>
 	<div class="row">
@@ -171,7 +174,32 @@
 		</div>
 	</div>
 </div><!-- /container -->
-
+<!--Request Modal-->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Quotation Request</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+				<%= form_for @request, url:requests_path(client_id: current_client.id, professional_id: @professional.id) do |f| %>
+		      <div class="form_group">
+		        <%= f.label "Please enter a detailed description of what you need done so that we can match you with the right one."%>
+		        <%= f.text_area :description, class: "form-control" %>
+		      </div>
+		      <div class="form_group">
+						<%= f.hidden_field :location, :value => @location %>
+			      <%= f.hidden_field :service, :value => @service %>
+		      </div>
+				<%= f.submit "Submit", class: "btn btn-info btn-block mt-1" %>
+				<% end %>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
 function searchProfessionalLocation() {
@@ -197,4 +225,3 @@ function searchProfessionalLocation() {
 </script>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDSqlenOHStWc1MdDufLvSzIXdum5UREsc&callback=searchProfessionalLocation"></script>
--->
