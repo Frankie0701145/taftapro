@@ -1,6 +1,6 @@
 class ProfessionalsController < ApplicationController
   before_action :logged_in_professional, only: [:edit, :update]
-
+  before_action :logged_in_client, only:[:show]
   def new
     @professional = Professional.new()
   end
@@ -20,6 +20,7 @@ class ProfessionalsController < ApplicationController
   end
 
   def show
+    @request = Request.new
     @professional = Professional.find(params[:id])
   end
 
