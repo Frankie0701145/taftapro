@@ -185,14 +185,18 @@
         </button>
       </div>
       <div class="modal-body">
-				<%= form_for @request, url:requests_path(client_id: current_client.id, professional_id: @professional.id) do |f| %>
+				<%= form_for @request, url:requests_path do |f| %>
 		      <div class="form_group">
 		        <%= f.label "Please enter a detailed description of what you need done so that we can match you with the right one."%>
 		        <%= f.text_area :description, class: "form-control" %>
 		      </div>
 		      <div class="form_group">
-						<%= f.hidden_field :location, :value => @location %>
-			      <%= f.hidden_field :service, :value => @service %>
+						<%= f.hidden_field :location,  					:value => @location %>
+			      <%= f.hidden_field :service, 	 					:value => @service %>
+						<%= hidden_field_tag   :professional_email, @professional.email%>
+						<%= f.hidden_field :user_email,					:value => @client.email%>
+						<%=	f.hidden_field :first_name, 				:value => @client.first_name %>
+						<%=	f.hidden_field :last_name,  				:value => @client.last_name %>
 		      </div>
 				<%= f.submit "Submit", class: "btn btn-info btn-block mt-1" %>
 				<% end %>
