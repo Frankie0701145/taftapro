@@ -20,8 +20,11 @@ class ProfessionalsController < ApplicationController
   end
 
   def show
-    @request = Request.new
     @professional = Professional.find(params[:id])
+    @request = Request.new
+    @service= @professional.service
+    @location=@professional.address
+    @client=current_client
   end
 
   def edit
