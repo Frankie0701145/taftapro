@@ -7,14 +7,14 @@ class RequestsController < ApplicationController
 				if @professional
 					@client=current_client
 					@client.request_quotation(professional:@professional, request:request)
-					flash.now[:sucess]="We will notify you when the professionals send you a quote"
+					flash[:success]="The quotation request has been sent."
 					redirect_to client_path(@client)
 				else
-					flash.now[:danger]="The quotation request was not sent"
+					flash[:danger]="The quotation request was not sent"
 					redirect_to professional_path(@professional)
 				end
 		else
-				flash.now[:danger]="The quotation request was not sent"
+				flash[:danger]="The quotation request was not sent"
 				redirect_to professional_path(@professional)
 		end
 =begin

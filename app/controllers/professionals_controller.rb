@@ -45,6 +45,7 @@ class ProfessionalsController < ApplicationController
     @quotation = Quotation.new(quotation_params)
     @professional = Professional.find(params[:professional_id])
     if @quotation.save
+      # TODO: Email client or create notifications
       flash[:success] = "Your quotation has been sent to the client."
       redirect_to @professional
     else
