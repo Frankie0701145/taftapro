@@ -11,12 +11,12 @@ class ClientPasswordResetsController < ApplicationController
 
     @client = Client.find_by(email: params[:client_password_reset][:email].downcase)
     if @client
-      #creates a reset digest token and adds the reset_sent_at time
+      #creates a reset token,reset digest token and adds the reset_sent_at time
       @client.create_reset_digest
       #sending the mail to the recipient
       @client.send_password_reset_email
       #adding the flash info message
-      flash[:info] = "Email sent with password reset instructions"
+      flash[:info] = "Email sent with password reset instructions to this email #{@client.email}"
       #redirecting to the root url
       redirect_to root_url
 

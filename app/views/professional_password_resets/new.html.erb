@@ -1,0 +1,29 @@
+
+
+<!--The reset password view-->
+
+  <div class="container">
+
+    <div class="row mt-4 pt-5">
+
+      <div class="col-6 mx-auto border border-white shadow-lg p-4 bg-white rounded mt-4">
+
+          <h3 class="text-center">Reset Password</h3>
+
+          <%= form_for(:professional_password_reset, url: professional_password_resets_path) do|f| %>
+
+              <div class="form-group">
+                <%= f.label :email %>
+                <%= f.email_field :email, class: 'form-control' %>
+              </div>
+
+
+              <%= f.submit "Submit", class: 'btn btn-info btn-block mt-2'%>
+
+          <% end %>
+
+      </div>
+
+    </div>
+
+  </div>

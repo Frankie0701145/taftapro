@@ -16,7 +16,7 @@ def setup
             password: "foobar", password_confirmation: "foobar")
 end
 
-  test "password_reset" do
+  test "Client password_reset" do
 
     @client.reset_token = Client.new_token
     mail = ClientMailer.password_reset( @client)
@@ -24,7 +24,7 @@ end
     assert_equal [@client.email], mail.to
     assert_equal ["noreply@taftapro.com"], mail.from
     assert_match @client.reset_token,   mail.body.encoded
-    assert_match "Hi", mail.body.encoded
+    assert_match CGI.escape(@client.email), mail.body.encoded
   end
 
 

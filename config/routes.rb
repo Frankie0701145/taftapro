@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  get 'professional_sessions/new'
+  
   root 'static_pages#home'
   #the routes for the client login and logout
   get     "/client/login",  to:"client_sessions#new"
@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   #the routes for the professional login and logout
   get     "/professional/login",  to: "professional_sessions#new"
   post    "/professional/login",  to: "professional_sessions#create"
-  delete  "/professional/logout", to: "professional_sessions#destroy" 
+  delete  "/professional/logout", to: "professional_sessions#destroy"
 
   get '/about', to: 'static_pages#about'
   get '/signup', to: 'clients#new'
@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   post 'upload_quotation', to: 'professionals#upload_quotation'
   resources :clients
   resources :client_password_resets,  only: [:new, :create, :edit, :update]
+  resources :professional_password_resets, only: [:new, :create, :edit, :update]
   resources :professionals
   resources :requests
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

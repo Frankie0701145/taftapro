@@ -6,6 +6,7 @@ class ClientPasswordResetsTest < ActionDispatch::IntegrationTest
   # end
 
   def setup
+    ActionMailer::Base.deliveries.clear
     @client = Client.new(first_name: "John", last_name: "Doe", email: "johndoe@gmail.com",
               password: "foobar", password_confirmation: "foobar")
     @client.save
@@ -29,8 +30,7 @@ class ClientPasswordResetsTest < ActionDispatch::IntegrationTest
     #we post with a valid email
     post client_password_resets_path,
          params: {client_password_reset: { email: @client.email}}
-    @client.reset_token = Client.new_token
-
+    
     assert_not_equal @client.reset_digest, @client.reload.reset_digest
     assert_equal 1, ActionMailer::Base.deliveries.size
     assert_not flash.empty?

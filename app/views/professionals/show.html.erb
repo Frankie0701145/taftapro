@@ -1,11 +1,15 @@
-<% if !current_client %>
-<div class="row">
-	<div class="col-md-6 offset-md-3">
-		<h3 class="mt-3">Welcome back <%= @professional.first_name %>! </h3>
-	</div>
-</div>
-<% else %>
-<%= render 'layouts/searchbar' %>
+<% if professional_logged_in?%>
+	<% if @professional.business_name.nil? || @professional.uniqueness_comment.nil? %>
+		<div class="alert alert-warning text-center" role="alert">
+				Please complete your Business information to increase your chance of getting a client by clinking the following. <%=link_to "Profile", edit_professional_path%>
+		</div>
+	<%elsif @professional.business_name.empty? || @professional.uniqueness_comment.empty?%>
+		<div class="alert alert-warning text-center" role="alert">
+				Please complete your Business information to increase your chance of getting a client by clinking the following. <%=link_to "Profile", edit_professional_path%>
+		</div>
+	<%end%>
+<%end%>
+
 <div class="container professional-profile">
 
 	<div class="row">
@@ -97,18 +101,37 @@
 				</div>
 				<div class="pull-right" style="margin-left:10px;">0</div>
 			</div>
-		</div>	
+		</div>
 		<div class="col-sm-5 text-center">
 		  <h3><strong><%= "#{@professional.first_name} #{@professional.last_name}" %></strong></h3>
 		  <h5>Service: <strong><%= @professional.service %></strong></h5>
 		  <h5>Location: <strong><%= "#{@professional.city}, #{@professional.country}" %></strong></h5>
-		  <%#= link_to "Request a Quotation", request_quotation_path(client_id: current_client.id, professional_id: @professional.id), class: "btn btn-primary" %>
-		</div>	
-	</div>			
+			<h5>Business Name: <strong><%= "#{@professional.business_name}" %></strong></h5>
+			<%if !professional_logged_in?%>
+				<button type="button" name="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalCenter">Request Quotation</button>
+			  <%#= link_to "Request a Quotation", request_quotation_path(client_id: current_client.id, professional_id: @professional.id), class: "btn btn-primary" %>
+			<%end%>
+		</div>
+	</div>
+	<div class="row">
+
+		<div class="col-12">
+			<hr/>
+			<h4>Business Quote</h4>
+			<div class="">
+				<p>
+					<%= "#{@professional.uniqueness_comment}" %>
+				</p>
+			</div>
+
+		</div>
+
+	</div>
 
 	<div class="row">
 		<div class="col-sm-7">
 			<hr/>
+			<h4>Reviews</h4>
 			<div class="review-block">
 			<% 5.times do %>
 				<div class="row">
@@ -151,9 +174,39 @@
 		</div>
 	</div>
 </div><!-- /container -->
-<% end %>
-
-<script> 
+<!--Request Modal-->
+<%if client_logged_in?%>
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Quotation Request</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+				<%= form_for @request, url:requests_path do |f| %>
+		      <div class="form_group">
+		        <%= f.label "Please enter a detailed description of what you need done so that we can match you with the right one."%>
+		        <%= f.text_area :description, class: "form-control" %>
+		      </div>
+		      <div class="form_group">
+						<%= f.hidden_field :location,  					:value => @location %>
+			      <%= f.hidden_field :service, 	 					:value => @service %>
+						<%= hidden_field_tag   :professional_email, @professional.email%>
+						<%= f.hidden_field :user_email,					:value => @client.email%>
+						<%=	f.hidden_field :first_name, 				:value => @client.first_name %>
+						<%=	f.hidden_field :last_name,  				:value => @client.last_name %>
+		      </div>
+				<%= f.submit "Submit", class: "btn btn-info btn-block mt-1" %>
+				<% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<%end%>
+<script>
 function searchProfessionalLocation() {
 	var lat = document.getElementById('latitude').value;
 	var lon = document.getElementById('longitude').value;

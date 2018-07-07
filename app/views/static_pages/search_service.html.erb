@@ -1,44 +1,22 @@
 <%= render 'layouts/searchbar' %>
+<div class="container mt-3 p-3">
+	<% if @professionals && @professionals.count > 0 %>
+	<div class="container">
+		<div class="d-flex ">
+			<h3 class=>Showing results for <strong><%= "'#{@service}'"%></strong> in <strong><%= "#{@location}"%></strong> </h3>
+		</div>
 
-
-<div class="container">
-
-  <div class="row mt-4 pt-5">
-
-    <div class="col-6 mx-auto border border-white shadow-lg p-4 bg-white rounded mt-1">
-      <h3>There are <%= "#{@professionals.count}" %> pros near you.  </h3>
-      <% if @professionals && @professionals.count > 0 %>
-      <%= form_for @request, class: "modal fade" do |f| %>
-      <div class="form_group">
-        <%= f.label "Please enter a detailed description of what you need done so that we can match you with the right one."%>
-        <%= f.text_area :description, class: "form-control" %>
-      </div>
-      <div class="form_group">
-        <%= f.label "Where should we send your matches", class: "mt-1" %>
-        <%= f.email_field :user_email, class: "form-control", placeholder: "Email" %>
-      </div>
-
-      <div class="form_group">
-        <%= f.label "Your name", class: "mt-1" %>
-        <%= f.text_field :first_name, class: "form-control", placeholder: "First Name" %>
-      </div>
-
-      <div class="form_group">
-      	<br>
-      	<%= f.text_field :last_name, class: "form-control", placeholder: "Last Name" %>
-      </div>
-
-      <%= f.hidden_field :location, :value => @location %>
-      <%= f.hidden_field :service, :value => @service %>
-
-      <%= f.submit "Submit", class: "btn btn-info btn-block mt-1" %>
-      <% end %>
-      <% else %>
-      <h3>There are no results for <strong><%= "'#{@service}'"%> <%= "#{@location}"%></strong> </h3>
-      <% end %>     
-
-    </div>
-
-  </div>
-
+		<% @professionals.each do |professional| %>
+					<div class="d-flex flex-column border p-3">
+						<div class="p-2"><%= link_to("#{professional.full_name}:", professional) %></div>
+						<div class="p-2"><%= professional.service.capitalize %></div>
+						<div class="p-2"><%= professional.address %></div>
+					</div>
+		<% end %>
+	</div>
+	<% else %>
+	<div class="row">
+		<h3>There are no results for <strong><%= "'#{@service}'"%></strong> in <strong> <%= "#{@location}"%></strong> </h3>
+	</div>
+	<% end %>
 </div>

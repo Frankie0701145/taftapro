@@ -6,10 +6,17 @@ class ApplicationController < ActionController::Base
   private
   	# Confirms a logged-in client.
 	def logged_in_client
-		unless client_logged_in?
+		if !client_logged_in? && !professional_logged_in?
 			store_location
 			flash[:danger] = "Please log in to continue."
 			redirect_to client_login_url
 		end
 	end
+  def logged_in_professional
+    unless professional_logged_in?
+      store_location
+      flash[:danger]= "Please log in to continue"
+      redirect_to professional_login_url
+    end
+  end
 end
