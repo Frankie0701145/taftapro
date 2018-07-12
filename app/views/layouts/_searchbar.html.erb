@@ -3,7 +3,7 @@
 		<%= form_for SearchServiceByLocationForm.new, url: search_service_url, method: :get do |f| %>
 			<div class="input-group">
 				<%= f.text_field :service, class: "form-control", placeholder: "Service", :required => true, value: "#{@service}" %>
-				<%= f.text_field :location, class: "form-control", placeholder: "City, Country", id: "geo-input" %>
+				<%= f.text_field :location, class: "form-control", placeholder: "City, Country", value: "#{@location}", id: "geo-input" %>
 				<div class="input-group-append">
 					<%= f.submit "Find a Professional", class: "btn btn-info" %>
 				</div>

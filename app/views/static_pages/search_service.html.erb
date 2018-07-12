@@ -6,7 +6,7 @@
 			<h3>
 				Showing results for
 				<strong><%= "'#{@service}'"%></strong>
-				<%if !@location.blank?%>
+				<%if @location.present? %>
 					in <strong><%= "'#{@location}'"%></strong>
 				<%end%>
 			</h3>
