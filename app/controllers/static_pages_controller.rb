@@ -12,9 +12,10 @@ class StaticPagesController < ApplicationController
   		location = params[:search_service_by_location_form][:location]
 
   		@professionals = Professional.near(@location) &&
-  					Professional.where(service: params[:search_service_by_location_form][:service])
+  					Professional.where(service: @service)
   	elsif params[:search_service_by_location_form][:location].empty?
-  		flash.now[:info] = "There's no results for the location you have entered."
+  		#flash.now[:info] = "There's no results for the location you have entered."
+      @professionals =Professional.where(service: @service)
   	elsif params[:search_service_by_location_form][:service].empty?
   		flash.now[:info] = "There's no results for the service you have entered."
   	else
