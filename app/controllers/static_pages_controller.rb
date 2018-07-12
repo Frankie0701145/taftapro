@@ -10,7 +10,7 @@ class StaticPagesController < ApplicationController
   	if !@location.empty? && !@service.empty?
   		
       @professionals = 
-        Professional.near(@location) && Professional.where(service: @service)
+        Professional.near(@location) & Professional.where(service: @service)
 
   	elsif @location.empty? && !@service.empty?
 
