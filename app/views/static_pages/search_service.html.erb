@@ -3,7 +3,13 @@
 	<% if @professionals && @professionals.count > 0 %>
 	<div class="container">
 		<div class="d-flex ">
-			<h3 class=>Showing results for <strong><%= "'#{@service}'"%></strong> in <strong><%= "#{@location}"%></strong> </h3>
+			<h3>
+				Showing results for
+				<strong><%= "'#{@service}'"%></strong>
+				<%if @location.present? %>
+					in <strong><%= "'#{@location}'"%></strong>
+				<%end%>
+			</h3>
 		</div>
 
 		<% @professionals.each do |professional| %>
@@ -16,7 +22,13 @@
 	</div>
 	<% else %>
 	<div class="row">
-		<h3>There are no results for <strong><%= "'#{@service}'"%></strong> in <strong> <%= "#{@location}"%></strong> </h3>
+		<h3>
+			There are no results for
+			 <strong><%= "'#{@service}'"%></strong>
+			 <% if @location.present? %>
+			 	in <strong> <%= "'#{@location}'"%></strong>
+			 <% end %>
+		</h3>
 	</div>
 	<% end %>
 </div>
