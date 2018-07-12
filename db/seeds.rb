@@ -13,13 +13,16 @@ puts "***Creating 10 professional personal trainers in Nairobi, Kenya****"
 	city = "Nairobi" 
 	country = "Kenya"
 	service = "Personal Training"
+	password = "password"
 	professional = Professional.create!(
 		first_name: first_name,
 		last_name: last_name,
 		email: email,
 		city: city,
 		country: country,
-		service: service		
+		service: service,
+		password: password,
+		password_confirmation: password		
 		)
 	details = Faker::Lorem.paragraph(7, true, 5)
 	Quotation.create!(details: details, professional_id: professional.id)
@@ -33,13 +36,16 @@ puts "***Creating 10 professional plumbers in Nyeri, Kenya****"
 	city = "Nyeri" 
 	country = "Kenya"
 	service = "Plumbing"
+	password = "password"
 	professional = Professional.create!(
 		first_name: first_name,
 		last_name: last_name,
 		email: email,
 		city: city,
 		country: country,
-		service: service		
+		service: service,
+		password: password,
+		password_confirmation: password		
 		)
 
 	details = Faker::Lorem.paragraph(7, true, 5)
