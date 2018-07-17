@@ -4,6 +4,7 @@
 #
 #  id                 :integer          not null, primary key
 #  business_name      :string
+#  career_start_date  :date
 #  city               :string
 #  country            :string
 #  email              :string
