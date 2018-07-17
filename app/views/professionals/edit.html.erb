@@ -17,11 +17,13 @@
           <div class="col-xs-6 col-sm-6 col-md-6">
             <div class="form-group">
               <%= f.text_field :first_name, class: "form-control input-sm personalInfo", placeholder: "First Name", :disabled=>true %>
+              <div>First Name</div>
             </div>
           </div>
           <div class="col-xs-6 col-sm-6 col-md-6">
             <div class="form-group">
               <%= f.text_field :last_name, class: "form-control input-sm personalInfo", placeholder: "Last Name", :disabled=>true %>
+              <div>Second Name</div>
             </div>
           </div>
         </div>
@@ -30,17 +32,20 @@
           <div class="col-xs-6 col-sm-6 col-md-6">
             <div class="form-group">
               <%= f.text_field :city, class: "form-control input-sm personalInfo", placeholder: "City", :disabled=>true %>
+              <div>City</div>
             </div>
           </div>
           <div class="col-xs-6 col-sm-6 col-md-6">
               <div class="form-group">
                 <%= f.text_field :country, class: "form-control input-sm personalInfo", placeholder: "Country", :disabled=>true %>
+                <div>Country</div>
               </div>
           </div>
         </div>
         <!--Service-->
         <div class="form-group p-3">
           <%= f.text_field :service, class: "form-control input-sm personalInfo", placeholder: "Service", :disabled=>true %>
+          <div>Service</div>
         </div>
         <div class="form-group">
           <%= f.submit "Save", class: "btn btn-success mt-2", :disabled=>true, :id=> "personalSave" %>
@@ -55,14 +60,32 @@
       </div>
 
       <%= form_for(@professional, url: professional_path( params[:id])) do |f|%>
-
+        <!--Business Name-->
         <div class="form-group p-3">
             <%=f.text_field :business_name, class: "form-control input-sm p-2 businessInfo", placeholder: "Business_name", :disabled=>true%>
             <div>If you don't have business name just write your name</div>
         </div>
+        <!--uniqueness_comment-->
         <div class="form-group p-3">
             <%=f.text_area :uniqueness_comment, class: "form-control businessInfo", placeholder: "Write a business Quote.Maximum 100 characters", :disabled=>true, :maxlength=>"100"%>
             <div>Write a business Quote.Maximum 100 characters.</div>
+        </div>
+        <!---->
+        <div class="row p-3">
+          <!--specialised-->
+          <div class="col-xs-6 col-sm-6 col-md-6">
+            <div class="form-group">
+              <%=f.text_field :specialised, class: "form-control input-sm businessInfo", placeholder: "Area of Specialization", :disabled=>true %>
+              <div>What is your area of specialization</div>
+            </div>
+          </div>
+          <!--Career Start Date-->
+          <div class="col-xs-6 col-sm-6 col-md-6">
+            <div class="form-group">
+              <%=f.date_field :career_start_date, class: "form-control input-sm businessInfo", placeholder: "When did you start this job", :disabled=>true%>
+              <div>When did you start the career</div>
+            </div>
+          </div>
         </div>
         <div class="form-group">
             <%= f.submit "Save", class: "btn btn-success mt-2", :disabled=>true, :id=> "businessSave" %>
@@ -73,7 +96,7 @@
 
   <script type="text/javascript">
       function editPersonal(){
-            console.log("Yeah");
+
             var personalInfoField = document.getElementsByClassName("personalInfo");
 
             for(var i=0; i < personalInfoField.length; i++){

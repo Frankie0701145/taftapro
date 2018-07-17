@@ -1,9 +1,5 @@
 <% if professional_logged_in?%>
-	<% if @professional.business_name.nil? || @professional.uniqueness_comment.nil? %>
-		<div class="alert alert-warning text-center" role="alert">
-				Please complete your Business information to increase your chance of getting a client by clinking the following. <%=link_to "Profile", edit_professional_path%>
-		</div>
-	<%elsif @professional.business_name.empty? || @professional.uniqueness_comment.empty?%>
+	<% if @professional.business_name.blank? || @professional.uniqueness_comment.blank? || @professional.career_start_date.blank? || @professional.specialised.blank? %>
 		<div class="alert alert-warning text-center" role="alert">
 				Please complete your Business information to increase your chance of getting a client by clinking the following. <%=link_to "Profile", edit_professional_path%>
 		</div>
@@ -102,11 +98,19 @@
 				<div class="pull-right" style="margin-left:10px;">0</div>
 			</div>
 		</div>
-		<div class="col-sm-5 text-center">
+		<div class="col-sm-5">
 		  <h3><strong><%= "#{@professional.first_name} #{@professional.last_name}" %></strong></h3>
-		  <h5>Service: <strong><%= @professional.service %></strong></h5>
-		  <h5>Location: <strong><%= "#{@professional.city}, #{@professional.country}" %></strong></h5>
-			<h5>Business Name: <strong><%= "#{@professional.business_name}" %></strong></h5>
+		  <h5>Service: <strong><%= "#{@professional.service}." %></strong></h5>
+			<h5>Specialization:
+					<strong><%="#{@professional.specialised}."%></strong>
+			</h5>
+		  <h5>Location: <strong><%= "#{@professional.city}, #{@professional.country}." %></strong></h5>
+			<h5>Business Name: <strong><%= "#{@professional.business_name}." %></strong></h5>
+			<h5>Experience:
+				<% if @professional.career_start_date.present?%>
+					<strong><%= "#{distance_of_time_in_words(Time.now, @professional.career_start_date)}."%></strong>
+				<% end%>
+			</h5>
 			<%if !professional_logged_in?%>
 				<button type="button" name="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalCenter">Request Quotation</button>
 			  <%#= link_to "Request a Quotation", request_quotation_path(client_id: current_client.id, professional_id: @professional.id), class: "btn btn-primary" %>
