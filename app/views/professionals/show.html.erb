@@ -100,15 +100,15 @@
 		</div>
 		<div class="col-sm-5">
 		  <h3><strong><%= "#{@professional.first_name} #{@professional.last_name}" %></strong></h3>
-		  <h5>Service: <strong><%= "#{@professional.service}." %></strong></h5>
+		  <h5>Service: <strong><%= "#{@professional.service}" %></strong></h5>
 			<h5>Specialization:
-					<strong><%="#{@professional.specialised}."%></strong>
+					<strong><%="#{@professional.specialised}"%></strong>
 			</h5>
-		  <h5>Location: <strong><%= "#{@professional.city}, #{@professional.country}." %></strong></h5>
-			<h5>Business Name: <strong><%= "#{@professional.business_name}." %></strong></h5>
+		  <h5>Location: <strong><%= "#{@professional.city}, #{@professional.country}" %></strong></h5>
+			<h5>Business Name: <strong><%= "#{@professional.business_name}" %></strong></h5>
 			<h5>Experience:
 				<% if @professional.career_start_date.present?%>
-					<strong><%= "#{distance_of_time_in_words(Time.now, @professional.career_start_date)}."%></strong>
+					<strong><%= "#{distance_of_time_in_words(Time.now, @professional.career_start_date)}"%></strong>
 				<% end%>
 			</h5>
 			<%if !professional_logged_in?%>
