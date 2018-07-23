@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_17_120946) do
+ActiveRecord::Schema.define(version: 2018_07_23_204449) do
 
   create_table "clients", force: :cascade do |t|
     t.string "email"
@@ -40,8 +40,8 @@ ActiveRecord::Schema.define(version: 2018_07_17_120946) do
     t.datetime "reset_sent_at"
     t.string "business_name"
     t.text "uniqueness_comment"
-    t.string "specialised"
     t.date "career_start_date"
+    t.string "specialization"
   end
 
   create_table "quotations", force: :cascade do |t|

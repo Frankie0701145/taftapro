@@ -16,7 +16,7 @@
 #  reset_digest       :string
 #  reset_sent_at      :datetime
 #  service            :string
-#  specialised        :string
+#  specialization     :string
 #  uniqueness_comment :text
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
