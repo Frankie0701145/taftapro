@@ -4,6 +4,7 @@
 #
 #  id                 :integer          not null, primary key
 #  business_name      :string
+#  career_start_date  :date
 #  city               :string
 #  country            :string
 #  email              :string
@@ -15,6 +16,7 @@
 #  reset_digest       :string
 #  reset_sent_at      :datetime
 #  service            :string
+#  specialization     :string
 #  uniqueness_comment :text
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null

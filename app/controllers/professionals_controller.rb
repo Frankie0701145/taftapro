@@ -60,7 +60,7 @@ class ProfessionalsController < ApplicationController
     params.require(:professional).permit(:first_name, :last_name, :email, :password, :password_confirmation, :service, :city, :country)
   end
   def professional_edit_profile_params
-    params.require(:professional).permit(:first_name, :last_name, :service, :city, :country, :uniqueness_comment, :business_name)
+    params.require(:professional).permit(:first_name, :last_name, :service, :city, :country, :uniqueness_comment, :business_name, :career_start_date, :specialization)
   end
 
   def quotation_params
