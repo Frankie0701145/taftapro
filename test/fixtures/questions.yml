@@ -1,0 +1,30 @@
+# == Schema Information
+#
+# Table name: questions
+#
+#  id          :integer          not null, primary key
+#  answer      :string
+#  question    :text
+#  type        :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  category_id :integer
+#
+# Indexes
+#
+#  index_questions_on_category_id  (category_id)
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  question: MyText
+  type: 
+  answer: MyString
+  category: one
+
+two:
+  question: MyText
+  type: 
+  answer: MyString
+  category: two
