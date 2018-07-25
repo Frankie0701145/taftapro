@@ -25,7 +25,6 @@ class Service::Category < ApplicationRecord
   end
 
   def self.home_improvement_category
-  	home_improvement_category = Service::Category.where(name: "Home Improvement")    
-  	home_improvement_category[0]
+  	Service::Category.find_by(name: "Home Improvement")    
   end
 end
