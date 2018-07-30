@@ -22,6 +22,12 @@ class StaticPagesController < ApplicationController
     end
   end
 
+  def search
+    @home_improvement_services = Service::Category.where(name: "Home Improvement").ransack(params[:q]).result(distinct: true)
+
+    # render json: { home_improvement: [], animals: [] }  
+  end
+
   def about
   end
 

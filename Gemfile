@@ -39,6 +39,7 @@ gem 'geocoder'
 gem 'font-awesome-rails'
 gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
 gem 'carrierwave', '~> 0.11.0'
+gem 'ransack', github: 'activerecord-hackery/ransack'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
