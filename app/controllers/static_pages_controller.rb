@@ -1,4 +1,6 @@
 class StaticPagesController < ApplicationController
+  before_action :force_json, only: :search
+
   def home
   	@search_form = SearchServiceByLocationForm.new
   end
@@ -30,5 +32,10 @@ class StaticPagesController < ApplicationController
 
   def about
   end
+
+  private
+    def force_json
+      request.format = :json
+    end
 
 end
