@@ -1,5 +1,4 @@
 class StaticPagesController < ApplicationController
-  before_action :force_json, only: :search
 
   def home
   	@search_form = SearchServiceByLocationForm.new
@@ -25,17 +24,17 @@ class StaticPagesController < ApplicationController
   end
 
   def search
-    @home_improvement_services = Service::Category.where(name: "Home Improvement").ransack(params[:q]).result(distinct: true)
+    @home_improvement_services = Service::Category.where(name: "Home Improvement").ransack(service_cont: params[:q]).result(distinct: true)
 
+    respond_to do |format|
+      format.html {}
+      format.json {
+        @home_improvement_services = @home_improvement_services.limit(5)
+      }
+    end
     # render json: { home_improvement: [], animals: [] }  
   end
 
   def about
   end
-
-  private
-    def force_json
-      request.format = :json
-    end
-
 end
