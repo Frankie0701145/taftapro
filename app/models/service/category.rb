@@ -14,14 +14,25 @@ class Service::Category < ApplicationRecord
 
 
   def self.create_home_improvement_category
-		home_improvement_category = Service::Category.find_or_create_by(name: "Home Improvement")    
-		
-		question_one = 
-			Question.find_by(question: "Where do you need the service?", category_id: home_improvement_category.id) || home_improvement_category.questions.build(question: "Where do you need the service?")
-		question_two = home_improvement_category.questions.build(question: "Describe the nature of the service.")
-		question_three = home_improvement_category.questions.build(question: "Describe the nature of the service.")
+    home_improvement_category = Service::Category.find_or_create_by(name: "Home Improvement")    
+    
+    if home_improvement_category
+      question_one = 
+        Question.find_by(
+        	question: "Where do you need the service?", 
+        	category_id: home_improvement_category.id
+        	) || 
+        home_improvement_category.questions.build(question: "Where do you need the service?")
 
-		home_improvement_category.save
+      question_two = 
+        Question.find_by(
+        	question: "Describe the nature of the service.", 
+        	category_id: home_improvement_category.id
+        	) ||       	
+      	home_improvement_category.questions.build(question: "Describe the nature of the service.")
+
+      home_improvement_category.save
+    end
   end
 
   def self.home_improvement_category
