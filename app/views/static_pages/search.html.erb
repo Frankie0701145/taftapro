@@ -46,15 +46,72 @@
 			</div>        
 			<div class="modal-body">
         <% @questions.each do |question| %>   
-          <%= form_for Answer.new, remote: true do |f| %>
-            <label><%= question.question %></label>
-            <%= f.hidden_field :question_id, value: question.id %>
-            <%= f.text_field :answer %>
-            
-            <%= f.submit "Next" %>
+          <% if @questions.index(question) == 0 %>
+            <!-- If it's the first question -->
+            <%= form_for Answer.new, remote: true, html: { id: "#{@questions.index(question)}" } do |f| %>
+              <label><%= question.question %></label>
+              <%= f.hidden_field :question_id, value: question.id %>
+              <%= f.text_field :answer %>
+              
+              <%= f.submit "Next", id: "next" %>
+            <% end %>
+          <% elsif @questions.index(question) == @questions.count - 1 %>
+            <!-- If it's the last question -->
+            <%= form_for Answer.new, remote: true, html: { class: "d-none", id: "#{@questions.index(question)}" } do |f| %>
+              <label><%= question.question %></label>
+              <%= f.hidden_field :question_id, value: question.id %>
+              <%= f.text_field :answer %>
+              
+              
+                <%= link_to "Back", '#', remote: true, class: "btn btn-info float-left", id: "back"%>
+                <%= f.submit "Submit", class: "float-right" %>                
+              
+            <% end %>
+          <% else %>
+            <!-- Middle questions -->
+            <%= form_for Answer.new, remote: true, html: { class: "d-none", id: "#{@questions.index(question)}" } do |f| %>
+              <label><%= question.question %></label>
+              <%= f.hidden_field :question_id, value: question.id %>
+              <%= f.text_field :answer %>
+              
+              
+                <%= link_to "Back", '#', remote: true, class: "btn btn-info float-left", id: "back"%>
+                <%= f.submit "Next", id: "next", class: "float-right" %>                
+              
+            <% end %>          
           <% end %>
         <% end %>
       </div>        
     </div>
   </div>
 </div>
+
+
+<script type='text/javascript'>
+ // hitting submit button hides the submitted form after it has been submitted
+$("#next").click(function() {
+  // If not the last question,
+  // hide this question
+  // and display the next question upon hitting next
+  if (this.parentElement.id < <%= @questions.count %>){
+    this.parentElement.classList.add("d-none");
+    this.parentElement.classList.remove("d-block");
+
+    var next_id = parseInt(this.parentElement.id, 10) + 1;
+    document.getElementById(next_id).classList.remove("d-none");
+    document.getElementById(next_id).classList.add("d-block");
+  }
+ }); 
+
+$("#back").click(function() {
+  if (this.parentElement.id > 0 && this.parentElement.id <= <%= @questions.count %>){
+    this.parentElement.classList.add("d-none");
+    this.parentElement.classList.remove("d-block");
+
+    var prev_id = parseInt(this.parentElement.id, 10) - 1;
+    document.getElementById(prev_id).classList.add("d-block");
+    document.getElementById(prev_id).classList.remove("d-none");
+  }
+ }); 
+ 
+</script>
