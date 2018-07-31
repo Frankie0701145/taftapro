@@ -19,6 +19,9 @@ class StaticPagesController < ApplicationController
 
           @questions = Service::Category.find_by(service: @service).questions 
 
+          # Used to track the questions that the client answers
+          @client_token = SecureRandom.hex(10)
+
         elsif @location.empty? && !@service.empty?
 
           @professionals = Professional.where(service: @service)

@@ -37,11 +37,10 @@
   <% end %>
 </div>
 
-<div class="modal fade" id="questionsModal">
+<div class="modal fade" id="questionsModal" data-backdrop="static">
   <div class="modal-dialog">
     <div class="modal-content">
 			<div class="modal-header">
-				<span data-dismiss="modal">&times;</span>
 				<h2>TaftaPro</h2>
 			</div>        
 			<div class="modal-body">
@@ -51,7 +50,8 @@
             <%= form_for Answer.new, remote: true, html: { id: "#{@questions.index(question)}" } do |f| %>
               <label><%= question.question %></label>
               <%= f.hidden_field :question_id, value: question.id %>
-              <%= f.text_field :answer %>
+              <%= f.hidden_field :client_token, value: @client_token %>
+              <%= f.text_field :answer, :required => true %>
               
               <%= f.submit "Next", id: "next" %>
             <% end %>
@@ -60,7 +60,10 @@
             <%= form_for Answer.new, remote: true, html: { class: "d-none", id: "#{@questions.index(question)}" } do |f| %>
               <label><%= question.question %></label>
               <%= f.hidden_field :question_id, value: question.id %>
-              <%= f.text_field :answer %>
+              <%= f.hidden_field :client_token, value: @client_token %>
+
+              <!-- Last question should be the client's email -->
+              <%= f.email_field :answer, class: "text-lowercase", :required => true %>
               
               
                 <%= link_to "Back", '#', remote: true, class: "btn btn-info float-left", id: "back"%>
@@ -72,7 +75,8 @@
             <%= form_for Answer.new, remote: true, html: { class: "d-none", id: "#{@questions.index(question)}" } do |f| %>
               <label><%= question.question %></label>
               <%= f.hidden_field :question_id, value: question.id %>
-              <%= f.text_field :answer %>
+              <%= f.hidden_field :client_token, value: @client_token %>
+              <%= f.text_field :answer, :required => true %>
               
               
                 <%= link_to "Back", '#', remote: true, class: "btn btn-info float-left", id: "back"%>
