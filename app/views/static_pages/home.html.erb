@@ -11,7 +11,7 @@
 			<%= form_for SearchServiceByLocationForm.new, url: search_path, local: true, method: :get do |f| %>
 			<div class="input-group">
 				<%= f.text_field :q, class: "form-control", placeholder: "Service", data: { behavior: "autocomplete" }, :required => true %>
-				<%= f.text_field :location, class: "form-control", placeholder: "City, Country", id: "geo-input" %>
+				<%= f.text_field :location, class: "form-control", placeholder: "City, Country", id: "geo-input", :required => true %>
 				<div class="input-group-append">
 					<%= f.submit "Find Professional", class: "btn btn-info" %>  
 				</div> 

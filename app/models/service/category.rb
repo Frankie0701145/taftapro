@@ -12,22 +12,23 @@
 class Service::Category < ApplicationRecord
   has_many :questions
 
+
   @@home_improvement_services = ["Domestic", 
-																	"Workers",
-																	"Handy Man",
-																	"House Cleaning",
-																	"Car Cleaning",
-																	"Interior Design",
-																	"General Contracting",
-																	"Repair and Maintenance",
-																	"Plumbing",
-																	"Landscaping",
-																	"Electrical",
-																	"Home Painting",
-																	"Home remodeling",
-																	"Carpet cleaning",
-																	"Lawn mowing",
-																	"Laundry"]
+								"Workers",
+								"Handy Man",
+								"House Cleaning",
+								"Car Cleaning",
+								"Interior Design",
+								"General Contracting",
+								"Repair and Maintenance",
+								"Plumbing",
+								"Landscaping",
+								"Electrical",
+								"Home Painting",
+								"Home remodeling",
+								"Carpet cleaning",
+								"Lawn mowing",
+								"Laundry"]
 
   def self.create_home_improvement_category
   	@@home_improvement_services.each do |home_improvement_service|

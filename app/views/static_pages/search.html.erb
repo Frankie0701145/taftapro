@@ -44,7 +44,16 @@
 				<span data-dismiss="modal">&times;</span>
 				<h2>TaftaPro</h2>
 			</div>        
-			<div class="modal-body"></div>        
+			<div class="modal-body">
+        <% @questions.each do |question| %>   
+          <%= form_for question do |f| %>
+            <label><%= question %></label>
+            <%= f.text_field :answer %>
+            
+            <%= f.submit "Next" %>
+          <% end %>
+        <% end %>
+      </div>        
     </div>
   </div>
 </div>

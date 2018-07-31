@@ -17,6 +17,8 @@ class StaticPagesController < ApplicationController
           @professionals = 
             Professional.near(@location) & Professional.where(service: @service)
 
+          @questions = Service::Category.find_by(service: @service).questions 
+          
         elsif @location.empty? && !@service.empty?
 
           @professionals = Professional.where(service: @service)
