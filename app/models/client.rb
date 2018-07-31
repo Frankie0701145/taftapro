@@ -18,6 +18,9 @@
 #
 
 class Client < ApplicationRecord
+	has_many :questions
+	has_many :answers
+
 	attr_accessor :reset_token
 
 	before_save :downcase_email

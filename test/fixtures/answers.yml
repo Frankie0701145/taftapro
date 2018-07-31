@@ -1,0 +1,28 @@
+# == Schema Information
+#
+# Table name: answers
+#
+#  id          :integer          not null, primary key
+#  answer      :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  client_id   :integer
+#  question_id :integer
+#
+# Indexes
+#
+#  index_answers_on_client_id    (client_id)
+#  index_answers_on_question_id  (question_id)
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  answer: MyString
+  client: one
+  question: one
+
+two:
+  answer: MyString
+  client: two
+  question: two

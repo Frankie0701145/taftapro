@@ -46,8 +46,9 @@
 			</div>        
 			<div class="modal-body">
         <% @questions.each do |question| %>   
-          <%= form_for question do |f| %>
-            <label><%= question %></label>
+          <%= form_for Answer.new, remote: true do |f| %>
+            <label><%= question.question %></label>
+            <%= f.hidden_field :question_id, value: question.id %>
             <%= f.text_field :answer %>
             
             <%= f.submit "Next" %>
