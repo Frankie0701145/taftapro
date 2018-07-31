@@ -1,8 +1,34 @@
-<ul>
-	<% @professionals.each do |professional| %>
-		<li>
-			<%= professional.first_name %> <br>
-			<%= professional.service.title %>
-		</li>
-	<% end %>
-</ul>
+<%= render 'layouts/searchbar' %>
+<div class="container mt-3 p-3">
+  <% if @professionals && @professionals.count > 0 %>
+  <div class="container">
+    <div class="d-flex ">
+      <h3>
+        Showing results for
+        <strong><%= "'#{@service}'"%></strong>
+        <%if @location.present? %>
+          in <strong><%= "'#{@location}'"%></strong>
+        <%end%>
+      </h3>
+    </div>
+
+    <% @professionals.each do |professional| %>
+          <div class="d-flex flex-column border p-3">
+            <div class="p-2"><%= link_to("#{professional.full_name}:", professional) %></div>
+            <div class="p-2"><%= professional.service.capitalize %></div>
+            <div class="p-2"><%= professional.address %></div>
+          </div>
+    <% end %>    
+  </div>
+  <% else %>
+  <div class="row">
+    <h3>
+      There are no results for
+       <strong><%= "'#{@service}'"%></strong>
+       <% if @location.present? %>
+        in <strong> <%= "'#{@location}'"%></strong>
+       <% end %>
+    </h3>
+  </div>
+  <% end %>
+</div>

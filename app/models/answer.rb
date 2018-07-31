@@ -12,9 +12,8 @@
 #
 # Indexes
 #
-#  index_answers_on_client_id     (client_id)
-#  index_answers_on_client_token  (client_token) UNIQUE
-#  index_answers_on_question_id   (question_id)
+#  index_answers_on_client_id    (client_id)
+#  index_answers_on_question_id  (question_id)
 #
 
 class Answer < ApplicationRecord

@@ -1,41 +1,63 @@
-<%= render 'layouts/searchbar' %>
-<div class="container mt-3 p-3">
-  <% if @professionals && @professionals.count > 0 %>
-  <div class="container">
-    <div class="d-flex ">
+<% if client_logged_in? %>
+  <%= render 'layouts/searchbar' %>
+  <div class="container mt-3 p-3">
+    <% if @professionals && @professionals.count > 0 %>
+      <div class="container">
+        <div class="d-flex ">
+          <h3>
+            Showing results for
+            <strong><%= "'#{@service}'"%></strong>
+            <%if @location.present? %>
+              in <strong><%= "'#{@location}'"%></strong>
+            <%end%>
+          </h3>
+        </div>
+
+        <% @professionals.each do |professional| %>
+              <div class="d-flex flex-column border p-3">
+                <div class="p-2"><%= link_to("#{professional.full_name}:", professional) %></div>
+                <div class="p-2"><%= professional.service.capitalize %></div>
+                <div class="p-2"><%= professional.address %></div>
+              </div>
+        <% end %>
+
+      </div>
+    <% else %>
+    <div class="row">
       <h3>
-        Showing results for
-        <strong><%= "'#{@service}'"%></strong>
-        <%if @location.present? %>
-          in <strong><%= "'#{@location}'"%></strong>
-        <%end%>
+        There are no results for
+         <strong><%= "'#{@service}'"%></strong>
+         <% if @location.present? %>
+          in <strong> <%= "'#{@location}'"%></strong>
+         <% end %>
       </h3>
     </div>
-
-    <% @professionals.each do |professional| %>
-          <div class="d-flex flex-column border p-3">
-            <div class="p-2"><%= link_to("#{professional.full_name}:", professional) %></div>
-            <div class="p-2"><%= professional.service.capitalize %></div>
-            <div class="p-2"><%= professional.address %></div>
-          </div>
     <% end %>
+  </div>
 
-	  <h3><%= @professionals.count %> pros found matching your criteria.</h3>
-	  <p>We're asking you a few questions so we can bring you the right pros.</p>
-	  <%= link_to "Next", '#', 'data-target' => '#questionsModal', 'data-toggle' => 'modal' %>    
+<% else %>
+
+  <div class="container mt-3 p-3">
+    <% if @professionals && @professionals.count > 0 %>
+      <div class="container">
+        <h3><%= @professionals.count %> pros found matching your criteria.</h3>
+        <p>We're asking you a few questions so we can bring you the right pros.</p>
+        <%= link_to "Next", '#', 'data-target' => '#questionsModal', 'data-toggle' => 'modal' %>    
+      </div>
+    <% else %>
+    <div class="row">
+      <h3>
+        There are no results for
+         <strong><%= "'#{@service}'"%></strong>
+         <% if @location.present? %>
+          in <strong> <%= "'#{@location}'"%></strong>
+         <% end %>
+      </h3>
+    </div>
+    <% end %>
   </div>
-  <% else %>
-  <div class="row">
-    <h3>
-      There are no results for
-       <strong><%= "'#{@service}'"%></strong>
-       <% if @location.present? %>
-        in <strong> <%= "'#{@location}'"%></strong>
-       <% end %>
-    </h3>
-  </div>
-  <% end %>
-</div>
+
+<% end %>
 
 <div class="modal fade" id="questionsModal" data-backdrop="static">
   <div class="modal-dialog">
@@ -57,7 +79,7 @@
             <% end %>
           <% elsif @questions.index(question) == @questions.count - 1 %>
             <!-- If it's the last question -->
-            <%= form_for Answer.new, remote: true, html: { class: "d-none", id: "#{@questions.index(question)}" } do |f| %>
+            <%= form_for Answer.new, url: submit_answers_path(location: @location, service: @service), html: { class: "d-none", id: "#{@questions.index(question)}" } do |f| %>
               <label><%= question.question %></label>
               <%= f.hidden_field :question_id, value: question.id %>
               <%= f.hidden_field :client_token, value: @client_token %>
