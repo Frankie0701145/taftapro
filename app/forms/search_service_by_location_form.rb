@@ -1,9 +1,9 @@
 class SearchServiceByLocationForm
 	include ActiveModel::Model
 
-	attr_accessor :service, :location
+	attr_accessor :service, :location, :q
 
 	def initialize(service: nil, params: {})
-		@service = service
+		@service = params[:q]
 	end
 end

@@ -1,5 +1,6 @@
-document.addEventListener("turbolinks:load", function(){
-  $input = $("[data-behavior='autocomplete']");
+$(document).on('turbolinks:load', function(){
+	
+  $inputer = $("[data-behavior='autocomplete']");
 
 	var options = {
 		getValue: "name",
@@ -11,8 +12,14 @@ document.addEventListener("turbolinks:load", function(){
 				listLocation: "home_improvement_services",
 				header: "<strong>Home Improvement</strong>"
 			}
-		]
+		],
+		list: {
+			match: {
+				enabled: true
+			}
+		}
+
 	}
 
-	$input.easyAutocomplete(options);
+	$inputer.easyAutocomplete(options);
 });
