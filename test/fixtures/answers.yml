@@ -18,12 +18,12 @@
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  answer: MyString
-  client: one
-  question: one
+# one:
+#   answer: MyString
+#   client: one
+#   question: one
 
-two:
-  answer: MyString
-  client: two
-  question: two
+# two:
+#   answer: MyString
+#   client: two
+#   question: two

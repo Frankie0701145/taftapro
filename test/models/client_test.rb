@@ -29,15 +29,15 @@ class ClientTest < ActiveSupport::TestCase
     assert @client.valid?
   end  
   
-  test "first name should be present" do
-  	@client.first_name = " "
-    assert_not @client.valid?   
-  end  
+  # test "first name should be present" do
+  # 	@client.first_name = " "
+  #   assert_not @client.valid?   
+  # end  
 
-  test "last name should be present" do
-  	@client.last_name = " "
-    assert_not @client.valid?   
-  end    
+  # test "last name should be present" do
+  # 	@client.last_name = " "
+  #   assert_not @client.valid?   
+  # end    
 
   test "email should be present" do
   	@client.email = " "
