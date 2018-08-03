@@ -74,23 +74,47 @@
               <%= f.hidden_field :question_id, value: question.id %>
               <%= f.hidden_field :client_token, value: @client_token %>
               
-              <% if question.answer_type = "text_field" %>
+              <% if question.answer_type == "text_field" %>
                 <%= f.text_field :answer, :required => true %>
-              <% elsif question.answer_type = "text_area" %>
+              <% elsif question.answer_type == "text_area" %>
                 <%= f.text_area :answer, :required => true %>
-              <% elsif question.answer_type = "date_field" %>
+              <% elsif question.answer_type == "date_field" %>
                 <%= f.date_field :answer, :required => true %>
-              <% elsif question.answer_type = "email_field" %>
+              <% elsif question.answer_type == "email_field" %>
                 <%= f.email_field :answer, class: "text-lowercase", :required => true %>
-              <% elsif question.answer_type = "radio" %>
+              <% elsif question.answer_type == "radio" %>
                 <%= f.text_field :answer, :required => true %>
-              <% elsif question.answer_type = "radio_and_text" %>
+              <% elsif question.answer_type == "radio_and_text" %>
                 <%= f.text_field :answer, :required => true %>
               <% end %>
 
 
               
-              <%= f.submit "Next", id: "next" %>
+              <%= f.submit "Next", id: "nextBtn-#{question.id}", onclick: "nextQuestion('nextBtn-#{question.id}')" %>
+            <% end %>
+          <% elsif @questions.index(question) == @questions.count - 1 %>
+            <!-- The last question -->
+            <%= form_for Answer.new, url: submit_answers_path, html: { class: "d-none", id: "#{@questions.index(question)}" } do |f| %>
+              <label><%= question.question %></label>
+              <%= f.hidden_field :question_id, value: question.id %>
+              <%= f.hidden_field :client_token, value: @client_token %>
+              
+              <% if question.answer_type == "text_field" %>
+                <%= f.text_field :answer, :required => true %>
+              <% elsif question.answer_type == "text_area" %>
+                <%= f.text_area :answer, :required => true %>
+              <% elsif question.answer_type == "date_field" %>
+                <%= f.date_field :answer, :required => true %>
+              <% elsif question.answer_type == "email_field" %>
+                <%= f.email_field :answer, class: "text-lowercase", :required => true %>
+              <% elsif question.answer_type == "radio" %>
+                <%= f.text_field :answer, :required => true %>
+              <% elsif question.answer_type == "radio_and_text" %>
+                <%= f.text_field :answer, :required => true %>
+              <% end %>
+              
+                <%= link_to "Back", '#', remote: true, class: "btn btn-info float-left", id: "backBtn-#{question.id}", onclick: "prevQuestion('backBtn-#{question.id}')"%>
+                <%= f.submit "Submit", class: "float-right" %>             
             <% end %>
           <% else %>
             <!-- Middle questions -->
@@ -99,25 +123,22 @@
               <%= f.hidden_field :question_id, value: question.id %>
               <%= f.hidden_field :client_token, value: @client_token %>
               
-              <% if question.answer_type = "text_field" %>
+              <% if question.answer_type == "text_field" %>
                 <%= f.text_field :answer, :required => true %>
-              <% elsif question.answer_type = "text_area" %>
+              <% elsif question.answer_type == "text_area" %>
                 <%= f.text_area :answer, :required => true %>
-              <% elsif question.answer_type = "date_field" %>
+              <% elsif question.answer_type == "date_field" %>
                 <%= f.date_field :answer, :required => true %>
-              <% elsif question.answer_type = "email_field" %>
+              <% elsif question.answer_type == "email_field" %>
                 <%= f.email_field :answer, class: "text-lowercase", :required => true %>
-              <% elsif question.answer_type = "radio" %>
+              <% elsif question.answer_type == "radio" %>
                 <%= f.text_field :answer, :required => true %>
-              <% elsif question.answer_type = "radio_and_text" %>
+              <% elsif question.answer_type == "radio_and_text" %>
                 <%= f.text_field :answer, :required => true %>
               <% end %>
-
-
               
-              
-                <%= link_to "Back", '#', remote: true, class: "btn btn-info float-left", id: "back"%>
-                <%= f.submit "Next", id: "next", class: "float-right" %>                
+                <%= link_to "Back", '#', remote: true, class: "btn btn-info float-left", id: "backBtn-#{question.id}", onclick: "prevQuestion('backBtn-#{question.id}')"%>
+                <%= f.submit "Next", id: "nextBtn-#{question.id}", class: "float-right", onclick: "nextQuestion('nextBtn-#{question.id}')" %>                
               
             <% end %>          
           <% end %>
@@ -128,9 +149,12 @@
 </div>
 
 
-<script type='text/javascript'>
- // hitting submit button hides the submitted form after it has been submitted
-$("#next").click(function() {
+<script type="text/javascript">
+
+function nextQuestion(btn_id) {
+  hash_sym = "#";
+  var object_id = hash_sym.concat(btn_id);
+  $(object_id).click(function() {
   // If not the last question,
   // hide this question
   // and display the next question upon hitting next
@@ -142,21 +166,25 @@ $("#next").click(function() {
     document.getElementById(next_id).classList.remove("d-none");
     document.getElementById(next_id).classList.add("d-block");
   }
- }); 
-
-function next(){
-
+  });   
 }
-
-$("#back").click(function() {
-  if (this.parentElement.id > 0 && this.parentElement.id <= <%= @questions.count %>){
-    this.parentElement.classList.add("d-none");
-    this.parentElement.classList.remove("d-block");
-
-    var prev_id = parseInt(this.parentElement.id, 10) - 1;
-    document.getElementById(prev_id).classList.add("d-block");
-    document.getElementById(prev_id).classList.remove("d-none");
-  }
- }); 
  
+
+function prevQuestion(btn_id) {
+  hash_sym = "#";
+  var object_id = hash_sym.concat(btn_id);
+  $(object_id).click(function() {
+  // If not the last question,
+  // hide this question
+  // and display the next question upon hitting next
+  if (this.parentElement.id > 0 && this.parentElement.id <= <%= @questions.count %>){
+  this.parentElement.classList.add("d-none");
+  this.parentElement.classList.remove("d-block");
+
+  var prev_id = parseInt(this.parentElement.id, 10) - 1;
+  document.getElementById(prev_id).classList.add("d-block");
+  document.getElementById(prev_id).classList.remove("d-none");
+  }
+  });   
+}
 </script>
