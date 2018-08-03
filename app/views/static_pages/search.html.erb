@@ -87,14 +87,12 @@
               <% elsif question.answer_type == "radio_and_text" %>
                 <%= f.text_field :answer, :required => true %>
               <% end %>
-
-
-              
+ 
               <%= f.submit "Next", id: "nextBtn-#{question.id}", onclick: "nextQuestion('nextBtn-#{question.id}')" %>
             <% end %>
           <% elsif @questions.index(question) == @questions.count - 1 %>
             <!-- The last question -->
-            <%= form_for Answer.new, url: submit_answers_path, html: { class: "d-none", id: "#{@questions.index(question)}" } do |f| %>
+            <%= form_for Answer.new, url: submit_answers_path(location: @location, service: @service), html: { class: "d-none", id: "#{@questions.index(question)}" } do |f| %>
               <label><%= question.question %></label>
               <%= f.hidden_field :question_id, value: question.id %>
               <%= f.hidden_field :client_token, value: @client_token %>
@@ -174,7 +172,7 @@ function prevQuestion(btn_id) {
   hash_sym = "#";
   var object_id = hash_sym.concat(btn_id);
   theObject = $(object_id)[0];
-  
+
   // If not the last question,
   // hide this question
   // and display the next question upon hitting next
