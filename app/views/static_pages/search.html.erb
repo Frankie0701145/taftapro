@@ -115,7 +115,7 @@
               
                 <%= link_to "Back", '#', remote: true, class: "btn btn-info float-left", id: "backBtn-#{question.id}", onclick: "prevQuestion('backBtn-#{question.id}')"%>
                 <%= f.submit "Submit", class: "float-right" %>             
-            <% end %>
+                <% end %>
           <% else %>
             <!-- Middle questions -->
             <%= form_for Answer.new, remote: true, html: { class: "d-none", id: "#{@questions.index(question)}" } do |f| %>
@@ -154,37 +154,37 @@
 function nextQuestion(btn_id) {
   hash_sym = "#";
   var object_id = hash_sym.concat(btn_id);
-  $(object_id).click(function() {
+  theObject = $(object_id)[0];
+
   // If not the last question,
   // hide this question
   // and display the next question upon hitting next
-  if (this.parentElement.id < <%= @questions.count %>){
-    this.parentElement.classList.add("d-none");
-    this.parentElement.classList.remove("d-block");
+  
+  if (theObject.parentElement.id < <%= @questions.count %>){
+    theObject.parentElement.classList.add("d-none");
+    theObject.parentElement.classList.remove("d-block");
 
-    var next_id = parseInt(this.parentElement.id, 10) + 1;
+    var next_id = parseInt(theObject.parentElement.id, 10) + 1;
     document.getElementById(next_id).classList.remove("d-none");
     document.getElementById(next_id).classList.add("d-block");
-  }
-  });   
+  }  
 }
- 
 
 function prevQuestion(btn_id) {
   hash_sym = "#";
   var object_id = hash_sym.concat(btn_id);
-  $(object_id).click(function() {
+  theObject = $(object_id)[0];
+  
   // If not the last question,
   // hide this question
   // and display the next question upon hitting next
-  if (this.parentElement.id > 0 && this.parentElement.id <= <%= @questions.count %>){
-  this.parentElement.classList.add("d-none");
-  this.parentElement.classList.remove("d-block");
+  if (theObject.parentElement.id > 0 && theObject.parentElement.id <= <%= @questions.count %>){
+  theObject.parentElement.classList.add("d-none");
+  theObject.parentElement.classList.remove("d-block");
 
-  var prev_id = parseInt(this.parentElement.id, 10) - 1;
+  var prev_id = parseInt(theObject.parentElement.id, 10) - 1;
   document.getElementById(prev_id).classList.add("d-block");
   document.getElementById(prev_id).classList.remove("d-none");
   }
-  });   
 }
 </script>
