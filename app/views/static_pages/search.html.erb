@@ -73,24 +73,24 @@
               <label><%= question.question %></label>
               <%= f.hidden_field :question_id, value: question.id %>
               <%= f.hidden_field :client_token, value: @client_token %>
-              <%= f.text_field :answer, :required => true %>
+              
+              <% if question.answer_type = "text_field" %>
+                <%= f.text_field :answer, :required => true %>
+              <% elsif question.answer_type = "text_area" %>
+                <%= f.text_area :answer, :required => true %>
+              <% elsif question.answer_type = "date_field" %>
+                <%= f.date_field :answer, :required => true %>
+              <% elsif question.answer_type = "email_field" %>
+                <%= f.email_field :answer, class: "text-lowercase", :required => true %>
+              <% elsif question.answer_type = "radio" %>
+                <%= f.text_field :answer, :required => true %>
+              <% elsif question.answer_type = "radio_and_text" %>
+                <%= f.text_field :answer, :required => true %>
+              <% end %>
+
+
               
               <%= f.submit "Next", id: "next" %>
-            <% end %>
-          <% elsif @questions.index(question) == @questions.count - 1 %>
-            <!-- If it's the last question -->
-            <%= form_for Answer.new, url: submit_answers_path(location: @location, service: @service), html: { class: "d-none", id: "#{@questions.index(question)}" } do |f| %>
-              <label><%= question.question %></label>
-              <%= f.hidden_field :question_id, value: question.id %>
-              <%= f.hidden_field :client_token, value: @client_token %>
-
-              <!-- Last question should be the client's email -->
-              <%= f.email_field :answer, class: "text-lowercase", :required => true %>
-              
-              
-                <%= link_to "Back", '#', remote: true, class: "btn btn-info float-left", id: "back"%>
-                <%= f.submit "Submit", class: "float-right" %>                
-              
             <% end %>
           <% else %>
             <!-- Middle questions -->
@@ -98,7 +98,22 @@
               <label><%= question.question %></label>
               <%= f.hidden_field :question_id, value: question.id %>
               <%= f.hidden_field :client_token, value: @client_token %>
-              <%= f.text_field :answer, :required => true %>
+              
+              <% if question.answer_type = "text_field" %>
+                <%= f.text_field :answer, :required => true %>
+              <% elsif question.answer_type = "text_area" %>
+                <%= f.text_area :answer, :required => true %>
+              <% elsif question.answer_type = "date_field" %>
+                <%= f.date_field :answer, :required => true %>
+              <% elsif question.answer_type = "email_field" %>
+                <%= f.email_field :answer, class: "text-lowercase", :required => true %>
+              <% elsif question.answer_type = "radio" %>
+                <%= f.text_field :answer, :required => true %>
+              <% elsif question.answer_type = "radio_and_text" %>
+                <%= f.text_field :answer, :required => true %>
+              <% end %>
+
+
               
               
                 <%= link_to "Back", '#', remote: true, class: "btn btn-info float-left", id: "back"%>
@@ -128,6 +143,10 @@ $("#next").click(function() {
     document.getElementById(next_id).classList.add("d-block");
   }
  }); 
+
+function next(){
+
+}
 
 $("#back").click(function() {
   if (this.parentElement.id > 0 && this.parentElement.id <= <%= @questions.count %>){

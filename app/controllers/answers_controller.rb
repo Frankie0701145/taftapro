@@ -3,6 +3,11 @@ class AnswersController < ApplicationController
 		answer = Answer.new(answer_params)
 
 		answer.save
+
+		respond_to do |format|
+			format.html {}
+			format.js
+		end
 			
 	end  
 
