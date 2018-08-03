@@ -32,9 +32,9 @@ class Service::Category < ApplicationRecord
 
   def self.create_home_improvement_category
   	first_question = { question: "Describe the nature of the service.", type: "text_area" }
-  	second_question = { question: "Which additional service do you want if any?", type: "text_box" }
-  	third_question = { question: "When do you need this service done – calendar?", type: "calendar" }
-  	last_question = { question: "Where can we send your matches?", type: "email" }
+  	second_question = { question: "Which additional service do you want if any?", type: "text_field" }
+  	third_question = { question: "When do you need this service done – calendar?", type: "date_field" }
+  	last_question = { question: "Where can we send your matches?", type: "email_field" }
 
   	@@home_improvement_services.each do |home_improvement_service|
 	    home_improvement_category = Service::Category.find_or_create_by(name: "Home Improvement", service: home_improvement_service)    
