@@ -1,0 +1,14 @@
+<% if question.answer_type = "text_field" %>
+	<%= f.text_field :answer, :required => true %>
+<% elsif question.answer_type = "text_area" %>
+	<%= f.text_area :answer, :required => true %>
+<% elsif question.answer_type = "date_field" %>
+	<%= f.date_field :answer, :required => true %>
+<% elsif question.answer_type = "email_field" %>
+	<%= f.email_field :answer, class: "text-lowercase", :required => true %>
+<% elsif question.answer_type = "radio" %>
+	<%= f.text_field :answer, :required => true %>
+<% elsif question.answer_type = "radio_and_text" %>
+	<%= f.text_field :answer, :required => true %>
+<% end %>
+

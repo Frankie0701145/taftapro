@@ -6,11 +6,11 @@ class ProfessionalsController < ApplicationController
   end
 
   def index
-    location = params[:location]
-    service = params[:service]    
+    @location = params[:location]
+    @service = params[:service]    
     
     @professionals = 
-            Professional.near(location) & Professional.where(service: service)
+            Professional.near(@location) & Professional.where(service: @service)
   end
 
   def create

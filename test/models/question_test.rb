@@ -4,8 +4,8 @@
 #
 #  id          :integer          not null, primary key
 #  answer      :string
+#  answer_type :string
 #  question    :text
-#  type        :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  category_id :integer

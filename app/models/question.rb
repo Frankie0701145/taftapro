@@ -4,8 +4,8 @@
 #
 #  id          :integer          not null, primary key
 #  answer      :string
+#  answer_type :string
 #  question    :text
-#  type        :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  category_id :integer
@@ -18,4 +18,6 @@
 class Question < ApplicationRecord
   belongs_to :category, :class_name => "Services::Category"
   has_many :answers
+
+  validates :question, uniqueness: { scope: :category_id}
 end
