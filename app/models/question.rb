@@ -19,5 +19,5 @@ class Question < ApplicationRecord
   belongs_to :category, :class_name => "Services::Category"
   has_many :answers
 
-  validates :question, uniqueness: true
+  validates :question, uniqueness: { scope: :category_id}
 end
