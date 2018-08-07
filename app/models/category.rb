@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: service_categories
+# Table name: categories
 #
 #  id         :integer          not null, primary key
 #  name       :string
@@ -9,7 +9,7 @@
 #  updated_at :datetime         not null
 #
 
-class Service::Category < ApplicationRecord
+class Category < ApplicationRecord
   has_many :questions
 
 
@@ -37,7 +37,7 @@ class Service::Category < ApplicationRecord
   	last_question = { question: "Where can we send your matches?", answer_type: "email_field" }
 
   	@@home_improvement_services.each do |home_improvement_service|
-	    home_improvement_category = Service::Category.find_or_create_by(name: "Home Improvement", service: home_improvement_service)    
+	    home_improvement_category = Category.find_or_create_by(name: "Home Improvement", service: home_improvement_service)    
 	    
 	    if home_improvement_category
 	      question_one = 
@@ -74,6 +74,7 @@ class Service::Category < ApplicationRecord
   end
 
   def self.home_improvement_category
-  	Service::Category.find_by(name: "Home Improvement")    
+  	Category.find_by(name: "Home Improvement")    
   end
+
 end

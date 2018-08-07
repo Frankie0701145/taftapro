@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: service_categories
+# Table name: categories
 #
 #  id         :integer          not null, primary key
 #  name       :string
@@ -11,7 +11,7 @@
 
 require 'test_helper'
 
-class Service::CategoryTest < ActiveSupport::TestCase
+class CategoryTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

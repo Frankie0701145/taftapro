@@ -5,7 +5,7 @@ class StaticPagesController < ApplicationController
   end
 
   def search
-    @home_improvement_services = Service::Category.where(name: "Home Improvement").ransack(service_cont: params[:q]).result(distinct: true)
+    @home_improvement_services = Category.where(name: "Home Improvement").ransack(service_cont: params[:q]).result(distinct: true)
 
     respond_to do |format|
       format.html {
@@ -17,7 +17,7 @@ class StaticPagesController < ApplicationController
           @professionals = 
             Professional.near(@location) & Professional.where(service: @service)
 
-          @questions = Service::Category.find_by(service: @service).questions 
+          @questions = Category.find_by(service: @service).questions 
 
           # Used to track the questions that the client answers
           @client_token = SecureRandom.hex(10)
