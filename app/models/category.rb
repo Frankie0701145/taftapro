@@ -11,7 +11,8 @@
 
 class Category < ApplicationRecord
   has_many :questions
-    @fuck ="Fuck you"
+    
+
     #Home Improvement
     @@home_improvement_services = ["Domestic Workers",
     								"Handy Man",
@@ -109,8 +110,7 @@ class Category < ApplicationRecord
                   "Facility Bouncers",
                   "Residential Security",
                   "Security Equipment Installation",
-                  "Bodyguard Services"
-                ]
+                  "Bodyguard Services"]
     #Business
     @@business = ["Surveyor",
                   "Accounting",
@@ -124,12 +124,10 @@ class Category < ApplicationRecord
                   "HR and Payroll Services",
                   "Merchandising Services",
                   "Internet Provision",
-                  "Customer Support"
-                ]
+                  "Customer Support"]
     #Carpentry
     @@carpentry = ["Furniture Repairs",
-                  "Furniture installation"
-                  ]
+                  "Furniture installation"]
 
   #Questions
   @@home_improvement_service_questions=[{ question: "Describe the nature of the service.", answer_type: "text_area" },
@@ -196,7 +194,7 @@ class Category < ApplicationRecord
        service_category = Category.find_or_create_by(name:category_name, service:service)
 
        if service_category
-          arry_questions.each do |question_obj|
+          arr_questions.each do |question_obj|
             question_one =
                 Question.find_by(
                   question: question_obj["question".to_sym],
