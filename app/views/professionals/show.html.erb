@@ -223,11 +223,9 @@
             <!-- The last question -->
             <%= form_for Answer.new, url: submit_answers_path(location: @location, service: @service), html: { class: "d-none", id: "#{@questions.index(question)}" } do |f| %>
               <label><%= question.question %></label>
-              <%= f.hidden_field :question_id,        value: question.id %>
-              <%= f.hidden_field :client_token,       value: @client_token %>
-							<%= f.hidden_field :location,  					:value => @location %>
-							<%= f.hidden_field :professional_email, :value =>@professional.email%>
-
+              <%= f.hidden_field   :question_id,         value: question.id %>
+              <%= f.hidden_field   :client_token,        value: @client_token %>
+							<%= hidden_field_tag   :professional_email,  @professional.email%>
 
               <% if question.answer_type == "text_field" %>
                 <%= f.text_field :answer, :required => true %>
