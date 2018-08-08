@@ -189,7 +189,7 @@ class Category < ApplicationRecord
 
   @@carpentry_questions = @@mechanical_questions
 
-  def self.inputter category_name, arr_services , arr_questions
+  def self.inputter(category_name, arr_services , arr_questions)
      arr_services.each do |service|
        service_category = Category.find_or_create_by(name:category_name, service:service)
 
@@ -205,54 +205,6 @@ class Category < ApplicationRecord
           service_category.save
        end
      end
-  end
-
-  def self.create_home_improvement_category
-  	first_question = { question: "Describe the nature of the service.", answer_type: "text_area" }
-  	second_question = { question: "Which additional service do you want if any?", answer_type: "text_field" }
-  	third_question = { question: "When do you need this service done – calendar?", answer_type: "date_field" }
-  	last_question = { question: "Where can we send your matches?", answer_type: "email_field" }
-
-  	@@home_improvement_services.each do |home_improvement_service|
-	    home_improvement_category = Category.find_or_create_by(name: "Home Improvement", service: home_improvement_service)
-
-	    if home_improvement_category
-	      question_one =
-	        Question.find_by(
-	        	question: first_question["question".to_sym],
-	        	category_id: home_improvement_category.id
-	        	) ||
-	        home_improvement_category.questions.build(question: first_question["question".to_sym], answer_type: first_question["answer_type".to_sym])
-
-	      question_two =
-	        Question.find_by(
-	        	question: second_question["question"],
-	        	category_id: home_improvement_category.id
-	        	) ||
-	      	home_improvement_category.questions.build(question: second_question["question".to_sym], answer_type: second_question["answer_type".to_sym])
-
-		  question_three =
-	        Question.find_by(
-	        	question: third_question["question"],
-	        	category_id: home_improvement_category.id
-	        	) ||
-	      	home_improvement_category.questions.build(question: third_question["question".to_sym], answer_type: third_question["answer_type".to_sym])
-
-	      question_last =
-	        Question.find_by(
-	        	question: last_question["question"],
-	        	category_id: home_improvement_category.id
-	        	) ||
-	      	home_improvement_category.questions.build(question: last_question["question".to_sym], answer_type: last_question["answer_type".to_sym])
-
-	      home_improvement_category.save
-	    end
-    end
-  end
-
-
-  def self.home_improvement_category
-  	Category.find_by(name: "Home Improvement")
   end
 
 end
