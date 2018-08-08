@@ -27,7 +27,7 @@ class AnswersController < ApplicationController
 			if !client_logged_in?
 				@client = Client.find_by(email: answer.answer)
 				if @client
-					flash[:info] = "Looks like you are an existing user. Your Request has been sent successfully to #{@professional.first_name} #{@professional.last_name}. Please login to continue."
+					flash[:info] = "Looks like you are an existing user. Your quotation request has been sent successfully to #{@professional.first_name} #{@professional.last_name}. Please login to continue."
 					request = Request.create(location:location, service:service, client_id: @client.id, professional_id: @professional.id)
 					answers.each do |answer|
 						answer.update_attributes(client_id: @client.id, request_id: request.id)
@@ -41,7 +41,7 @@ class AnswersController < ApplicationController
 					answers.each do |answer|
 						answer.update_attributes(client_id: @client.id, request_id: request.id)
 					end
-					flash[:success] = "Welcome! We have emailed you a temporary password. Please change it. Your request has been sent successfully to #{@professional.first_name} #{@professional.last_name}."
+					flash[:success] = "Welcome! We have emailed you a temporary password. Please change it. Your quotation request has been sent successfully to #{@professional.first_name} #{@professional.last_name}."
 					# TO-DO: ACTUALLY SEND THE EMAIL WITH THE PASSWORD
 					redirect_to professionals_path(location: location, service: service)
 				end
@@ -51,7 +51,7 @@ class AnswersController < ApplicationController
 				answers.each do |answer|
 					answer.update_attributes(client_id: @client.id, request_id: request.id)
 				end
-				flash[:success] = "Your request has been sent successfully to #{@professional.first_name} #{@professional.last_name}."
+				flash[:success] = "Your quotation request has been sent successfully to #{@professional.first_name} #{@professional.last_name}."
 				redirect_to professionals_path(location: location, service: service)
 			end
 
