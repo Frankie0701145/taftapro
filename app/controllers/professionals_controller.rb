@@ -30,7 +30,8 @@ class ProfessionalsController < ApplicationController
     @service= @professional.service
     @location=@professional.address
     @questions = Category.find_by(service: @service).questions
-
+    # Used to track the questions that the client answers
+    @client_token = SecureRandom.hex(10)
     @client=current_client
   end
 
