@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_08_132901) do
+ActiveRecord::Schema.define(version: 2018_08_08_171302) do
 
   create_table "answers", force: :cascade do |t|
     t.string "answer"
@@ -88,8 +88,6 @@ ActiveRecord::Schema.define(version: 2018_08_08_132901) do
     t.string "location"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "client_id"
-    t.integer "professional_id"
   end
 
 end

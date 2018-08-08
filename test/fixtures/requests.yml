@@ -2,13 +2,11 @@
 #
 # Table name: requests
 #
-#  id              :integer          not null, primary key
-#  location        :string
-#  service         :string
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#  client_id       :integer
-#  professional_id :integer
+#  id         :integer          not null, primary key
+#  location   :string
+#  service    :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
