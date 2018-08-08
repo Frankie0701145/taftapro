@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_08_120919) do
+ActiveRecord::Schema.define(version: 2018_08_08_132901) do
 
   create_table "answers", force: :cascade do |t|
     t.string "answer"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 2018_08_08_120919) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "client_token"
+    t.integer "request_id"
     t.index ["client_id"], name: "index_answers_on_client_id"
     t.index ["question_id"], name: "index_answers_on_question_id"
   end
@@ -87,6 +88,8 @@ ActiveRecord::Schema.define(version: 2018_08_08_120919) do
     t.string "location"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "client_id"
+    t.integer "professional_id"
   end
 
 end
