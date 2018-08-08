@@ -226,9 +226,8 @@
               <%= f.hidden_field :question_id,        value: question.id %>
               <%= f.hidden_field :client_token,       value: @client_token %>
 							<%= f.hidden_field :location,  					:value => @location %>
-				      <%= f.hidden_field :service, 	 					:value => @service %>
 							<%= f.hidden_field :professional_email, :value =>@professional.email%>
-							<%= f.hidden_field :location,           :value =>@location%>
+
 
               <% if question.answer_type == "text_field" %>
                 <%= f.text_field :answer, :required => true %>
