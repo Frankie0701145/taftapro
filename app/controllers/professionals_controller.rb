@@ -26,7 +26,7 @@ class ProfessionalsController < ApplicationController
 
   def show
     @professional = Professional.find(params[:id])
-    @request = Request.new
+    #@request = Request.new
     @service= @professional.service
     @location=@professional.address
     @questions = Category.find_by(service: @service).questions

@@ -112,7 +112,7 @@
 				<% end%>
 			</h5>
 			<%if !professional_logged_in?%>
-				<button type="button" name="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalCenter">Request Quotation</button>
+				<button type="button" name="button" class="btn btn-success" data-toggle="modal" data-target="#questionsModal">Request Quotation</button>
 			  <%#= link_to "Request a Quotation", request_quotation_path(client_id: current_client.id, professional_id: @professional.id), class: "btn btn-primary" %>
 			<%end%>
 		</div>
@@ -178,46 +178,16 @@
 		</div>
 	</div>
 </div><!-- /container -->
-<!--Request Modal-->
-<%if client_logged_in?%>
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalCenterTitle">Quotation Request</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-				<%= form_for @request, url:requests_path do |f| %>
-		      <div class="form_group">
-		        <%= f.label "Please enter a detailed description of what you need done so that we can match you with the right one."%>
-		        <%= f.text_area :description, class: "form-control" %>
-		      </div>
-		      <div class="form_group">
-						<%= f.hidden_field :location,  					:value => @location %>
-			      <%= f.hidden_field :service, 	 					:value => @service %>
-						<%= hidden_field_tag   :professional_email, @professional.email%>
-						<%= f.hidden_field :user_email,					:value => @client.email%>
-						<%=	f.hidden_field :first_name, 				:value => @client.first_name %>
-						<%=	f.hidden_field :last_name,  				:value => @client.last_name %>
-		      </div>
-				<%= f.submit "Submit", class: "btn btn-info btn-block mt-1" %>
-				<% end %>
-      </div>
-    </div>
-  </div>
-</div>
-<%end%>
+
 
 <div class="modal fade" id="questionsModal" data-backdrop="static">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
 			<div class="modal-header">
 				<h2>TaftaPro</h2>
 			</div>
 			<div class="modal-body">
+
         <% @questions.each do |question| %>
           <% if @questions.index(question) == 0 %>
             <!-- If it's the first question -->
@@ -226,14 +196,20 @@
               <%= f.hidden_field :question_id, value: question.id %>
               <%= f.hidden_field :client_token, value: @client_token %>
 
+
               <% if question.answer_type == "text_field" %>
                 <%= f.text_field :answer, :required => true %>
               <% elsif question.answer_type == "text_area" %>
                 <%= f.text_area :answer, :required => true %>
               <% elsif question.answer_type == "date_field" %>
                 <%= f.date_field :answer, :required => true %>
-              <% elsif question.answer_type == "email_field" %>
-                <%= f.email_field :answer, class: "text-lowercase", :required => true %>
+								<% elsif question.answer_type == "email_field" %>
+										<%if !client_logged_in?%>
+				                <%= f.email_field :answer, class: "text-lowercase", :required => true %>
+										<%else%>
+												<%= f.email_field :answer, class: "text-lowercase", :required => true, :value => @client.email, :disabled=>true  %>
+										<%end%>
+
               <% elsif question.answer_type == "radio" %>
                 <%= f.text_field :answer, :required => true %>
               <% elsif question.answer_type == "radio_and_text" %>
@@ -242,12 +218,17 @@
 
               <%= f.submit "Next", id: "nextBtn-#{question.id}", onclick: "nextQuestion('nextBtn-#{question.id}')" %>
             <% end %>
+
           <% elsif @questions.index(question) == @questions.count - 1 %>
             <!-- The last question -->
             <%= form_for Answer.new, url: submit_answers_path(location: @location, service: @service), html: { class: "d-none", id: "#{@questions.index(question)}" } do |f| %>
               <label><%= question.question %></label>
-              <%= f.hidden_field :question_id, value: question.id %>
-              <%= f.hidden_field :client_token, value: @client_token %>
+              <%= f.hidden_field :question_id,        value: question.id %>
+              <%= f.hidden_field :client_token,       value: @client_token %>
+							<%= f.hidden_field :location,  					:value => @location %>
+				      <%= f.hidden_field :service, 	 					:value => @service %>
+							<%= f.hidden_field :professional_email, :value =>@professional.email%>
+							<%= f.hidden_field :location,           :value =>@location%>
 
               <% if question.answer_type == "text_field" %>
                 <%= f.text_field :answer, :required => true %>
@@ -255,8 +236,14 @@
                 <%= f.text_area :answer, :required => true %>
               <% elsif question.answer_type == "date_field" %>
                 <%= f.date_field :answer, :required => true %>
-              <% elsif question.answer_type == "email_field" %>
-                <%= f.email_field :answer, class: "text-lowercase", :required => true %>
+
+								<% elsif question.answer_type == "email_field" %>
+										<%if !client_logged_in?%>
+				                <%= f.email_field :answer, class: "text-lowercase", :required => true %>
+										<%else%>
+												<%= f.email_field :answer, class: "text-lowercase", :required => true, :value => @client.email, :disabled=>true  %>
+										<%end%>
+
               <% elsif question.answer_type == "radio" %>
                 <%= f.text_field :answer, :required => true %>
               <% elsif question.answer_type == "radio_and_text" %>
@@ -266,6 +253,7 @@
                 <%= link_to "Back", '#', remote: true, class: "btn btn-info float-left", id: "backBtn-#{question.id}", onclick: "prevQuestion('backBtn-#{question.id}')"%>
                 <%= f.submit "Submit", class: "float-right" %>
                 <% end %>
+
           <% else %>
             <!-- Middle questions -->
             <%= form_for Answer.new, remote: true, html: { class: "d-none", id: "#{@questions.index(question)}" } do |f| %>
@@ -279,8 +267,14 @@
                 <%= f.text_area :answer, :required => true %>
               <% elsif question.answer_type == "date_field" %>
                 <%= f.date_field :answer, :required => true %>
-              <% elsif question.answer_type == "email_field" %>
-                <%= f.email_field :answer, class: "text-lowercase", :required => true %>
+
+							<% elsif question.answer_type == "email_field" %>
+									<%if !client_logged_in?%>
+			                <%= f.email_field :answer, class: "text-lowercase", :required => true %>
+									<%else%>
+											<%= f.email_field :answer, class: "text-lowercase", :required => true, :value => @client.email, :disabled=>true  %>
+									<%end%>
+
               <% elsif question.answer_type == "radio" %>
                 <%= f.text_field :answer, :required => true %>
               <% elsif question.answer_type == "radio_and_text" %>
