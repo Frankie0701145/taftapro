@@ -15,9 +15,10 @@
 #
 #  index_answers_on_client_id    (client_id)
 #  index_answers_on_question_id  (question_id)
+#  index_answers_on_request_id   (request_id)
 #
 
 class Answer < ApplicationRecord
   belongs_to :question
-  
+  belongs_to :request
 end

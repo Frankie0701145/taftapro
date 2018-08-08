@@ -12,5 +12,5 @@
 class Request < ApplicationRecord
   belongs_to :professional
   belongs_to :client
-  has_many   :answer
+  has_many   :answers
 end

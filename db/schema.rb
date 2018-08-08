@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_08_171302) do
+ActiveRecord::Schema.define(version: 2018_08_08_174642) do
 
   create_table "answers", force: :cascade do |t|
     t.string "answer"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 2018_08_08_171302) do
     t.integer "request_id"
     t.index ["client_id"], name: "index_answers_on_client_id"
     t.index ["question_id"], name: "index_answers_on_question_id"
+    t.index ["request_id"], name: "index_answers_on_request_id"
   end
 
   create_table "categories", force: :cascade do |t|
