@@ -17,14 +17,14 @@
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  question: MyText
-  type: 
-  answer: MyString
-  category: one
+# one:
+#   question: MyText
+#   type: 
+#   answer: MyString
+#   category: one
 
-two:
-  question: MyText
-  type: 
-  answer: MyString
-  category: two
+# two:
+#   question: MyText
+#   type: 
+#   answer: MyString
+#   category: two
