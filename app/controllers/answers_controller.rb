@@ -20,10 +20,9 @@ class AnswersController < ApplicationController
 		# This answer should contain the client's email
 
 		@professional = Professional.find_by(email: pro_email)
-		answers = Answer.where(client_token: answer.client_token)
 
 		if answer.save
-
+			answers = Answer.where(client_token: answer.client_token)
 			if !client_logged_in?
 				@client = Client.find_by(email: answer.answer)
 				if @client
@@ -32,6 +31,7 @@ class AnswersController < ApplicationController
 					answers.each do |answer|
 						answer.update_attributes(client_id: @client.id, request_id: request.id)
 					end
+					@client.request_quotation(professional:@professional, request:request, answers:answers)
 					redirect_to professionals_path(location: location, service: service)
 				else
 					password = SecureRandom.hex(6)
@@ -42,6 +42,7 @@ class AnswersController < ApplicationController
 						answer.update_attributes(client_id: @client.id, request_id: request.id)
 					end
 					flash[:success] = "Welcome! We have emailed you a temporary password. Please change it. Your quotation request has been sent successfully to #{@professional.first_name} #{@professional.last_name}."
+					@client.request_quotation(professional:@professional, request:request, answers:answers)
 					# TO-DO: ACTUALLY SEND THE EMAIL WITH THE PASSWORD
 					redirect_to professionals_path(location: location, service: service)
 				end
@@ -52,6 +53,7 @@ class AnswersController < ApplicationController
 					answer.update_attributes(client_id: @client.id, request_id: request.id)
 				end
 				flash[:success] = "Your quotation request has been sent successfully to #{@professional.first_name} #{@professional.last_name}."
+				@client.request_quotation(professional:@professional, request:request, answers:answers)
 				redirect_to professionals_path(location: location, service: service)
 			end
 
