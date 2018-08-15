@@ -2,9 +2,17 @@
 
     A client is seeking your services. Please review the below details about the request and reply to the client with a quotation.
 
-    Client' name: <%= "#{@client.first_name} #{@client.last_name}"%>
+    Client name: <%= "#{@client.first_name} #{@client.last_name}"%>
     Searching for: <%= @request.service %>
   	Location: <%= @request.location %>
-    Description of work: <%= @request.description %>
+    Description of work:
+    <% @answers.each do |answer| %>
+          <% if answer.answer.present?%>
+            <%if answer.question.answer_type != "email_field"%>
+              <%=answer.question.question%>
+              <%=answer.answer%>
+            <%end%>
+          <%end%>
+    <% end %>
 
-	<%= link_to "Send a Quote", "#" %> 
+	<%= link_to "Send a Quote", client_url(@client, professional_id: @professional.id), class: "btn btn-primary btn-block" %>

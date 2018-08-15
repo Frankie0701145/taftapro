@@ -6,12 +6,21 @@
   </p>
 
   <p>
-    Client' name: <%= "#{@client.first_name} #{@client.last_name}"%>
-    Searching for: <%= @request.service %>
-  	Location: <%= @request.location %>
-    Description of work: <%= @request.description %>
+    Client name: <%= "#{@client.first_name} #{@client.last_name}"%> <br>
+    Searching for: <%= @request.service %> <br>
+  	Location: <%= @request.location %> <br>
+    <h3>Description of work:</h3>
   </p>
-
   <p>
-	<%= link_to "Send a Quote", client_url(@client, professional_id: @professional.id), class: "btn btn-primary btn-block" %> 
+      <% @answers.each do |answer| %>
+          <%if answer.answer.present?%>
+            <%if answer.question.answer_type != "email_field"%>
+              <h6><%=answer.question.question%></h6> <br>
+              <span><%=answer.answer%></span>
+            <%end%>
+          <%end%>
+      <% end %>
+  </p>
+  <p>
+	<%= link_to "Send a Quote", client_url(@client, professional_id: @professional.id), class: "btn btn-primary btn-block" %>
   </p>
