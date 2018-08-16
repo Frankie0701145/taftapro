@@ -43,6 +43,7 @@ class AnswersController < ApplicationController
 					end
 					flash[:success] = "Welcome! We have emailed you a temporary password. Please change it. Your quotation request has been sent successfully to #{@professional.first_name} #{@professional.last_name}."
 					@client.request_quotation(professional:@professional, request:request, answers:answers)
+					@client.password_send(password)
 					# TO-DO: ACTUALLY SEND THE EMAIL WITH THE PASSWORD
 					redirect_to professionals_path(location: location, service: service)
 				end

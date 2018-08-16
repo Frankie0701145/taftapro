@@ -31,4 +31,11 @@ class ClientMailer < ApplicationMailer
 
     mail to: @professional.email, subject: "Potential Client"
   end
+
+  def password_send(client,password)
+    @client = client
+    @password = password
+    @greeting = "Hi, #{@client.first_name}"
+    mail to: @client.email, subject: "Sending Password"
+  end
 end
