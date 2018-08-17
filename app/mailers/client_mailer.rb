@@ -22,12 +22,20 @@ class ClientMailer < ApplicationMailer
     mail to: @client.email, subject:"Password Reset"
   end
 
-  def quotation(client, professional: professional, request: request)
+  def quotation(client, professional: professional, request: request, answers:answers)
     @client = client
     @professional = professional
     @request = request
+    @answers = answers
     @greeting = "Hi, #{@professional.first_name}"
 
-    mail to: @professional.email, subject: "Potential Client"    
+    mail to: @professional.email, subject: "Potential Client"
+  end
+
+  def password_send(client,password)
+    @client = client
+    @password = password
+    @greeting = "Hi, #{@client.first_name}"
+    mail to: @client.email, subject: "Sending Password"
   end
 end

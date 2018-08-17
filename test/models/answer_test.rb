@@ -9,11 +9,13 @@
 #  updated_at   :datetime         not null
 #  client_id    :integer
 #  question_id  :integer
+#  request_id   :integer
 #
 # Indexes
 #
 #  index_answers_on_client_id    (client_id)
 #  index_answers_on_question_id  (question_id)
+#  index_answers_on_request_id   (request_id)
 #
 
 require 'test_helper'

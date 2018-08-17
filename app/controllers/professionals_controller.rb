@@ -1,15 +1,15 @@
 class ProfessionalsController < ApplicationController
   before_action :logged_in_professional, only: [:edit, :update]
-  before_action :logged_in_client, only:[:show]
+  #before_action :logged_in_client, only:[:show]
   def new
     @professional = Professional.new()
   end
 
   def index
     @location = params[:location]
-    @service = params[:service]    
-    
-    @professionals = 
+    @service = params[:service]
+
+    @professionals =
             Professional.near(@location) & Professional.where(service: @service)
   end
 
@@ -26,9 +26,12 @@ class ProfessionalsController < ApplicationController
 
   def show
     @professional = Professional.find(params[:id])
-    @request = Request.new
+    #@request = Request.new
     @service= @professional.service
     @location=@professional.address
+    @questions = Category.find_by(service: @service).questions
+    # Used to track the questions that the client answers
+    @client_token = SecureRandom.hex(10)
     @client=current_client
   end
 

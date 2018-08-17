@@ -64,13 +64,15 @@ class Client < ApplicationRecord
 			ClientMailer.password_reset(self).deliver_now
 	end
 
-	def request_quotation(professional: , request:)
-		ClientMailer.quotation(self, professional: professional, request: request).deliver_now
+	def request_quotation(professional: , request:, answers:)
+		ClientMailer.quotation(self, professional: professional, request: request, answers:answers).deliver_now
 	end
-
+	def password_send(password)
+		ClientMailer.password_send(self, password).deliver_now
+	end
 	# Returns true if the given token matches the digest.
 	def authenticated?(attribute, token)
-		
+
 		digest = self.send("#{attribute}_digest")
 		return false if digest.nil?
 		BCrypt::Password.new(digest).is_password?(token)

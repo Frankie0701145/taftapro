@@ -2,15 +2,18 @@
 #
 # Table name: requests
 #
-#  id          :integer          not null, primary key
-#  description :text
-#  first_name  :string
-#  last_name   :string
-#  location    :string
-#  service     :string
-#  user_email  :string
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
+#  id              :integer          not null, primary key
+#  location        :string
+#  service         :string
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  client_id       :integer
+#  professional_id :integer
+#
+# Indexes
+#
+#  index_requests_on_client_id        (client_id)
+#  index_requests_on_professional_id  (professional_id)
 #
 
 require 'test_helper'

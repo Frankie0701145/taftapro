@@ -11,16 +11,11 @@ class StaticPagesController < ApplicationController
       format.html {
         @location = params[:search_service_by_location_form][:location]
         @service = params[:search_service_by_location_form][:q]
-     
+
         if !@location.empty? && !@service.empty?
-          
-          @professionals = 
+
+          @professionals =
             Professional.near(@location) & Professional.where(service: @service)
-
-          @questions = Category.find_by(service: @service).questions 
-
-          # Used to track the questions that the client answers
-          @client_token = SecureRandom.hex(10)
 
         elsif @location.empty? && !@service.empty?
 
@@ -29,13 +24,13 @@ class StaticPagesController < ApplicationController
         else
           flash.now[:info] = "Please enter a service that you are looking for."
           render 'home'
-        end        
+        end
       }
       format.json {
         @home_improvement_services = @home_improvement_services.limit(5)
       }
     end
-    # render json: { home_improvement: [], animals: [] }  
+    # render json: { home_improvement: [], animals: [] }
   end
 
   def about
