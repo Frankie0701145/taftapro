@@ -14,21 +14,7 @@ class Category < ApplicationRecord
     
 
     #Home Improvement
-    @@home_improvement_services = ["Domestic Workers",
-    								"Handy Man",
-    								"House Cleaning",
-    								"Car Cleaning",
-    								"Interior Design",
-    								"General Contracting",
-    								"Repair and Maintenance",
-    								"Plumbing",
-    								"Landscaping",
-    								"Electrical",
-    								"Home Painting",
-    								"Home remodeling",
-    								"Carpet cleaning",
-    								"Lawn mowing",
-    								"Laundry"]
+    @@home_improvement_services = ["Domestic Workers","Handy Man","House Cleaning","Car Cleaning","Interior Design","General Contracting","Repair and Maintenance","Plumbing","Landscaping","Electrical","Home Painting","Home remodeling","Carpet cleaning","Lawn mowing","Laundry"]
     #Animal
     @@animals = ["Dog Walking/Running",
                  "Dog training",
