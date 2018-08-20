@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   resources :client_password_resets,  only: [:new, :create, :edit, :update]
   resources :professional_password_resets, only: [:new, :create, :edit, :update]
   resources :professionals
-  resources :requests, only: [:index]
+  resources :requests, only: [:index, :show]
   resources :answers, only: [:create]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
