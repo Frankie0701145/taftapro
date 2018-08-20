@@ -1,5 +1,10 @@
 class RequestsController < ApplicationController
 
+	def index
+		#will setup the assocition later
+		@requests= Request.where(professional_id:current_professional.id).order("created_at DESC").paginate(:page => params[:page], :per_page => 3)
+	end
+=begin
 	def create
 		request = Request.new(request_params)
 		if request.save
@@ -17,7 +22,7 @@ class RequestsController < ApplicationController
 				flash[:danger]="The quotation request was not sent"
 				redirect_to professional_path(@professional)
 		end
-=begin
+
 		if request.save
 			location = request.location
 			service = request.service
@@ -40,8 +45,10 @@ class RequestsController < ApplicationController
 			flash[:success] = "We will notify you when the professionals send you a quote."
 			redirect_to client_path(@client)
 		end
-=end
+
 	end
+=end
+
 
 	private
 	def request_params
