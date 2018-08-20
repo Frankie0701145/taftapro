@@ -40,7 +40,8 @@ gem 'font-awesome-rails'
 gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
 gem 'carrierwave', '~> 0.11.0'
 gem 'ransack', github: 'activerecord-hackery/ransack'
-
+gem 'will_paginate', '3.1.6'
+gem 'bootstrap-will_paginate', '1.0.0' 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
@@ -62,9 +63,9 @@ end
 group :test do
   gem 'sqlite3'
   # To show red and green at the appropriate times
-  gem 'minitest-reporters' 
+  gem 'minitest-reporters'
   # To filter the backtrace to eliminate unwanted lines
-  gem 'mini_backtrace' 
+  gem 'mini_backtrace'
   # Adds support for Capybara system testing and selenium driver
   # gem 'capybara', '>= 2.15', '< 4.0'
   # gem 'selenium-webdriver'
