@@ -1,0 +1,44 @@
+
+
+<div class="container pt-4 w-50">
+  <div class="row border shadow-lg pt-3 mb-3 bg-white rounded">
+      <div class="col-12 m-1">
+        <p class="font-weight-bold">
+          Quotation Request for <%="#{@request.service}"%> from
+          <!--Will set up the association later-->
+          <span class="font-italic"> <%=link_to "#{@client.first_name} #{@client.last_name}"%></span>
+          <span>on <%= @request.created_at.strftime("%B %e, %Y at %I:%M %p.")%></span>
+        </p>
+
+      </div>
+      <hr>
+      <div class="col-12 m-2">
+          <h4 class="text-center">Description</h4>
+          <% @answers.each do |answer| %>
+              <%if answer.answer.present?%>
+                <%if answer.question.answer_type != "email_field"%>
+                  <h5><%=answer.question.question%></h5>
+                  <p><%=answer.answer%></p>
+                  <hr>
+                <%end%>
+              <%end%>
+          <% end %>
+          <h5>Where is the location of the work?</h5>
+          <p><%=@request.location%></p>
+
+      </div>
+      <hr>
+      <div class="col-12 m-2">
+        <div class="row">
+
+          <div class="col-auto mr-auto">
+            <%= link_to "Send Quotation", class: "btn btn-primary btn-block" %>
+          </div>
+          <div class="col-auto">
+            <%= link_to "Back",requests_path%>
+          </div>
+
+        </div>
+      </div>
+  </div>
+</div>
