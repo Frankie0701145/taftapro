@@ -1,8 +1,14 @@
 class RequestsController < ApplicationController
-
+	before_action :logged_in_professional, only:[:index, :show]
 	def index
-		#will setup the assocition later
+		#TODO:will setup the assocition later
 		@requests= Request.where(professional_id:current_professional.id).order("created_at DESC").paginate(:page => params[:page], :per_page => 3)
+	end
+	def show
+		@request= Request.find_by(id:params[:id])
+		#TODO:will setup the assocition later
+		@answers = Answer.where(request_id:@request.id)
+		@client  = Client.find_by(id:@request.client_id)
 	end
 =begin
 	def create

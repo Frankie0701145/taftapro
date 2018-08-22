@@ -32,7 +32,7 @@
         <div class="row">
 
           <div class="col-auto mr-auto">
-            <%= link_to "Send Quotation", class: "btn btn-primary btn-block" %>
+            <%= link_to "Send Quotation", request_quotation_path(@request.client_id) ,class: "btn btn-success btn-block" %>
           </div>
           <div class="col-auto">
             <%= link_to "Back",requests_path%>

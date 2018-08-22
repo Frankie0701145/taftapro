@@ -1,42 +1,29 @@
 <div class="top_padder">
-<% if !current_client %>
-<div class="row">
-	<div class="col-md-6 offset-md-3">
-		<h3>Upload a quote for <%= @client.full_name %> </h3>
-		<%= form_for @quotation, url: upload_quotation_path(client_id: @client.id, professional_id: params[:professional_id]) do |f| %>
-			<%= f.file_field :quotation_document %>
-      <%= f.hidden_field :professional_id, :value => params[:professional_id] %>
-			<%= f.hidden_field :client_id, :value => @client.id %>
-			<br>
-			<%= f.submit "Upload Quote", class: "btn btn-success" %>
-		<% end %>
-	</div>
-</div>
-<% else %>
-  <div class="row">
-    <div class="col-md-6 offset-md-3 text-center">
-      <h1>Welcome, <%= @client.first_name %>!</h1>
-      <p>Find a professional to help you do almost anything.</p>    
-    </div>
-  </div>
 
-  <div class="row">
-    <div class="col-md-6 offset-md-3 mt-7">
-      <%= form_for SearchServiceByLocationForm.new, url: search_path, local: true, method: :get do |f| %>
-      <div class="input-group">
-        <%= f.text_field :q, class: "form-control", id: "serviceField", placeholder: "Service", data: { behavior: "autocomplete" } %>
-        <%= f.text_field :location, class: "form-control", placeholder: "City, Country", id: "geo-input", :required => true %>
-        <div class="input-group-append">
-          <%= f.submit "Find Professional", class: "btn btn-info" %>  
-        </div>    
-      </div>
-      <% end %>
-    </div>
-  </div>
-<% end %>
+	  <div class="row">
+	    <div class="col-md-6 offset-md-3 text-center">
+	      <h1>Welcome, <%= @client.first_name %>!</h1>
+	      <p>Find a professional to help you do almost anything.</p>
+	    </div>
+	  </div>
+
+	  <div class="row">
+	    <div class="col-md-6 offset-md-3 mt-7">
+	      <%= form_for SearchServiceByLocationForm.new, url: search_path, local: true, method: :get do |f| %>
+	      <div class="input-group">
+		        <%= f.text_field :q, class: "form-control", id: "serviceField", placeholder: "Service", data: { behavior: "autocomplete" } %>
+		        <%= f.text_field :location, class: "form-control", placeholder: "City, Country", id: "geo-input", :required => true %>
+		        <div class="input-group-append">
+		          <%= f.submit "Find Professional", class: "btn btn-info" %>
+		        </div>
+	      </div>
+	      <% end %>
+	    </div>
+	  </div>
+
 </div>
 <script type='text/javascript'>
   $(function() {
     $("#geo-input").geocomplete();
-  });   
+  });
 </script>
