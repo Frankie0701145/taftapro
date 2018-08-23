@@ -23,7 +23,7 @@
                     <div class="col-12 m-1">
                       <div class="row">
                         <div class="col-auto mr-auto">
-                          <%=link_to "Send Quotation", request_quotation_path(  client_id:request.client_id ), class:"btn btn-success btn-block"%></button>
+                          <%=link_to "Send Quotation", request_quotation_path(  client_id:request.client_id,request_id:request.id ), class:"btn btn-success btn-block"%></button>
                         </div>
                         <div class="col-auto">
                           <span class="align-middle">Status: <span class="font-italic text-secondary align-middle"><%=request.status%></span></span>

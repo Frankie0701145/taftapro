@@ -26,6 +26,7 @@ class ClientsController < ApplicationController
     @quotation = Quotation.new
     @client_id = params[:client_id]
     @client = Client.find_by(id:params[:client_id])
+    @request = Request.find_by(id:params[:request_id])
     @professional = current_professional
     #professional = Professional.find(params[:professional_id])
     #current_client.request_quotation(professional)

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_23_070730) do
+ActiveRecord::Schema.define(version: 2018_08_23_090544) do
 
   create_table "answers", force: :cascade do |t|
     t.string "answer"
@@ -81,6 +81,7 @@ ActiveRecord::Schema.define(version: 2018_08_23_070730) do
     t.datetime "updated_at", null: false
     t.string "quotation_document"
     t.integer "client_id"
+    t.integer "request_id"
     t.index ["professional_id"], name: "index_quotations_on_professional_id"
   end
 

@@ -13,7 +13,7 @@
       </div>
 
       <div class="col-12 m-1 text-right">
-        <span class="align-middle">Status:<span class="font-italic text-secondary align-middle"><%=@request.status%></span></span>
+        <span class="align-middle">Status:<span class="font-italic text-secondary"><%=@request.status%></span></span>
       </div>
 
       <div class="col-12 m-2">
@@ -32,11 +32,12 @@
 
       </div>
       <hr>
+      <%if professional_logged_in?%>
       <div class="col-12 m-2">
         <div class="row">
 
           <div class="col-auto mr-auto">
-            <%= link_to "Send Quotation", request_quotation_path( client_id:@request.client_id ) ,class: "btn btn-success btn-block" %>
+            <%= link_to "Send Quotation", request_quotation_path( client_id:@request.client_id, request_id:@request.id ) ,class: "btn btn-success btn-block" %>
           </div>
           <div class="col-auto">
             <%= link_to "Back",requests_path, class: "btn btn-secondary btn-block"%>
@@ -44,5 +45,6 @@
 
         </div>
       </div>
+      <%end%>
   </div>
 </div>
