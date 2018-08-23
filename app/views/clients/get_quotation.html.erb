@@ -1,7 +1,7 @@
 <div class="top_padder">
   <div class="row">
   	<div class="col-md-6 offset-md-3">
-  		<h3>Upload a quote for <%= @client.full_name %> </h3>
+  		<h3>Upload a quote for <%= "#{@client.full_name}" %> </h3>
   		<%= form_for @quotation, url: upload_quotation_path(client_id: @client.id, professional_id: @professional.id) do |f| %>
   			<%= f.file_field :quotation_document %>
         <%= f.hidden_field :professional_id, :value => params[:professional_id] %>
