@@ -26,7 +26,7 @@
                           <%=link_to "Send Quotation", request_quotation_path(  client_id:request.client_id ), class:"btn btn-success btn-block"%></button>
                         </div>
                         <div class="col-auto">
-                          Status:
+                          <span class="align-middle">Status: <span class="font-italic text-secondary align-middle"><%=request.status%></span></span>
                         </div>
 
                       </div>

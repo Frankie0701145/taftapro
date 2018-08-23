@@ -5,6 +5,7 @@
 #  id              :integer          not null, primary key
 #  location        :string
 #  service         :string
+#  status          :string           default("Not Sent")
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  client_id       :integer
