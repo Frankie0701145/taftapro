@@ -41,7 +41,7 @@ class AnswersController < ApplicationController
 					answers.each do |answer|
 						answer.update_attributes(client_id: @client.id, request_id: request.id)
 					end
-					flash[:success] = "Welcome! We have emailed you a temporary password. Please change it. Your quotation request has been sent successfully to #{@professional.first_name} #{@professional.last_name}."
+					flash[:success] = "Welcome! We have emailed you a temporary password. Please change it. Your quotation request has been sent successfully to #{@professional.first_name} #{@professional.last_name}.Please complete your profile."
 					@client.request_quotation(professional:@professional, request:request, answers:answers)
 					@client.password_send(password)
 					# TO-DO: ACTUALLY SEND THE EMAIL WITH THE PASSWORD
