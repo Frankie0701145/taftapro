@@ -1,6 +1,6 @@
 class ClientsController < ApplicationController
   before_action :logged_in_professional, only: [:get_quotation]
-
+  before_action :logged_in_client, only:[:edit]
   def new
   	@client = Client.new
   end
@@ -20,7 +20,19 @@ class ClientsController < ApplicationController
   	@client = Client.find(params[:id])
 
   end
-
+  def edit
+    @client = current_client
+  end
+  def update
+    @client=current_client
+    if @client.update_attributes(client_edit_profile_params)
+      flash.now[:success]="Profile Saved successfully"
+      render "edit"
+    else
+      flash.now[:danger]="The profile was not saved"
+      render "edit"
+    end
+  end
   def get_quotation
     client_logout if current_client
     @quotation = Quotation.new
@@ -42,5 +54,8 @@ class ClientsController < ApplicationController
 
     def client_params
     	params.require(:client).permit(:first_name, :last_name, :email, :password, :password_confirmation)
+    end
+    def client_edit_profile_params
+      params.require(:client).permit(:first_name,:last_name)
     end
 end
