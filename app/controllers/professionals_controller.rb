@@ -52,7 +52,10 @@ class ProfessionalsController < ApplicationController
   def upload_quotation
     @quotation = Quotation.new(quotation_params)
     @professional = Professional.find(params[:professional_id])
+    @request = Request.find(params[:request_id])
+
     if @quotation.save
+      @request.update_attribute(:status,"Sent")
       # TODO: Email client or create notifications
       flash[:success] = "Your quotation has been sent to the client."
       redirect_to @professional
@@ -72,7 +75,7 @@ class ProfessionalsController < ApplicationController
   end
 
   def quotation_params
-    params.require(:quotation).permit(:quotation_document, :professional_id, :client_id)
+    params.require(:quotation).permit(:quotation_document, :professional_id, :client_id, :request_id)
   end
 
 end

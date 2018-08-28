@@ -6,6 +6,7 @@
 				<tr>
 					<th>Professional</th>
 					<th>File</th>
+					<th>Request ID </th>
 				</tr>
 			</thead>
 			<tbody>
@@ -14,6 +15,7 @@
 				<tr>
 					<td><%= link_to professional.full_name, professional %></td>
 					<td><%= link_to File.basename(quotation.quotation_document_url), quotation.quotation_document_url %></td>
+					<td><%= link_to quotation.request_id, request_path(quotation.request_id)%></td>
 				</tr>
 
 				<% end %>

@@ -1,0 +1,52 @@
+
+<div class="container pt-4 w-50">
+    <h3>Quotation Request</h3>
+    <div class="row">
+        <%= will_paginate @requests, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer%>
+    </div>
+    <% if @requests && @requests.count > 0 %>
+
+        <% @requests.each do |request| %>
+
+              <div class="row border shadow-lg pt-3 mb-3 bg-white rounded">
+
+                    <div class="col-12 m-1">
+                      <p class="font-weight-bold">
+                        Quotation Request for <%="#{request.service}"%> from
+                        <!--Will set up the association later-->
+                        <span class="font-italic"> <%=link_to "#{Client.find_by(id:request.client_id).first_name} #{Client.find_by(id:request.client_id).last_name}"%></span>
+                        <span>on <%= request.created_at.strftime("%B %e, %Y at %I:%M %p.")%></span>
+                      </p>
+
+                    </div>
+
+                    <div class="col-12 m-1">
+                      <div class="row">
+                        <div class="col-auto mr-auto">
+                          <%=link_to "Send Quotation", request_quotation_path(  client_id:request.client_id,request_id:request.id ), class:"btn btn-success btn-block"%></button>
+                        </div>
+                        <div class="col-auto">
+                          <span class="align-middle">Status: <span class="font-italic text-secondary align-middle"><%=request.status%></span></span>
+                        </div>
+
+                      </div>
+                    </div>
+
+                    <div class="col-12 m-1">
+                      <div class="row justify-content-center">
+                        <div class="col-2">
+                          <%=link_to "More....", request%>
+                        </div>
+                      </div>
+                    </div>
+
+              </div>
+        <%end%>
+    <%else%>
+      <p class="font-weight-bold">There are No Quotation Requests Right now</p>
+    <%end%>
+    <div class="row">
+        <%= will_paginate @requests, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer%>
+    </div>
+
+</div>

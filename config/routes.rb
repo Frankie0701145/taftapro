@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  
+
   root 'static_pages#home'
   #the routes for the client login and logout
   get     "/client/login",  to:"client_sessions#new"
@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   get '/signup', to: 'clients#new'
   get "/professional/signup", to: 'professionals#new' #the route to the professional signup
   get '/search', to: 'static_pages#search'
-  # get '/request_quotation', to: 'clients#get_quotation'
+  get '/request_quotation', to: 'clients#get_quotation'
   get '/quotations', to: 'clients#quotations'
   post 'upload_quotation', to: 'professionals#upload_quotation'
   post '/submit_answers', to: 'answers#find_or_create_client'
@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   resources :client_password_resets,  only: [:new, :create, :edit, :update]
   resources :professional_password_resets, only: [:new, :create, :edit, :update]
   resources :professionals
-  resources :requests
+  resources :requests, only: [:index, :show]
   resources :answers, only: [:create]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

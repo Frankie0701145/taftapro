@@ -9,6 +9,7 @@
 #  updated_at         :datetime         not null
 #  client_id          :integer
 #  professional_id    :integer
+#  request_id         :integer
 #
 # Indexes
 #
