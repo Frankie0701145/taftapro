@@ -6,7 +6,7 @@
         <p class="font-weight-bold">
           Quotation Request for <%="#{@request.service}"%> from
           <!--Will set up the association later-->
-          <span class="font-italic"> <%=link_to "#{@client.first_name} #{@client.last_name}"%></span>
+          <span class="font-italic"> <%=link_to "#{@client.full_name}"%></span>
           <span>on <%= @request.created_at.strftime("%B %e, %Y at %I:%M %p.")%></span>
         </p>
 
