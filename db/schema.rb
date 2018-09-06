@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_23_090544) do
+ActiveRecord::Schema.define(version: 2018_09_06_015544) do
 
   create_table "answers", force: :cascade do |t|
     t.string "answer"
@@ -62,6 +62,16 @@ ActiveRecord::Schema.define(version: 2018_08_23_090544) do
     t.text "uniqueness_comment"
     t.date "career_start_date"
     t.string "specialization"
+  end
+
+  create_table "projects", force: :cascade do |t|
+    t.integer "client_id"
+    t.integer "professional_id"
+    t.string "status"
+    t.integer "quotation_id"
+    t.datetime "due"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "questions", force: :cascade do |t|
