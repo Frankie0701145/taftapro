@@ -47,7 +47,7 @@ class ClientsController < ApplicationController
   end
 
   def quotations
-    @quotations = Quotation.where(client_id: current_client.id)
+    @quotations = Quotation.where(client_id: current_client.id).order("created_at DESC")
   end
 
   private

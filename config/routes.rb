@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
 
 
-  get 'projects/index'
   root 'static_pages#home'
   #the routes for the client login and logout
   get     "/client/login",  to:"client_sessions#new"
@@ -26,5 +25,6 @@ Rails.application.routes.draw do
   resources :professionals
   resources :requests, only: [:index, :show]
   resources :answers, only: [:create]
+  resources :projects, only: [:index, :new, :create, :edit,:update]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
