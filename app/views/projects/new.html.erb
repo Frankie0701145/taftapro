@@ -1,0 +1,28 @@
+
+  <div class="container my-5 p-3">
+
+      <div class="row offset-2 p-2">
+        <div class="col">
+          <h1>Project Start</h1>
+        </div>
+
+      </div>
+
+      <div class="row offset-2 p-2">
+            <div class="col">
+              <%=form_for @project do |f|%>
+                  <%= render 'shared/error_messages', object: f.object %>
+                  <%= f.hidden_field :professional_id, :value => @professional_id %>
+                  <%= f.hidden_field :client_id, :value => @client_id %>
+                  <%= f.hidden_field :quotation_id, :value => @quotation_id %>
+
+                  <div class="form-group">
+                      <%= f.label :due, "Due Date & Time:"%>
+                      <%= f.datetime_select :due, class:"form-control", required:true%>
+                  </div>
+                  <%= f.submit "Save", class: "btn btn-info  mt-2" %>
+
+              <%end%>
+            </div>
+      </div>
+  </div>
