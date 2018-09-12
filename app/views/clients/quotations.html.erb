@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row my-4">
 	<div class="col-md-8 offset-md-2">
 		<% if @quotations && @quotations.count > 0 %>
 		<table class="table table-striped">
@@ -7,6 +7,8 @@
 					<th>Professional</th>
 					<th>File</th>
 					<th>RequestID</th>
+					<th></th>
+
 				</tr>
 			</thead>
 			<tbody>
@@ -18,12 +20,11 @@
 					<td><%= link_to quotation.request_id, request_path(quotation.request_id)%></td>
 
 					<%if quotation.status.blank?%>
-								<td><%= link_to "Accept", new_project_path(client_id:quotation.client_id, professional_id:quotation.professional_id, quotation_id:quotation.id),class: "btn btn-success btn-sm"%></td>
-								<td><%= link_to "Decline", new_project_path(client_id:quotation.client_id, professional_id:quotation.professional_id, quotation_id:quotation.id), class: "btn btn-danger btn-sm"%></td>
-					<%elsif quotation.status == "declined"%>
-								<td><%= link_to "Accept", new_project_path(client_id:quotation.client_id, professional_id:quotation.professional_id, quotation_id:quotation.id),class: "btn btn-success btn-sm"%></td>
-					<%else%>
-								<td><%= link_to "Decline", new_project_path(client_id:quotation.client_id, professional_id:quotation.professional_id, quotation_id:quotation.id), class: "btn btn-danger btn-sm"%></td>
+								<td>
+									<%= link_to "Accept", new_project_path(client_id:quotation.client_id, professional_id:quotation.professional_id, quotation_id:quotation.id,request_id:quotation.request_id),class: "btn btn-success btn-sm"%>
+									<%= link_to "Decline", decline_quotation_path(quotation_id:quotation.id), :method => :post, class: "btn btn-danger btn-sm"%>
+								</td>
+
 					<%end%>
 					<td class="font-italic">
 						<%=quotation.status.titleize if quotation.status.present?%>

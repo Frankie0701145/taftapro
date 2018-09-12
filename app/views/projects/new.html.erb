@@ -15,7 +15,7 @@
                   <%= f.hidden_field :professional_id, :value => @professional_id %>
                   <%= f.hidden_field :client_id, :value => @client_id %>
                   <%= f.hidden_field :quotation_id, :value => @quotation_id %>
-
+                  <%= f.hidden_field :request_id,   :value=> @request_id%>
                   <div class="form-group">
                       <%= f.label :due, "Due Date & Time:"%>
                       <%= f.datetime_select :due, class:"form-control", required:true%>

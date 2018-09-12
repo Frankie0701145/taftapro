@@ -1,2 +1,78 @@
-<h1>Projects#index</h1>
-<p>Find me in app/views/projects/index.html.erb</p>
+<div class="container my-5">
+
+  <div class="row justify-content-around align-items-center">
+
+        <div class="col-3">
+            <h1>Projects</h>
+        </div>
+
+        <div class="col-2">
+            <%=link_to "Start Project","#", class: "btn btn-primary btn-sm"%>
+        </div>
+
+  </div>
+
+  <div class="row offset-2">
+      <%= will_paginate @requests, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer%>
+  </div>
+
+  <% if @projects && @projects.count > 0 %>
+
+       <% @projects.each do |project| %>
+        <div class="row my-4 justify-content-center">
+
+            <div class="col-7">
+              <!--TODO: Will setup the association-->
+
+                <div class="row border mx-0">
+
+                    <div class="col-12 text-center border p-3">
+                      <%if client_logged_in?%>
+                        <%
+                          pro = Professional.find(project.professional_id)
+                          pro_name= pro.business_name || pro.full_name
+                         %>
+                        <h5><%=link_to "#{pro_name}","#"%></h5>
+                      <%elsif professional_logged_in?%>
+                        <%
+                          client= Client.find(project.client_id)
+                          client_name = client.full_name
+                        %>
+                        <h5><%=link_to "#{client_name}","#"%></h5>
+                      <%end%>
+                    </div>
+
+                    <div class="col-12 pr-2 py-3 text">
+                      <% service = Request.find(project.request_id).service%>
+                      <h4 class="font-weight-bold"><%=service%></h4>
+                    </div>
+                    <%if client_logged_in?%>
+                        <div class="col-12 pr-2 py-3">
+                          <%=link_to "Update", "#",class: "btn btn-sm btn-success" %>
+                          <%= link_to "Rate", "#", class:"btn btn-sm btn-warning"%>
+                        </div>
+                    <%end%>
+                    <div class="col-12 pr-2 py-2">
+
+                      <div class="d-flex flex-row justify-content-between">
+                        <div class="pr-4">
+                          <h8 class="font-italic">Due On:<%= project.due.in_time_zone("Nairobi").strftime("%B %d, %Y %H:%M:%S") %></h8>
+                        </div>
+
+                        <span class="">Status: <span class="font-italic text-capitalize"><%=project.status%><span><span>
+                      </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+       <%end%>
+       <div class="row offset-2" >
+         <%= will_paginate @requests, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer%>
+       </div>
+   <%else%>
+        <div class="row my-4 justify-content-center">
+          <h3>There are no projects.</h3>
+        </div>
+   <%end%>
+</div>

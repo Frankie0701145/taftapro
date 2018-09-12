@@ -6,7 +6,7 @@
         <p class="font-weight-bold">
           Quotation Request for <%="#{@request.service}"%> from
           <!--Will set up the association later-->
-          <span class="font-italic"> <%=link_to "#{@client.first_name} #{@client.last_name}"%></span>
+          <span class="font-italic"> <%=link_to "#{@client.full_name}"%></span>
           <span>on <%= @request.created_at.strftime("%B %e, %Y at %I:%M %p.")%></span>
         </p>
 
@@ -45,7 +45,7 @@
 
         </div>
       </div>
-      <%else%>
+      <%elsif !client_logged_in? && !professional_logged_in?%>
       <div class="col-12 m-2">
         To upload a quotation please <%=link_to "Login",professional_login_path%>
       </div>

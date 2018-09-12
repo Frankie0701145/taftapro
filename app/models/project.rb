@@ -10,6 +10,7 @@
 #  client_id       :integer
 #  professional_id :integer
 #  quotation_id    :integer
+#  request_id      :integer
 #
 
 class Project < ApplicationRecord
