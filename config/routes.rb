@@ -17,8 +17,9 @@ Rails.application.routes.draw do
   get '/search', to: 'static_pages#search'
   get '/request_quotation', to: 'clients#get_quotation'
   get '/quotations', to: 'clients#quotations'
-  post 'decline_quotation', to: 'clients#decline_quotation'
-  post 'upload_quotation', to: 'professionals#upload_quotation'
+  get '/quotation/:id', to: 'clients#quotation', as: "quotation"
+  put '/decline_quotation', to: 'clients#decline_quotation'
+  post '/upload_quotation', to: 'professionals#upload_quotation'
   post '/submit_answers', to: 'answers#find_or_create_client'
   resources :clients
   resources :client_password_resets,  only: [:new, :create, :edit, :update]

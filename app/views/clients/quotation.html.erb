@@ -1,0 +1,31 @@
+
+
+<div class="container">
+    <div class="row top_padder justify-content-center">
+      <div class="col-9">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Professional</th>
+                  <th>File</th>
+                  <th>RequestID</th>
+                  <th>Date Sent</th>
+                </tr>
+              </thead>
+              <tbody>
+                <%
+                    professional = Professional.find(@quotation.professional_id)
+                    pro_name  = professional.business_name || professional.full_name
+                %>
+                <tr>
+                  <td><%= link_to pro_name, professional %></td>
+                  <td><%= link_to File.basename(@quotation.quotation_document_url), @quotation.quotation_document_url %></td>
+                  <td><%= link_to @quotation.request_id, request_path(@quotation.request_id)%></td>
+                  <td><%=@quotation.created_at.in_time_zone("Nairobi").strftime("%B %d, %Y at %I:%M:%p")%></td>
+                </tr>
+              </tbody>
+            </table>
+      </div>
+    </div>
+
+</div>

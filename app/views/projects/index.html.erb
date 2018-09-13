@@ -6,9 +6,11 @@
             <h1>Projects</h>
         </div>
 
-        <div class="col-2">
-            <%=link_to "Start Project","#", class: "btn btn-primary btn-sm"%>
-        </div>
+            <div class="col-2">
+              <% if client_logged_in?%>
+                <%=link_to "Start Project",root_url, class: "btn btn-primary btn-sm"%>
+              <%end%>
+            </div>
 
   </div>
 
@@ -62,6 +64,9 @@
                         <span class="">Status: <span class="font-italic text-capitalize"><%=project.status%><span><span>
                       </div>
 
+                    </div>
+                    <div class="col-12 pr-2 py-2">
+                      <%=link_to "View Quotes", quotation_path(project.quotation_id), class: "btn btn-sm btn-primary"%>
                     </div>
                 </div>
             </div>

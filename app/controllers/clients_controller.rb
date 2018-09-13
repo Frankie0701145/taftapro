@@ -56,6 +56,9 @@ class ClientsController < ApplicationController
   def quotations
     @quotations = Quotation.where(client_id: current_client.id).order("created_at DESC")
   end
+  def quotation
+    @quotation = Quotation.find(params[:id])
+  end
 
   private
 
