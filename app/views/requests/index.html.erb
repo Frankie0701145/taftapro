@@ -15,7 +15,7 @@
                         Quotation Request for <%="#{request.service}"%> from
                         <!--Will set up the association later-->
                         <span class="font-italic"> <%=link_to "#{Client.find_by(id:request.client_id).first_name} #{Client.find_by(id:request.client_id).last_name}"%></span>
-                        <span>on <%= request.created_at.strftime("%B %e, %Y at %I:%M %p.")%></span>
+                        <span>on <%= request.created_at.in_time_zone("Nairobi").strftime("%B %e, %Y at %I:%M %p.")%></span>
                       </p>
 
                     </div>

@@ -1,21 +1,42 @@
-<div class="row">
-	<div class="col-md-6 offset-md-3">
+<div class="row my-4">
+
+	<div class="col-md-8 offset-md-2">
+		<h2>Quotations<h2/>
+	</div>
+	<div class="col-md-8 offset-md-2">
 		<% if @quotations && @quotations.count > 0 %>
 		<table class="table table-striped">
 			<thead>
 				<tr>
 					<th>Professional</th>
 					<th>File</th>
-					<th>Request ID </th>
+					<th>RequestID</th>
+					<th></th>
+					<th>Date Sent</th>
 				</tr>
 			</thead>
 			<tbody>
 				<% @quotations.each do |quotation| %>
-				<% professional = Professional.find(quotation.professional_id)%>
+				<%
+				 		professional = Professional.find(quotation.professional_id)
+						pro_name  = professional.business_name || professional.full_name
+				%>
 				<tr>
-					<td><%= link_to professional.full_name, professional %></td>
+					<td><%= link_to pro_name, professional %></td>
 					<td><%= link_to File.basename(quotation.quotation_document_url), quotation.quotation_document_url %></td>
 					<td><%= link_to quotation.request_id, request_path(quotation.request_id)%></td>
+
+					<%if quotation.status.blank?%>
+								<td>
+									<%= link_to "Accept", new_project_path(client_id:quotation.client_id, professional_id:quotation.professional_id, quotation_id:quotation.id,request_id:quotation.request_id),class: "btn btn-success btn-sm"%>
+									<%= link_to "Decline", decline_quotation_path(quotation_id:quotation.id), :method => :put, class: "btn btn-danger btn-sm"%>
+								</td>
+
+					<%end%>
+					<td class="font-italic">
+						<%=quotation.status.titleize if quotation.status.present?%>
+					</td>
+					<td><%=quotation.created_at.in_time_zone("Nairobi").strftime("%B %d, %Y at %H:%M:%S")%></td>
 				</tr>
 
 				<% end %>

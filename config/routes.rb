@@ -17,7 +17,9 @@ Rails.application.routes.draw do
   get '/search', to: 'static_pages#search'
   get '/request_quotation', to: 'clients#get_quotation'
   get '/quotations', to: 'clients#quotations'
-  post 'upload_quotation', to: 'professionals#upload_quotation'
+  get '/quotation/:id', to: 'clients#quotation', as: "quotation"
+  put '/decline_quotation', to: 'clients#decline_quotation'
+  post '/upload_quotation', to: 'professionals#upload_quotation'
   post '/submit_answers', to: 'answers#find_or_create_client'
   resources :clients
   resources :client_password_resets,  only: [:new, :create, :edit, :update]
@@ -25,5 +27,6 @@ Rails.application.routes.draw do
   resources :professionals
   resources :requests, only: [:index, :show]
   resources :answers, only: [:create]
+  resources :projects, only: [:index, :new, :create, :edit,:update]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

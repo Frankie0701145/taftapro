@@ -10,7 +10,7 @@
           <button class="btn btn-info btn-sm mt-2 mb-3" onclick="editPersonal()" id="personalEdit">Edit</button>
       </div>
 
-      <%= form_for( @professional, url: professional_path( params[:id] ))  do |f|%>
+      <%= form_for( @professional, url: professional_path( params[:id]), method: :put )  do |f|%>
         <!--Name-->
         <%= render 'shared/error_messages', object: f.object %>
         <div class="row p-3">
@@ -59,7 +59,7 @@
         <button class="btn btn-info btn-sm mt-2" onclick="editBusiness()" id="businessEdit">Edit</button>
       </div>
 
-      <%= form_for(@professional, url: professional_path( params[:id])) do |f|%>
+      <%= form_for(@professional, url: professional_path( params[:id]), method: :put ) do |f|%>
         <!--Business Name-->
         <div class="form-group p-3">
             <%=f.text_field :business_name, class: "form-control input-sm p-2 businessInfo", placeholder: "Business_name", :disabled=>true%>

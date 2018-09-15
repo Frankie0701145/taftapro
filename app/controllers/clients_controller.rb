@@ -45,9 +45,19 @@ class ClientsController < ApplicationController
     #redirect_to professional
     #flash[:success] = "The quotation has been sent to your email."
   end
-
+  def decline_quotation
+    quotation = Quotation.find(params[:quotation_id])
+    quotation[:status]="declined"
+    if quotation.save
+      flash[:info] = "Quotation is declined successfully"
+      redirect_to quotations_path
+    end
+  end
   def quotations
-    @quotations = Quotation.where(client_id: current_client.id)
+    @quotations = Quotation.where(client_id: current_client.id).order("created_at DESC")
+  end
+  def quotation
+    @quotation = Quotation.find(params[:id])
   end
 
   private

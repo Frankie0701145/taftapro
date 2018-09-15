@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_23_090544) do
+ActiveRecord::Schema.define(version: 2018_09_12_072841) do
 
   create_table "answers", force: :cascade do |t|
     t.string "answer"
@@ -64,6 +64,17 @@ ActiveRecord::Schema.define(version: 2018_08_23_090544) do
     t.string "specialization"
   end
 
+  create_table "projects", force: :cascade do |t|
+    t.integer "client_id"
+    t.integer "professional_id"
+    t.string "status"
+    t.integer "quotation_id"
+    t.datetime "due"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "request_id"
+  end
+
   create_table "questions", force: :cascade do |t|
     t.text "question"
     t.string "answer"
@@ -82,6 +93,7 @@ ActiveRecord::Schema.define(version: 2018_08_23_090544) do
     t.string "quotation_document"
     t.integer "client_id"
     t.integer "request_id"
+    t.string "status"
     t.index ["professional_id"], name: "index_quotations_on_professional_id"
   end
 
