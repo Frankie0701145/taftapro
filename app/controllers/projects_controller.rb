@@ -1,4 +1,5 @@
 class ProjectsController < ApplicationController
+  before_action :logged_in_client, only:[:edit]
 
   def index
 
@@ -12,6 +13,20 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def edit
+    @project = Project.find(params[:id])
+    @request = Request.find(@project.request_id)
+  end
+  def update
+    @project = Project.find(params[:id])
+    if @project.update_attributes(project_edit_params)
+      flash.now[:success]="Project updated successfully"
+      redirect_to projects_path
+    else
+      flash.now[:success]= "Project was not updated successfully"
+      redirect_to projects_path
+    end
+  end
   def new
     @project = Project.new
     @professional_id = params[:professional_id]
@@ -34,5 +49,8 @@ class ProjectsController < ApplicationController
   private
   def project_params
     params.require(:project).permit(:professional_id,:client_id,:quotation_id,:due,:request_id)
+  end
+  def project_edit_params
+    params.require(:project).permit(:status)
   end
 end
