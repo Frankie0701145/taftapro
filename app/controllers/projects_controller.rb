@@ -21,6 +21,7 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
     if @project.update_attributes(project_edit_params)
       flash.now[:success]="Project updated successfully"
+      #TODO: will setup a notification to the professional later
       redirect_to projects_path
     else
       flash.now[:success]= "Project was not updated successfully"
