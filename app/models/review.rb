@@ -12,4 +12,6 @@
 #
 
 class Review < ApplicationRecord
+  belongs_to :professional, dependent: :destroy
+  belongs_to :client, dependent: :destroy
 end

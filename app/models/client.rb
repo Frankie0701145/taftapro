@@ -20,6 +20,7 @@
 class Client < ApplicationRecord
 	has_many :questions
 	has_many :answers
+	has_many  :review 
 
 	attr_accessor :reset_token
 

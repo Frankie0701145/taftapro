@@ -1,2 +1,43 @@
-<h1>Reviews#new</h1>
-<p>Find me in app/views/reviews/new.html.erb</p>
+
+
+
+<div class="container my-5 p-3">
+
+    <div class="row offset-1 p-2">
+      <div class="col">
+        <h1>Rate and write a review about the Project</h1>
+      </div>
+
+    </div>
+
+    <div class="row offset-1 p-4 my-3 border">
+          <div class="col">
+            <%=form_for @review do |f|%>
+                <%= render 'shared/error_messages', object: f.object %>
+                <%= f.hidden_field :professional_id, :value => @professional_id %>
+                <div class="form-group">
+                    <%= f.label :rating, "Rate"%>
+                    <div id="star-rating" class="border"></div>
+                </div>
+
+                <div class="form-group">
+                      <%= f.label :comment, "Review"%>
+                      <%= f.text_area :comment, class:"form-control", required:true%>
+                </div>
+                <%= f.submit "Save", class: "btn btn-success mt-2"%>
+            <%end%>
+          </div>
+
+    </div>
+
+</div>
+
+
+<script type="text/javascript">
+
+      $("#star-rating").raty({
+        path: "/assets",
+        scoreName:"review[rating]"
+      })
+
+</script>

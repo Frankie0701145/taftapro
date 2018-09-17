@@ -36,6 +36,7 @@ class Professional < ApplicationRecord
 	geocoded_by :address
 	after_validation :geocode, if: :address_changed?
 	has_one :quotation
+	has_many :reviews
 
 	def full_name
 		"#{first_name} #{last_name}"

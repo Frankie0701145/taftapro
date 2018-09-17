@@ -51,7 +51,7 @@
                     <%if client_logged_in?%>
                         <div class="col-12 pr-2 py-3">
                           <%=link_to "Update", edit_project_path(project.id),class: "btn btn-sm btn-success" %>
-                          <%= link_to "Rate", "#", class:"btn btn-sm btn-warning"%>
+                          <%= link_to "Rate", new_review_path(professional_id:pro.id), class:"btn btn-sm btn-warning"%>
                         </div>
                     <%end%>
                     <div class="col-12 pr-2 py-2">
