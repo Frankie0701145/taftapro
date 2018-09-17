@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_12_072841) do
+ActiveRecord::Schema.define(version: 2018_09_17_142131) do
 
   create_table "answers", force: :cascade do |t|
     t.string "answer"
@@ -107,6 +107,15 @@ ActiveRecord::Schema.define(version: 2018_09_12_072841) do
     t.string "status", default: "Not Sent"
     t.index ["client_id"], name: "index_requests_on_client_id"
     t.index ["professional_id"], name: "index_requests_on_professional_id"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.integer "client_id"
+    t.integer "professional_id"
+    t.integer "rating"
+    t.text "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
