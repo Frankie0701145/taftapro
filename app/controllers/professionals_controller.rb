@@ -36,7 +36,7 @@ class ProfessionalsController < ApplicationController
   end
 
   def edit
-    @professional = Professional.find(params[:id])
+    @professional = current_professional
   end
   def update
     @professional=current_professional

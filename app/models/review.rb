@@ -9,9 +9,11 @@
 #  updated_at      :datetime         not null
 #  client_id       :integer
 #  professional_id :integer
+#  project_id      :integer
 #
 
 class Review < ApplicationRecord
-  belongs_to :professional, dependent: :destroy
-  belongs_to :client, dependent: :destroy
+  belongs_to :professional
+  belongs_to :client
+  belongs_to :project
 end

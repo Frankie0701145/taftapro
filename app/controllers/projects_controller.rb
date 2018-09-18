@@ -4,8 +4,10 @@ class ProjectsController < ApplicationController
   def index
 
     if professional_logged_in?
+      #TODO: setup an association between the project and a professional
       @projects = Project.where(professional_id:current_professional.id ).order("created_at DESC").paginate(:page => params[:page], :per_page => 3)
     elsif client_logged_in?
+      #TODO: setup an association between the project and the client
       @projects = Project.where(client_id:current_client.id).order("created_at DESC").paginate(:page => params[:page], :per_page => 3)
     else
       flash[:info]= "Restricted page please login or sign up to view the page"
@@ -20,11 +22,11 @@ class ProjectsController < ApplicationController
   def update
     @project = Project.find(params[:id])
     if @project.update_attributes(project_edit_params)
-      flash.now[:success]="Project updated successfully"
+      flash[:success]="Project updated successfully"
       #TODO: will setup a notification to the professional later
       redirect_to projects_path
     else
-      flash.now[:success]= "Project was not updated successfully"
+      flash[:success]= "Project was not updated successfully"
       redirect_to projects_path
     end
   end
@@ -42,6 +44,7 @@ class ProjectsController < ApplicationController
     if @project.save
       @quotation=Quotation.find(@project.quotation_id)
       @quotation.update_attribute(:status, "accepted")
+      #TODO: will setup a notification to the professional later
       flash[:success] = "Project started successfully"
       redirect_to projects_path
     end
