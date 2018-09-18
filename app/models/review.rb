@@ -1,18 +1,19 @@
 # == Schema Information
 #
-# Table name: projects
+# Table name: reviews
 #
 #  id              :integer          not null, primary key
-#  due             :datetime
-#  status          :string
+#  comment         :text
+#  rating          :integer
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  client_id       :integer
 #  professional_id :integer
-#  quotation_id    :integer
-#  request_id      :integer
+#  project_id      :integer
 #
 
-class Project < ApplicationRecord
-  has_many :reviews, dependent: :destroy
+class Review < ApplicationRecord
+  belongs_to :professional
+  belongs_to :client
+  belongs_to :project
 end

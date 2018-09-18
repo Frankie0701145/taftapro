@@ -35,7 +35,8 @@ class Professional < ApplicationRecord
 	validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 	geocoded_by :address
 	after_validation :geocode, if: :address_changed?
-	has_one :quotation
+	has_one  :quotation, dependent: :destroy
+	has_many :reviews, dependent: :destroy
 
 	def full_name
 		"#{first_name} #{last_name}"

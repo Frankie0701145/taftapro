@@ -32,11 +32,17 @@ class ProfessionalsController < ApplicationController
     @questions = Category.find_by(service: @service).questions
     # Used to track the questions that the client answers
     @client_token = SecureRandom.hex(10)
-    @client=current_client
+    @client=current_client if client_logged_in?
+    @reviews=@professional.reviews.order("created_at DESC").paginate(:page => params[:page], :per_page => 2)
+    if @professional.reviews.blank?
+      @average_review_rating = 0
+    else
+      @average_review_rating = @professional.reviews.average(:rating).round(1)
+    end
   end
 
   def edit
-    @professional = Professional.find(params[:id])
+    @professional = current_professional
   end
   def update
     @professional=current_professional

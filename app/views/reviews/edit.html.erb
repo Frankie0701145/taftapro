@@ -1,0 +1,39 @@
+<div class="container my-5 p-3">
+
+    <div class="row offset-1 p-2">
+      <div class="col">
+        <h1>Edit your review</h1>
+      </div>
+
+    </div>
+
+    <div class="row offset-1 p-4 my-3 border">
+          <div class="col">
+            <%=form_for(@review, method: :put) do |f|%>
+                <%= render 'shared/error_messages', object: f.object %>
+
+                <div class="form-group">
+                    <%= f.label :rating, "Rate"%>
+                    <div id="star-rating" class="border" data-score= <%= @review.rating %>></div>
+                </div>
+
+                <div class="form-group">
+                      <%= f.label :comment, "Review"%>
+                      <%= f.text_area :comment, class:"form-control", required:true%>
+                </div>
+                <%= f.submit "Save", class: "btn btn-success mt-2"%>
+            <%end%>
+          </div>
+
+    </div>
+
+</div>
+
+<script type="text/javascript">
+
+      $("#star-rating").raty({
+        path: "/assets",
+        scoreName:"review[rating]"
+      });
+
+</script>
