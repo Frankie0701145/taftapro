@@ -2,11 +2,10 @@ class CategoriesServicesAndQuestions
   ## TO-DO: This rake task needs major refactoring
 
   def self.invoke
-	  # Category names
-	  category_names = ["Home Improvement", "Animals", "Events", "Legal", "Photography", 
-	                    "Lessons", "Design and Web","Transport", "Repair and Technical Support", 
-	                    "Mechanical", "Personal", "Security", "Business", "Carpentry"
-	                  ].sort
+	  # Category names 
+	  category_names = ["Animals", "Business", "Carpentry", "Design and Web", "Events", "Home Improvement", 
+	  					"Legal", "Lessons", "Mechanical", "Personal", "Photography", "Repair and Technical Support", 
+	  					"Security", "Transport"].sort
 
 	  # Services
 
