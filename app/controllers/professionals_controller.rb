@@ -29,7 +29,7 @@ class ProfessionalsController < ApplicationController
     #@request = Request.new
     @service= @professional.service
     @location=@professional.address
-    @questions = Category.find_by(service: @service).questions
+    @questions = Category.find_by(service: @service).questions unless professional_logged_in?
     # Used to track the questions that the client answers
     @client_token = SecureRandom.hex(10)
     @client=current_client if client_logged_in?
