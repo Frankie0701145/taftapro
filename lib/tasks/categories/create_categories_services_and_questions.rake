@@ -1,5 +1,6 @@
 class CategoriesServicesAndQuestions
-  ## TO-DO: This rake task needs major refactoring
+  ## TO-DO: This rake task needs major refactoring:
+  # Consider using private methods instead
 
   def self.invoke
 	  # Category names 
