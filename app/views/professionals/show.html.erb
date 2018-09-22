@@ -88,7 +88,7 @@
 				</div>
 			</div> -->
 
-			<div class="col-sm-4">				
+			<div class="col-sm-4">
 			</div>
 
 			<!--The professional profile section-->
@@ -181,182 +181,192 @@
 </div>
 <!-- /container -->
 
-<!--Model-->
-<div class="modal fade" id="questionsModal" data-backdrop="static">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-			<div class="modal-header">
-				<h2>TaftaPro</h2>
+<!--Only load when the professional is not logged in-->
+<%unless professional_logged_in?%>
+			<!--Model-->
+			<div class="modal fade" id="questionsModal" data-backdrop="static">
+			  <div class="modal-dialog modal-dialog-centered">
+			    <div class="modal-content">
+						<div class="modal-header">
+							<h2>TaftaPro</h2>
+						</div>
+						<div class="modal-body">
+
+			        <% @questions.each do |question| %>
+			          <% if @questions.index(question) == 0 %>
+			            <!-- If it's the first question -->
+			            <%= form_for Answer.new, remote: true, html: { id: "#{@questions.index(question)}" } do |f| %>
+			              <label><%= question.question %></label>
+			              <%= f.hidden_field :question_id, value: question.id %>
+			              <%= f.hidden_field :client_token, value: @client_token %>
+
+
+			              <% if question.answer_type == "text_field" %>
+			                <%= f.text_field :answer, :required => true %>
+			              <% elsif question.answer_type == "text_area" %>
+			                <%= f.text_area :answer, :required => true %>
+			              <% elsif question.answer_type == "date_field" %>
+			                <%= f.date_field :answer, :required => true %>
+											<% elsif question.answer_type == "email_field" %>
+													<%if !client_logged_in?%>
+							                <%= f.email_field :answer, class: "text-lowercase", :required => true %>
+													<%else%>
+															<%= f.email_field :answer, class: "text-lowercase", :required => true, :value => @client.email, :disabled=>true  %>
+													<%end%>
+
+			              <% elsif question.answer_type == "radio" %>
+			                <%= f.text_field :answer, :required => true %>
+			              <% elsif question.answer_type == "radio_and_text" %>
+			                <%= f.text_field :answer, :required => true %>
+			              <% end %>
+
+			              <%= f.submit "Next", id: "nextBtn-#{question.id}", onclick: "nextQuestion('nextBtn-#{question.id}')" %>
+			            <% end %>
+
+			          <% elsif @questions.index(question) == @questions.count - 1 %>
+			            <!-- The last question -->
+			            <%= form_for Answer.new, url: submit_answers_path(location: @location, service: @service), html: { class: "d-none", id: "#{@questions.index(question)}" } do |f| %>
+			              <label><%= question.question %></label>
+			              <%= f.hidden_field   :question_id,         value: question.id %>
+			              <%= f.hidden_field   :client_token,        value: @client_token %>
+										<%= hidden_field_tag   :professional_email,  @professional.email%>
+
+			              <% if question.answer_type == "text_field" %>
+			                <%= f.text_field :answer, :required => true %>
+			              <% elsif question.answer_type == "text_area" %>
+			                <%= f.text_area :answer, :required => true %>
+			              <% elsif question.answer_type == "date_field" %>
+			                <%= f.date_field :answer, :required => true %>
+
+											<% elsif question.answer_type == "email_field" %>
+													<%if !client_logged_in?%>
+							                <%= f.email_field :answer, class: "text-lowercase", :required => true %>
+													<%else%>
+															<%= f.email_field :answer, class: "text-lowercase", :required => true, :value => @client.email, :disabled=>true  %>
+													<%end%>
+
+			              <% elsif question.answer_type == "radio" %>
+			                <%= f.text_field :answer, :required => true %>
+			              <% elsif question.answer_type == "radio_and_text" %>
+			                <%= f.text_field :answer, :required => true %>
+			              <% end %>
+
+			                <%= link_to "Back", '#', remote: true, class: "btn btn-info float-left", id: "backBtn-#{question.id}", onclick: "prevQuestion('backBtn-#{question.id}')"%>
+			                <%= f.submit "Submit", class: "float-right" %>
+			                <% end %>
+
+			          <% else %>
+			            <!-- Middle questions -->
+			            <%= form_for Answer.new, remote: true, html: { class: "d-none", id: "#{@questions.index(question)}" } do |f| %>
+			              <label><%= question.question %></label>
+			              <%= f.hidden_field :question_id, value: question.id %>
+			              <%= f.hidden_field :client_token, value: @client_token %>
+
+			              <% if question.answer_type == "text_field" %>
+			                <%= f.text_field :answer, :required => true %>
+			              <% elsif question.answer_type == "text_area" %>
+			                <%= f.text_area :answer, :required => true %>
+			              <% elsif question.answer_type == "date_field" %>
+			                <%= f.date_field :answer, :required => true %>
+
+										<% elsif question.answer_type == "email_field" %>
+												<%if !client_logged_in?%>
+						                <%= f.email_field :answer, class: "text-lowercase", :required => true %>
+												<%else%>
+														<%= f.email_field :answer, class: "text-lowercase", :required => true, :value => @client.email, :disabled=>true  %>
+												<%end%>
+
+			              <% elsif question.answer_type == "radio" %>
+			                <%= f.text_field :answer, :required => true %>
+			              <% elsif question.answer_type == "radio_and_text" %>
+			                <%= f.text_field :answer, :required => true %>
+			              <% end %>
+
+			                <%= link_to "Back", '#', remote: true, class: "btn btn-info float-left", id: "backBtn-#{question.id}", onclick: "prevQuestion('backBtn-#{question.id}')"%>
+			                <%= f.submit "Next", id: "nextBtn-#{question.id}", class: "float-right", onclick: "nextQuestion('nextBtn-#{question.id}')" %>
+
+			            <% end %>
+			          <% end %>
+			        <% end %>
+			      </div>
+			    </div>
+			  </div>
 			</div>
-			<div class="modal-body">
-
-        <% @questions.each do |question| %>
-          <% if @questions.index(question) == 0 %>
-            <!-- If it's the first question -->
-            <%= form_for Answer.new, remote: true, html: { id: "#{@questions.index(question)}" } do |f| %>
-              <label><%= question.question %></label>
-              <%= f.hidden_field :question_id, value: question.id %>
-              <%= f.hidden_field :client_token, value: @client_token %>
-
-
-              <% if question.answer_type == "text_field" %>
-                <%= f.text_field :answer, :required => true %>
-              <% elsif question.answer_type == "text_area" %>
-                <%= f.text_area :answer, :required => true %>
-              <% elsif question.answer_type == "date_field" %>
-                <%= f.date_field :answer, :required => true %>
-								<% elsif question.answer_type == "email_field" %>
-										<%if !client_logged_in?%>
-				                <%= f.email_field :answer, class: "text-lowercase", :required => true %>
-										<%else%>
-												<%= f.email_field :answer, class: "text-lowercase", :required => true, :value => @client.email, :disabled=>true  %>
-										<%end%>
-
-              <% elsif question.answer_type == "radio" %>
-                <%= f.text_field :answer, :required => true %>
-              <% elsif question.answer_type == "radio_and_text" %>
-                <%= f.text_field :answer, :required => true %>
-              <% end %>
-
-              <%= f.submit "Next", id: "nextBtn-#{question.id}", onclick: "nextQuestion('nextBtn-#{question.id}')" %>
-            <% end %>
-
-          <% elsif @questions.index(question) == @questions.count - 1 %>
-            <!-- The last question -->
-            <%= form_for Answer.new, url: submit_answers_path(location: @location, service: @service), html: { class: "d-none", id: "#{@questions.index(question)}" } do |f| %>
-              <label><%= question.question %></label>
-              <%= f.hidden_field   :question_id,         value: question.id %>
-              <%= f.hidden_field   :client_token,        value: @client_token %>
-							<%= hidden_field_tag   :professional_email,  @professional.email%>
-
-              <% if question.answer_type == "text_field" %>
-                <%= f.text_field :answer, :required => true %>
-              <% elsif question.answer_type == "text_area" %>
-                <%= f.text_area :answer, :required => true %>
-              <% elsif question.answer_type == "date_field" %>
-                <%= f.date_field :answer, :required => true %>
-
-								<% elsif question.answer_type == "email_field" %>
-										<%if !client_logged_in?%>
-				                <%= f.email_field :answer, class: "text-lowercase", :required => true %>
-										<%else%>
-												<%= f.email_field :answer, class: "text-lowercase", :required => true, :value => @client.email, :disabled=>true  %>
-										<%end%>
-
-              <% elsif question.answer_type == "radio" %>
-                <%= f.text_field :answer, :required => true %>
-              <% elsif question.answer_type == "radio_and_text" %>
-                <%= f.text_field :answer, :required => true %>
-              <% end %>
-
-                <%= link_to "Back", '#', remote: true, class: "btn btn-info float-left", id: "backBtn-#{question.id}", onclick: "prevQuestion('backBtn-#{question.id}')"%>
-                <%= f.submit "Submit", class: "float-right" %>
-                <% end %>
-
-          <% else %>
-            <!-- Middle questions -->
-            <%= form_for Answer.new, remote: true, html: { class: "d-none", id: "#{@questions.index(question)}" } do |f| %>
-              <label><%= question.question %></label>
-              <%= f.hidden_field :question_id, value: question.id %>
-              <%= f.hidden_field :client_token, value: @client_token %>
-
-              <% if question.answer_type == "text_field" %>
-                <%= f.text_field :answer, :required => true %>
-              <% elsif question.answer_type == "text_area" %>
-                <%= f.text_area :answer, :required => true %>
-              <% elsif question.answer_type == "date_field" %>
-                <%= f.date_field :answer, :required => true %>
-
-							<% elsif question.answer_type == "email_field" %>
-									<%if !client_logged_in?%>
-			                <%= f.email_field :answer, class: "text-lowercase", :required => true %>
-									<%else%>
-											<%= f.email_field :answer, class: "text-lowercase", :required => true, :value => @client.email, :disabled=>true  %>
-									<%end%>
-
-              <% elsif question.answer_type == "radio" %>
-                <%= f.text_field :answer, :required => true %>
-              <% elsif question.answer_type == "radio_and_text" %>
-                <%= f.text_field :answer, :required => true %>
-              <% end %>
-
-                <%= link_to "Back", '#', remote: true, class: "btn btn-info float-left", id: "backBtn-#{question.id}", onclick: "prevQuestion('backBtn-#{question.id}')"%>
-                <%= f.submit "Next", id: "nextBtn-#{question.id}", class: "float-right", onclick: "nextQuestion('nextBtn-#{question.id}')" %>
-
-            <% end %>
-          <% end %>
-        <% end %>
-      </div>
-    </div>
-  </div>
-</div>
-
+<%end%>
 
 
 <script>
-function searchProfessionalLocation() {
-	var lat = document.getElementById('latitude').value;
-	var lon = document.getElementById('longitude').value;
-  var location = new google.maps.LatLng(lat, lon);
+		function searchProfessionalLocation() {
+			var lat = document.getElementById('latitude').value;
+			var lon = document.getElementById('longitude').value;
+		  var location = new google.maps.LatLng(lat, lon);
 
-  var mapCanvas = document.getElementById("map");
-  var mapOptions = {center: location, zoom: 7};
-  var map = new google.maps.Map(mapCanvas,mapOptions);
+		  var mapCanvas = document.getElementById("map");
+		  var mapOptions = {center: location, zoom: 7};
+		  var map = new google.maps.Map(mapCanvas,mapOptions);
 
-  var city = new google.maps.Circle({
-    center: location,
-    radius: 50000,
-    strokeColor: "#0000FF",
-    strokeOpacity: 0.8,
-    strokeWeight: 2,
-    fillColor: "#0000FF",
-    fillOpacity: 0.4
-  });
-  city.setMap(map);
-}
-function nextQuestion(btn_id) {
-  hash_sym = "#";
-  var object_id = hash_sym.concat(btn_id);
-  theObject = $(object_id)[0];
+		  var city = new google.maps.Circle({
+		    center: location,
+		    radius: 50000,
+		    strokeColor: "#0000FF",
+		    strokeOpacity: 0.8,
+		    strokeWeight: 2,
+		    fillColor: "#0000FF",
+		    fillOpacity: 0.4
+		  });
+		  city.setMap(map);
+		}
 
-  // If not the last question,
-  // hide this question
-  // and display the next question upon hitting next
+		//Only load when the professional is not logged in
 
-  if (theObject.parentElement.id < <%= @questions.count %>){
-    theObject.parentElement.classList.add("d-none");
-    theObject.parentElement.classList.remove("d-block");
+		<%unless professional_logged_in?%>
+				function nextQuestion(btn_id) {
+				  hash_sym = "#";
+				  var object_id = hash_sym.concat(btn_id);
+				  theObject = $(object_id)[0];
 
-    var next_id = parseInt(theObject.parentElement.id, 10) + 1;
-    document.getElementById(next_id).classList.remove("d-none");
-    document.getElementById(next_id).classList.add("d-block");
-  }
-}
+				  // If not the last question,
+				  // hide this question
+				  // and display the next question upon hitting next
 
-function prevQuestion(btn_id) {
-  hash_sym = "#";
-  var object_id = hash_sym.concat(btn_id);
-  theObject = $(object_id)[0];
+				  if (theObject.parentElement.id < <%= @questions.count %>){
+				    theObject.parentElement.classList.add("d-none");
+				    theObject.parentElement.classList.remove("d-block");
 
-  // If not the last question,
-  // hide this question
-  // and display the next question upon hitting next
-  if (theObject.parentElement.id > 0 && theObject.parentElement.id <= <%= @questions.count %>){
-  theObject.parentElement.classList.add("d-none");
-  theObject.parentElement.classList.remove("d-block");
+				    var next_id = parseInt(theObject.parentElement.id, 10) + 1;
+				    document.getElementById(next_id).classList.remove("d-none");
+				    document.getElementById(next_id).classList.add("d-block");
+				  }
+				}
 
-  var prev_id = parseInt(theObject.parentElement.id, 10) - 1;
-  document.getElementById(prev_id).classList.add("d-block");
-  document.getElementById(prev_id).classList.remove("d-none");
-  }
-}
-$(".star-rating").raty({
-	path:"/assets",
-	readOnly: true,
-	score:function(){
-		return  $(this).attr("data-score");
-	}
-});
+				function prevQuestion(btn_id) {
+				  hash_sym = "#";
+				  var object_id = hash_sym.concat(btn_id);
+				  theObject = $(object_id)[0];
+
+				  // If not the last question,
+				  // hide this question
+				  // and display the next question upon hitting next
+				  if (theObject.parentElement.id > 0 && theObject.parentElement.id <= <%= @questions.count %>){
+				  theObject.parentElement.classList.add("d-none");
+				  theObject.parentElement.classList.remove("d-block");
+
+				  var prev_id = parseInt(theObject.parentElement.id, 10) - 1;
+				  document.getElementById(prev_id).classList.add("d-block");
+				  document.getElementById(prev_id).classList.remove("d-none");
+				  }
+				}
+		<%end%>
+
+		//end
+		$(".star-rating").raty({
+			path:"/assets",
+			readOnly: true,
+			score:function(){
+				return  $(this).attr("data-score");
+			}
+		});
+		
 </script>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDSqlenOHStWc1MdDufLvSzIXdum5UREsc&callback=searchProfessionalLocation"></script>

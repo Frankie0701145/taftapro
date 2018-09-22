@@ -29,9 +29,9 @@ class ProfessionalsController < ApplicationController
     #@request = Request.new
     @service= @professional.service
     @location=@professional.address
-    @questions = Category.find_by(service: @service).questions
+    @questions = Category.find_by(service: @service).questions unless professional_logged_in?
     # Used to track the questions that the client answers
-    @client_token = SecureRandom.hex(10)
+    @client_token = SecureRandom.hex(10) unless professional_logged_in?
     @client=current_client if client_logged_in?
     @reviews=@professional.reviews.order("created_at DESC").paginate(:page => params[:page], :per_page => 2)
     if @professional.reviews.blank?
