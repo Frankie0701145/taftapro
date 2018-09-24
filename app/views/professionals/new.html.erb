@@ -37,10 +37,16 @@
 
       </div>
 
-      <div class="form-group">
-        <label>Service:</label>
-        <%= f.select :service, Category.order(:service).select("DISTINCT(service)").collect { |c| [ c.service, c.service ] } %>
-  		</div>
+      <div class="row">
+        <div class="col-md-2">
+          <label>Service:</label>  
+        </div>
+        <div class="col-md-10">
+          <%= f.select :service, Category.order(:service).select("DISTINCT(service)").collect { |c| [ c.service, c.service ] } %> 
+          <br/>         
+        </div>        
+      </div>
+
 
   		<div class="row">
   			<div class="col-xs-6 col-sm-6 col-md-6">
