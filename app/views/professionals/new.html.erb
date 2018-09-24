@@ -38,6 +38,7 @@
       </div>
 
       <div class="form-group">
+        <label>Service:</label>
         <%= f.select :service, Category.order(:service).select("DISTINCT(service)").collect { |c| [ c.service, c.service ] } %>
   		</div>
 
