@@ -1,6 +1,7 @@
 class ClientsController < ApplicationController
   before_action :logged_in_professional, only: [:get_quotation]
   before_action :logged_in_client, only:[:edit]
+  before_action :allow_correct_client, only: [:show]
   def new
   	@client = Client.new
   end
@@ -68,4 +69,11 @@ class ClientsController < ApplicationController
     def client_edit_profile_params
       params.require(:client).permit(:first_name,:last_name)
     end
+
+    def allow_correct_client
+      @client = Client.find(params[:id])
+      unless @client == current_client
+        redirect_to current_client 
+      end
+    end    
 end
