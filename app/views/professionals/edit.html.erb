@@ -44,7 +44,11 @@
         </div>
         <!--Service-->
         <div class="form-group p-3">
-          <%= f.text_field :service, class: "form-control input-sm personalInfo", placeholder: "Service", :disabled=>true %>
+          <%= f.text_field :service, class: "form-control input-sm personalInfo service", placeholder: "Service", :disabled=>true %>
+          <div class="d-none" id="select-hider">
+          <%= f.select :service, Category.order(:service).select("DISTINCT(service)").collect { |c| [ c.service, c.service ] }, {} ,{ class: "service-select"} %>  
+          </div>
+          
           <div>Service</div>
         </div>
         <div class="form-group">
@@ -94,29 +98,37 @@
     </div>
   </div>
 
-  <script type="text/javascript">
-      function editPersonal(){
+<script type="text/javascript">
+  function editPersonal(){
 
-            var personalInfoField = document.getElementsByClassName("personalInfo");
+        var personalInfoField = document.getElementsByClassName("personalInfo");
 
-            for(var i=0; i < personalInfoField.length; i++){
+        for(var i=0; i < personalInfoField.length; i++){
 
-              personalInfoField[i].disabled=false;
+          personalInfoField[i].disabled=false;
 
-            }
-            document.getElementById("personalSave").disabled=false;
-            document.getElementById("personalEdit").disabled=true;
-      }
-      function editBusiness(){
-            console.log("Yeah");
-            var businessInfoField = document.getElementsByClassName("businessInfo");
+        }
+        document.getElementById("personalSave").disabled=false;
+        document.getElementById("personalEdit").disabled=true;
+        $("#select-hider").removeClass("d-none");
+        $("#select-hider").addClass("d-block");
+        $(".service").addClass("d-none");
 
-            for(var i=0; i < businessInfoField.length; i++){
+        $(".service-select").select2({
+          theme: "bootstrap"
+        });
+  }
+  function editBusiness(){
+        console.log("Yeah");
+        var businessInfoField = document.getElementsByClassName("businessInfo");
 
-              businessInfoField[i].disabled=false;
+        for(var i=0; i < businessInfoField.length; i++){
 
-            }
-            document.getElementById("businessSave").disabled=false;
-            document.getElementById("businessEdit").disabled=true;
-      }
-  </script>
+          businessInfoField[i].disabled=false;
+
+        }
+        document.getElementById("businessSave").disabled=false;
+        document.getElementById("businessEdit").disabled=true;
+  }
+
+</script>

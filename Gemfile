@@ -28,6 +28,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'bcrypt', '~> 3.1.7'
 gem 'rails-controller-testing'
 gem 'rails-erd', group: :development
+gem "select2-rails"
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'

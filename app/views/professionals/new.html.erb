@@ -38,7 +38,7 @@
       </div>
 
       <div class="form-group">
-  			<%= f.text_field :service, class: "form-control input-sm", placeholder: "Service" %>
+        <%= f.select :service, Category.order(:service).select("DISTINCT(service)").collect { |c| [ c.service, c.service ] } %>
   		</div>
 
   		<div class="row">
@@ -60,3 +60,10 @@
   		<p class="mt-2">Already have an account? <%= link_to "Log In", professional_login_path%></p>
   	</div>
 </div>
+
+<script type="text/javascript">
+
+  $("#professional_service").select2({
+    theme: "bootstrap"
+  });  
+</script>
