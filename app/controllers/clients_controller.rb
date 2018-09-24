@@ -2,6 +2,7 @@ class ClientsController < ApplicationController
   before_action :logged_in_professional, only: [:get_quotation]
   before_action :logged_in_client, only:[:edit]
   before_action :allow_correct_client, only: [:show]
+  before_action :allow_correct_pro, only: [:get_quotation]
   def new
   	@client = Client.new
   end
@@ -35,7 +36,6 @@ class ClientsController < ApplicationController
     end
   end
   def get_quotation
-    client_logout if current_client
     @quotation = Quotation.new
     @client_id = params[:client_id]
     @client = Client.find_by(id:params[:client_id])
@@ -76,4 +76,13 @@ class ClientsController < ApplicationController
         redirect_to current_client 
       end
     end    
+
+    def allow_correct_pro
+      @request = Request.find_by(id:params[:request_id])
+
+      unless @request.professional_id == current_professional.id
+        flash[:info] = "You are not allowed to view this page."
+        redirect_to current_professional
+      end
+    end
 end
