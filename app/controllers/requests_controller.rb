@@ -1,6 +1,6 @@
 class RequestsController < ApplicationController
 	before_action :logged_in_professional, only:[:index]
-	before_action :allow_pro_users_only, only: [:show]
+	before_action :allow_pro_users_only, only: [:show, :index]
 	def index
 		#TODO:will setup the assocition later
 		@requests= Request.where(professional_id:current_professional.id).order("created_at DESC").paginate(:page => params[:page], :per_page => 3)
