@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat');
+@import url('https://fonts.googleapis.com/css?family=Montserrat|Varela+Round|Righteous');
 
 h1 {
 	font-size: 55px;
@@ -40,15 +40,15 @@ body {
 	
 	.home-action-section {
 		background: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0,0, 0.35));
-
 		position: absolute;
 		top: 300px;
 		width: 100%;
 		color: #fff;
 
 		h1 {	
-			font-family: 'Varela', sans-serif;
+			font-family: 'Varela Round', sans-serif;
 		}
+
 	}
 }
 
