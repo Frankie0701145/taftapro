@@ -109,3 +109,17 @@ body {
 .eac-item {
 	color: black !important;
 }
+
+.dropdown.login-dropdown {
+	.dropdown-menu {
+		li:hover {
+			color: white;
+			background: grey;
+		}
+	}
+
+	.dropdown-toggle:after {
+		display: none;
+	}
+	
+}
