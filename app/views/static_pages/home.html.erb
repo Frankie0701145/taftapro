@@ -1,35 +1,54 @@
-<div class="home_banner">
+<div class="home_banner w-100">
 	<div class="row">
-		<div class="col-md-6 offset-md-3 text-center">
-			<h1>Get stuff done!</h1>
-			<p>Find a professional to help you do almost anything.</p>
-		</div>
-	</div>
+		<div class="col-md-12">
+			<div class="home-action-section centered-xy">
+				<div class="row">
+					<div class="col-md-10 offset-md-1 text-center">
+						<h1>Get stuff done!</h1>
+						<p>Find a professional to help you do almost anything.</p>
 
-	<div class="row">
-		<div class="col-md-6 offset-md-3 mt-7">
-			<%= form_for SearchServiceByLocationForm.new, url: search_path, local: true, method: :get do |f| %>
-			<div class="input-group">
-				<%= f.text_field :q, class: "form-control", placeholder: "Service", data: { behavior: "autocomplete" }, :required => true %>
-				<%= f.text_field :location, class: "form-control", placeholder: "City, Country", id: "geo-input" %>
-				<div class="input-group-append">
-					<%= f.submit "Find Professional", class: "btn btn-info" %>
+			            <%= form_for SearchServiceByLocationForm.new, url: search_path, local: true, method: :get do |f| %>
+			            	<div class="row">
+				                <!-- Start of service input -->
+				                <div class="col-md-4 col-sm-12 search-service">
+				                    <label for="search-service">Service</label>
+				                    <%= f.text_field :q, id: "search-service", class: "form-control text-dark", placeholder: "Service", data: { behavior: "autocomplete" }, :required => true %>		
+				                </div>
+
+				                <!-- Start of location input -->
+				                <div class="col-md-4 col-sm-12 search-location">
+				                    <label for="search-location">Location</label>
+				                    <%= f.text_field :location, id: "search-location", class: "form-control", placeholder: "City, Country" %>	
+				                </div>
+
+				                <!-- Start of submit input -->
+				                <div class="col-md-4 col-sm-12 search-submit text-left">
+				                    
+									<%#= f.submit "Find Professional", class: "btn btn-info" %>			                    
+				                    <%= button_tag type: 'submit', class: "btn btn-info" do %>
+								        <i class="fa fa-search"></i>
+								        Find Professional
+								    <% end %>
+				                </div>			            		
+			            	</div>
+
+
+
+			            <% end %>	
+					</div>
 				</div>
 
-				<%#= form_with url: search_path, local: true, method: :get do |form| %>
-					<%#= form.text_field :q, placeholder: "Service", data: { behavior: "autocomplete" } %>
-					<%#= form.button "Search" %>
-				<%# end %>
-			</div>
-			<% end %>
+
+ 			</div>
 		</div>
 	</div>
+
 
 
 </div>
 <script type='text/javascript'>
 	$(function() {
-		$("#geo-input").geocomplete();
+		$("#search-location").geocomplete();
 	});
 
 </script>

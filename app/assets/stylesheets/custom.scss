@@ -1,14 +1,30 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
 
+h1 {
+	font-size: 55px;
+	line-height: 60.5px;
+}
+
 body {
 	font-family: 'Montserrat', sans-serif;
 	overflow-x: hidden;
 }
 
+.topnav {
+	background-color: #F6F6F6;
+}
+
 .topnav a{
 	text-decoration: none;
-	color: white;
+	color: #000;
 	margin-right: 30px;
+	padding: 20px;
+}
+
+.topnav .navbar-brand {
+	font-family: 'Righteous', cursive;
+	font-size: 30px;
+	color: #343A40;
 }
 
 .topnav a:hover{
@@ -17,8 +33,23 @@ body {
 	margin-right: 30px;
 }
 
-.home_banner, .top_padder {
-	margin-top: 210px;
+.home_banner {
+	height: 100vh !important;
+	background: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0,0, 0.35)), url('banner.jpg'), no-repeat center;
+	background-size: 100%;
+	
+	.home-action-section {
+		background: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0,0, 0.35));
+
+		position: absolute;
+		top: 300px;
+		width: 100%;
+		color: #fff;
+
+		h1 {	
+			font-family: 'Varela', sans-serif;
+		}
+	}
 }
 
 .user-name {
@@ -46,4 +77,35 @@ body {
 
 .select2 {
 	width: 290px !important;
+}
+
+.new_search_service_by_location_form input {
+    height: 50px;
+    width: 100%;
+    border: none;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    padding-left: 30px;
+    font-size: 18px;
+    color: #999
+}
+
+.search-submit button{
+	color: #fff;
+	width: auto;
+	height: 50px;
+	position: absolute;
+	bottom: 0;
+	margin: 0;
+	padding: 0 20px;
+
+}
+
+.eac-category{
+	color: #136c7a;
+}
+
+.eac-item {
+	color: black !important;
 }
