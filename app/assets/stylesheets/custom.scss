@@ -99,7 +99,17 @@ body {
 	bottom: 0;
 	margin: 0;
 	padding: 0 20px;
+}
 
+.search-location:before {
+	content: '\f276';
+    font-family: fontawesome;
+    font-size: 22px;
+    position: absolute;
+    right: 30px;
+    bottom: 0;
+    color: #999;
+    line-height: 50px;
 }
 
 .eac-category{
