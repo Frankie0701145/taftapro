@@ -27,7 +27,6 @@ class ProfessionalsController < ApplicationController
 
   def show
     @professional = Professional.find(params[:id])
-
     @service= @professional.service
     @location=@professional.address
     @questions = Category.find_by(service: @service).questions unless professional_logged_in?
@@ -87,8 +86,10 @@ class ProfessionalsController < ApplicationController
 
   def allow_correct_pro_and_logged_in_client
     @professional = Professional.find(params[:id])
-    unless current_client || @professional == current_professional 
-      redirect_to current_professional 
+    if professional_logged_in?
+      unless @professional == current_professional
+        redirect_to current_professional
+      end
     end
   end
 
