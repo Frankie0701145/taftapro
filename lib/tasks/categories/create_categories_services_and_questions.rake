@@ -122,7 +122,11 @@ class CategoriesServicesAndQuestions
 	  end
 	  
 	  def self.animals_questions
-	   self.home_improvement_questions
+	  	[{ question: "Describe the nature of the service.", answer_type: "text_area" },
+	                                          { question: "Which additional service do you want if any?", answer_type: "text_field" },
+	                                          { question: "When do you need this service done – calendar?", answer_type: "date_field" },
+	                                          { question: "Where can we send your matches?", answer_type: "email_field" }
+	                                          ]
 	  end
 
 	  def self.events_questions
@@ -174,31 +178,58 @@ class CategoriesServicesAndQuestions
 	  end 
 	                             
 	  def self.transport_questions 
-	   self.design_and_web_questions
+	   [{question:"Outline how you want it done", answer_type:"text_area"},
+	                                {question:"Any additional information", answer_type:"text_area"},
+	                                {question:"Describe the specific service interested in", answer_type:"text_area"},
+	                                {question: "Where can we send your matches?", answer_type:"email_field"}]
 	  end
 
 	  def self.repair_and_technical_support_questions 
-	  	self.design_and_web_questions
+	   [{question:"Outline how you want it done", answer_type:"text_area"},
+	                                {question:"Any additional information", answer_type:"text_area"},
+	                                {question:"Describe the specific service interested in", answer_type:"text_area"},
+	                                {question: "Where can we send your matches?", answer_type:"email_field"}]
 	  end
 
 	  def self.mechanical_questions
-	   self.design_and_web_questions
+	   [{question:"Outline how you want it done", answer_type:"text_area"},
+	                                {question:"Any additional information", answer_type:"text_area"},
+	                                {question:"Describe the specific service interested in", answer_type:"text_area"},
+	                                {question: "Where can we send your matches?", answer_type:"email_field"}]
 	  end
 
 	  def self.personal_questions 
-	  	self.design_and_web_questions
+	   [{question:"Outline how you want it done", answer_type:"text_area"},
+	                                {question:"Any additional information", answer_type:"text_area"},
+	                                {question:"Describe the specific service interested in", answer_type:"text_area"},
+	                                {question: "Where can we send your matches?", answer_type:"email_field"}]
 	  end
 	  
 	  def self.security_questions
-	   self.events_questions
+		[{question: "What is your role in the event", answer_type: "text_field"},
+			               {question: "When do you need this service done", answer_type: "date_field"},
+			               {question: "Additional information", answer_type: "text_area"},
+			               {question: "How many guests do you expect", answer_type: "text_field"},
+			               {question: "What type of event are you hosting", answer_type: "text_field"},
+			               {question: "Is the event indoors or outdoors", answer_type: "text_field"},
+			               {question: "What is the duration of the service", answer_type: "text_field"},
+			               {question: "What is the type of venue", answer_type: "text_field"},
+			               { question: "Where can we send your matches?", answer_type: "email_field" }
+			              ]
 	  end
 
 	  def self.business_questions
-	   self.mechanical_questions
+	   [{question:"Outline how you want it done", answer_type:"text_area"},
+	                                {question:"Any additional information", answer_type:"text_area"},
+	                                {question:"Describe the specific service interested in", answer_type:"text_area"},
+	                                {question: "Where can we send your matches?", answer_type:"email_field"}]
 	  end
 	  
 	  def self.carpentry_questions
-	   self.mechanical_questions
+	   [{question:"Outline how you want it done", answer_type:"text_area"},
+	                                {question:"Any additional information", answer_type:"text_area"},
+	                                {question:"Describe the specific service interested in", answer_type:"text_area"},
+	                                {question: "Where can we send your matches?", answer_type:"email_field"}]
       end
 
     category_names.each do |category_name|
