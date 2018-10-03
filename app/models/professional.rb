@@ -25,7 +25,7 @@
 class Professional < ApplicationRecord
 	attr_accessor :reset_token
 
-	before_save :downcase_email
+	before_save :downcase_email, :downcase_service
 	validates :first_name, :last_name, :email, :city, :country, :service, presence: true
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 	validates :email, presence: true, length: { maximum: 255 },
@@ -84,10 +84,14 @@ class Professional < ApplicationRecord
 		reset_sent_at < 2.hours.ago
 	end
 
-	#private methods placed hear
+	
 	private
-	#method to convert email to lower case
+	
 	def downcase_email
 		email.downcase!
+	end
+
+	def downcase_service
+		service.downcase!
 	end
 end

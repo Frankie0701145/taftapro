@@ -12,6 +12,8 @@
 class Category < ApplicationRecord
   has_many :questions
 
+  before_save :downcase_service
+
   def self.inputter(category_name, arr_services , arr_questions)
     puts "*** Creating services for category: #{category_name}... ***"
 
@@ -34,4 +36,9 @@ class Category < ApplicationRecord
       end
     end
   end
+
+  private
+    def downcase_service
+      service.downcase!
+    end
 end
