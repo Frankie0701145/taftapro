@@ -10,8 +10,11 @@ class ProfessionalsController < ApplicationController
     @location = params[:location]
     @service = params[:service]
 
+    nearby_pros = Professional.near(@location).to_a
+    pros_offering_this_service = Professional.where(service: @service).to_a
+
     @professionals =
-            Professional.near(@location) & Professional.where(service: @service)
+            nearby_pros & pros_offering_this_service
   end
 
   def create
