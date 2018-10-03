@@ -23,7 +23,7 @@ class StaticPagesController < ApplicationController
     respond_to do |format|
       format.html {
         @location = params[:search_service_by_location_form][:location]
-        @service = params[:search_service_by_location_form][:q]
+        @service = params[:search_service_by_location_form][:q].downcase!
 
         if !@location.empty? && !@service.empty?
 
