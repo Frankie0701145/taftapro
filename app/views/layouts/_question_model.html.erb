@@ -53,7 +53,7 @@
 
                     <%= f.hidden_field   :question_id,         value: question.id %>
                     <%= f.hidden_field   :client_token,        value: @client_token %>
-                    <%= hidden_field_tag :professional_email,  @professional.email%>
+                    <%= f.hidden_field :professional_email,  value: @professional.email%>
 
                     <div class="form-group">
                         <label><%= question.question %></label>

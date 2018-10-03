@@ -16,12 +16,13 @@ class AnswersController < ApplicationController
 
 		location = params[:location]
 		service = params[:service]
-		pro_email = params[:professional_email]
+		# pro_email = params[:professional_email]
 		# This answer should contain the client's email
 
-		@professional = Professional.find_by(email: pro_email)
 
 		if answer.save
+			@professional = Professional.find_by(email: answer.professional_email)
+			
 			answers = Answer.where(client_token: answer.client_token)
 			if !client_logged_in?
 				@client = Client.find_by(email: answer.answer)
@@ -63,7 +64,7 @@ class AnswersController < ApplicationController
 	private
 
 		def answer_params
-			params.require(:answer).permit(:answer, :question_id, :client_id, :client_token)
+			params.require(:answer).permit(:answer, :question_id, :client_id, :client_token, :professional_email)
 		end
 
 end
