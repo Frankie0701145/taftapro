@@ -10,8 +10,11 @@ class ProfessionalsController < ApplicationController
     @location = params[:location]
     @service = params[:service]
 
+    nearby_pros = Professional.near(@location).to_a
+    pros_offering_this_service = Professional.where(service: @service).to_a
+
     @professionals =
-            Professional.near(@location) & Professional.where(service: @service)
+            nearby_pros & pros_offering_this_service
   end
 
   def create
@@ -76,6 +79,7 @@ class ProfessionalsController < ApplicationController
   def professional_params
     params.require(:professional).permit(:first_name, :last_name, :email, :password, :password_confirmation, :service, :city, :country)
   end
+
   def professional_edit_profile_params
     params.require(:professional).permit(:first_name, :last_name, :service, :city, :country, :uniqueness_comment, :business_name, :career_start_date, :specialization)
   end
@@ -86,11 +90,12 @@ class ProfessionalsController < ApplicationController
 
   def allow_correct_pro_and_logged_in_client
     @professional = Professional.find(params[:id])
-    if professional_logged_in?
-      unless @professional == current_professional
+    if current_professional
+      unless current_client || @professional == current_professional
         redirect_to current_professional
       end
     end
+
   end
 
 end
