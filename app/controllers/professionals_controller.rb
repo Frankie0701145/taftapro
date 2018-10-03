@@ -1,6 +1,6 @@
 class ProfessionalsController < ApplicationController
   before_action :logged_in_professional, only: [:edit, :update]
-  before_action :allow_correct_pro_and_logged_in_client, only: [:show]
+  before_action :allow_correct_pro_and_clients, only: [:show]
 
   def new
     @professional = Professional.new()
@@ -32,7 +32,8 @@ class ProfessionalsController < ApplicationController
     @professional = Professional.find(params[:id])
     @service= @professional.service
     @location=@professional.address
-    @questions = Category.find_by(service: @service).questions
+    category = Category.find_by(service: @service)
+    @questions = category.questions
     # Used to track the questions that the client answers
     @client_token = SecureRandom.hex(10) unless professional_logged_in?
     @client=current_client if client_logged_in?
@@ -88,7 +89,7 @@ class ProfessionalsController < ApplicationController
     params.require(:quotation).permit(:quotation_document, :professional_id, :client_id, :request_id)
   end
 
-  def allow_correct_pro_and_logged_in_client
+  def allow_correct_pro_and_clients
     @professional = Professional.find(params[:id])
     if current_professional
       unless current_client || @professional == current_professional
