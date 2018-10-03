@@ -1,25 +1,55 @@
   <div class="container mt-5">
-    <div class="d-flex flex-column justify-content-center p-3 m-3 border border-white shadow-lg">
-        <div class="d-flex justify-content-between">
-            <h3>Personal Information</h3>
-            <button class="btn btn-info btn-sm mt-2 mb-3" onclick="editPersonal()" id="personalEdit">Edit</button>
-        </div>
-        <%= form_for( @client, url: client_path( params[:id] ))  do |f|%>
-          <%= render 'shared/error_messages', object: f.object %>
-          <!--Name-->
-          <div class="form-group p-3">
-            <%= f.text_field :first_name, class: "form-control input-sm personalInfo", placeholder: "First Name", :disabled=>true %>
-            <div>First Name</div>
-          </div>
-          <div class="form-group p-3">
-            <%= f.text_field :last_name, class: "form-control input-sm personalInfo", placeholder: "Second Name", :disabled=>true %>
-            <div>Second Name</div>
-          </div>
-          <div class="form-group">
-            <%= f.submit "Save", class: "btn btn-success mt-2", :disabled=>true, :id=> "personalSave" %>
-          </div>
-        <%end%>
-    </div>
+
+      <div class="d-flex flex-column justify-content-center p-3 m-3 border border-white shadow-lg">
+
+            <div class="d-flex justify-content-between">
+                <h3>Personal Information</h3>
+                <button class="btn btn-info btn-sm mt-2 mb-3" onclick="editPersonal()" id="personalEdit">Edit</button>
+            </div>
+
+            <%= form_for( @client, url: client_path( params[:id] ))  do |f|%>
+              <%= render 'shared/error_messages', object: f.object %>
+              <!--Name-->
+              <div class="form-group p-3">
+                <%= f.label :first_name, " First Name" %>
+                <%= f.text_field :first_name, class: "form-control input-sm personalInfo", placeholder: "First Name", :disabled=>true %>
+              </div>
+              <div class="form-group p-3">
+                <%= f.label :last_name, " Last Name" %>
+                <%= f.text_field :last_name, class: "form-control input-sm personalInfo", placeholder: "Second Name", :disabled=>true %>
+              </div>
+              <div class="form-group p-3">
+                <%= f.submit "Save", class: "btn btn-success mt-2", :disabled=>true, :id=> "personalSave" %>
+              </div>
+            <%end%>
+
+            <div class="d-flex mt-3 p-3">
+                <button type="button" name="button" class="btn btn-sm" onclick="showChangePasswordDIV()">Change Password</button>
+            </div>
+
+            <div class="d-none" id="passwordChangeDIV">
+                  <%=form_for(@client, url:change_password_path(params[:id])) do |f|%>
+                  
+                      <div class="form-group p-3">
+                        <%= f.label :old_password, " Old Password" %>
+                        <%= f.password_field :old_password, class: 'form-control', required:true %>
+                      </div>
+                      <div class="form-group p-3">
+                        <%= f.label :password, "Password" %>
+                        <%= f.password_field :password, class: 'form-control', required:true %>
+                      </div>
+                      <div class="form-group p-3">
+                        <%= f.label :password_confirmation, "Confirmation Password" %>
+                        <%= f.password_field :password_confirmation, class: 'form-control', required:true %>
+                      </div>
+                      <div class="form-group p-3">
+                        <%= f.submit "Save", class: "btn btn-success mt-2" %>
+                      </div>
+                  <%end%>
+            </div>
+
+      </div>
+
   </div>
   <script type="text/javascript">
       function editPersonal(){
@@ -33,6 +63,22 @@
             }
             document.getElementById("personalSave").disabled=false;
             document.getElementById("personalEdit").disabled=true;
+      }
+
+      var x = 0;
+
+      function showChangePasswordDIV(){
+
+            if(x < 1){
+              $("#passwordChangeDIV").removeClass("d-none").addClass("d-flex flex");
+              x++;
+              console.log(x);
+            }else{
+              $("#passwordChangeDIV").removeClass("d-flex flex").addClass("d-none");
+              x =  0;
+              console.log(x);
+
+            }
       }
 
   </script>

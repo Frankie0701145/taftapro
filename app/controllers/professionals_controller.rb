@@ -30,7 +30,6 @@ class ProfessionalsController < ApplicationController
 
   def show
     @professional = Professional.find(params[:id])
-
     @service= @professional.service
     @location=@professional.address
     @questions = Category.find_by(service: @service).questions unless professional_logged_in?
@@ -80,7 +79,7 @@ class ProfessionalsController < ApplicationController
   def professional_params
     params.require(:professional).permit(:first_name, :last_name, :email, :password, :password_confirmation, :service, :city, :country)
   end
-  
+
   def professional_edit_profile_params
     params.require(:professional).permit(:first_name, :last_name, :service, :city, :country, :uniqueness_comment, :business_name, :career_start_date, :specialization)
   end
@@ -92,11 +91,11 @@ class ProfessionalsController < ApplicationController
   def allow_correct_pro_and_logged_in_client
     @professional = Professional.find(params[:id])
     if current_professional
-      unless current_client || @professional == current_professional 
-        redirect_to current_professional 
+      unless current_client || @professional == current_professional
+        redirect_to current_professional
       end
     end
-    
+
   end
 
 end
