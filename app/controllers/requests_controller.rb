@@ -64,7 +64,8 @@ class RequestsController < ApplicationController
 
 	def allow_pro_users_only
 		unless current_professional
-			redirect_to root_url
+			store_location
+			redirect_to professional_login_url
 		end
 	end
 end

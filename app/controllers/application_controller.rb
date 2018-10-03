@@ -12,8 +12,8 @@ class ApplicationController < ActionController::Base
 			redirect_to client_login_url
 		end
 	end
+  
   def logged_in_professional
-
     unless professional_logged_in?
       if client_logged_in?
         flash[:info] = "You are not allowed to access this page."
