@@ -33,7 +33,7 @@ class AnswersController < ApplicationController
 						answer.update_attributes(client_id: @client.id, request_id: request.id)
 					end
 					@client.request_quotation(professional:@professional, request:request, answers:answers)
-					redirect_to professionals_path(location: location, service: service)
+					redirect_to client_login_path
 				else
 					password = SecureRandom.hex(6)
 					@client = Client.create(email: answer.answer, password: password, password_confirmation: password)
