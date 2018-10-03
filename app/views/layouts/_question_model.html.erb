@@ -20,6 +20,7 @@
 
                     <%= f.hidden_field :question_id, value: question.id %>
                     <%= f.hidden_field :client_token, value: @client_token %>
+                    <%= f.hidden_field :professional_email,  value: @professional.email%>
 
 
                     <div class="form-group">
@@ -85,6 +86,7 @@
                 <%= form_for Answer.new, remote: true, html: { class: "d-none", id: "#{@questions.index(question)}" } do |f| %>
                     <%= f.hidden_field :question_id, value: question.id %>
                     <%= f.hidden_field :client_token, value: @client_token %>
+                    <%= f.hidden_field :professional_email,  value: @professional.email%>
 
                     <div class="form-group">
                         <label><%= question.question %></label>
