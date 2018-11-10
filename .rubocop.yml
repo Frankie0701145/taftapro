@@ -4,3 +4,21 @@ inherit_gem:
 
 AllCops:
   TargetRubyVersion: 2.3
+  Exclude:
+    - drafts/**/*
+    - log/*
+    - vendor/**/*
+    - tmp/**/*
+    - public/**/*
+    - deploy/*
+    - doc/*
+    - coverage/**/*
+    - node_modules/**/*
+
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Layout/SpaceBeforeBlockBraces:
+  EnforcedStyle: space
+  EnforcedStyleForEmptyBraces: space
