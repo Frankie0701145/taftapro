@@ -1,28 +1,32 @@
-module ClientSessionsHelper
+# frozen_string_literal: true
 
-  #professional
-  #method to log in the professional
+module ClientSessionsHelper
+  # professional
+  # method to log in the professional
   def professional_login(professional)
-    session[:professional_id]= professional.id
+    session[:professional_id] = professional.id
   end
+
   # Returns the current logged-in professional (if any).
   def current_professional
     @current_professional ||= Professional.find_by(id: session[:professional_id])
   end
-  #Returns true if the professional is logged in, false otherwise.
+
+  # Returns true if the professional is logged in, false otherwise.
   def professional_logged_in?
     !current_professional.nil?
   end
-  #Logs out the current professional
+
+  # Logs out the current professional
   def professional_logout
     session.delete(:professional_id)
     @current_professional = nil
   end
 
-  #client
-  #method to log in the client
+  # client
+  # method to log in the client
   def client_login(client)
-    session[:client_id]= client.id
+    session[:client_id] = client.id
   end
 
   # Returns the current logged-in client (if any).
@@ -30,12 +34,12 @@ module ClientSessionsHelper
     @current_client ||= Client.find_by(id: session[:client_id])
   end
 
-  #Returns true if the client is logged in, false otherwise.
+  # Returns true if the client is logged in, false otherwise.
   def client_logged_in?
     !current_client.nil?
   end
 
-  #Logs out the current client
+  # Logs out the current client
   def client_logout
     session.delete(:client_id)
     @current_client = nil
@@ -51,5 +55,4 @@ module ClientSessionsHelper
   def store_location
     session[:forwarding_url] = request.original_url if request.get?
   end
-
 end

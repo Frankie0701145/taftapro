@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -33,8 +35,8 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
-  #adding the host of the mailer
-  host = "localhost:3000"
+  # adding the host of the mailer
+  host = 'localhost:3000'
   config.action_mailer.default_url_options = { host: host }
 
   # Tell Action Mailer not to deliver emails to the real world.

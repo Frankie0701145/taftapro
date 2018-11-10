@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: quotations
@@ -19,5 +21,5 @@
 
 class Quotation < ApplicationRecord
   # belongs_to :professional
-  	mount_uploader :quotation_document, QuotationDocumentUploader
+  mount_uploader :quotation_document, QuotationDocumentUploader
 end
