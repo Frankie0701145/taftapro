@@ -29,6 +29,8 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'rails-controller-testing'
 gem 'rails-erd', group: :development
 gem "select2-rails"
+# For code style
+gem 'rubocop', '~> 0.60.0', require: false
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
