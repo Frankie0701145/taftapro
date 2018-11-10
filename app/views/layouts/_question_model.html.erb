@@ -34,9 +34,9 @@
                           <%= f.date_field :answer, :required => true, :class =>"form-control" %>
                           <% elsif question.answer_type == "email_field" %>
                               <%if !client_logged_in?%>
-                                  <%= f.email_field :answer, class: "text-lowercase", :required => true, :class =>"form-control" %>
+                                  <%= f.email_field :answer, :required => true, :class =>"form-control text-lowercase" %>
                               <%else%>
-                                  <%= f.email_field :answer, class: "text-lowercase", :required => true, :value => @client.email, :disabled=>true, :class =>"form-control"  %>
+                                  <%= f.email_field :answer, :required => true, :value => @client.email, :disabled=>true, :class =>"form-control text-lowercase"  %>
                               <%end%>
                         <% elsif question.answer_type == "radio" %>
                           <%= f.text_field :answer, :required => true, :class =>"form-control" %>
@@ -98,9 +98,9 @@
                           <%= f.date_field :answer, :required => true, :class =>"form-control" %>
                         <% elsif question.answer_type == "email_field" %>
                             <%if !client_logged_in?%>
-                                <%= f.email_field :answer, class: "text-lowercase", :required => true, :class =>"form-control" %>
+                                <%= f.email_field :answer, :required => true, :class =>"form-control text-lowercase" %>
                             <%else%>
-                                <%= f.email_field :answer, class: "text-lowercase", :required => true, :value => @client.email, :disabled=>true, :class =>"form-control"%>
+                                <%= f.email_field :answer, :required => true, :value => @client.email, :disabled=>true, :class =>"form-control text-lowercase"%>
                             <%end%>
 
                         <% elsif question.answer_type == "radio" %>

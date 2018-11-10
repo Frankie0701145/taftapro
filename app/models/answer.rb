@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: answers
@@ -21,5 +23,5 @@
 
 class Answer < ApplicationRecord
   belongs_to :question
-  #belongs_to :request
+  # belongs_to :request
 end

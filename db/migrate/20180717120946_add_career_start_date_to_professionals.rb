@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddCareerStartDateToProfessionals < ActiveRecord::Migration[5.2]
   def change
     add_column :professionals, :career_start_date, :date

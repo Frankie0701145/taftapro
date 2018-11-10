@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: questions
@@ -19,5 +21,5 @@ class Question < ApplicationRecord
   belongs_to :category
   has_many :answers
 
-  validates :question, uniqueness: { scope: :category_id}
+  validates :question, uniqueness: { scope: :category_id }
 end

@@ -2,7 +2,9 @@
   <div class="col-md-12">
 		<%= form_for SearchServiceByLocationForm.new, url: search_path, local: true, method: :get do |f| %>
 			<div class="input-group">
-				<%= f.text_field :q, class: "form-control text-lowercase", id: "serviceField", placeholder: "Service", data: { behavior: "autocomplete" }, value: "#{@service}", :required => true %>
+				<div class="search-service">	
+					<%= f.select :q, Category.order(:service).select("DISTINCT(service)").collect { |c| [ c.service, c.service ] } %> 
+				</div>
 				<%= f.text_field :location, class: "form-control", placeholder: "City, Country", value: "#{@location}", id: "geo-input"%>
 				<div class="input-group-append">
 					<%= f.submit "Find a Professional", class: "btn btn-info" %>
@@ -16,4 +18,9 @@
    $(function() {
 	  $("#geo-input").geocomplete();
 	});
+
+	$("#search_service_by_location_form_q").select2({
+		theme: "bootstrap"
+	});  
+
 </script>

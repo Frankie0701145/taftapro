@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddResetToProfessionals < ActiveRecord::Migration[5.2]
   def change
     add_column :professionals, :reset_digest, :string

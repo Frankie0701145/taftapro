@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: answers
@@ -19,7 +21,7 @@
 #  index_answers_on_request_id   (request_id)
 #
 
-require 'test_helper'
+require "test_helper"
 
 class AnswerTest < ActiveSupport::TestCase
   # test "the truth" do

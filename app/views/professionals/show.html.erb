@@ -125,7 +125,7 @@
 
 		  var mapCanvas = document.getElementById("map");
 		  var mapOptions = {center: location, zoom: 7};
-		  var map = new google.maps.Map(mapCanvas,mapOptions);
+		  var map = new google.maps.Map(mapCanvas, mapOptions);
 
 		  var city = new google.maps.Circle({
 		    center: location,
@@ -191,4 +191,4 @@
 
 </script>
 
-<script data-turbolinks-eval="false" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDSqlenOHStWc1MdDufLvSzIXdum5UREsc&callback=searchProfessionalLocation"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%=ENV["GOOGLE_API_KEY"]%>&callback=searchProfessionalLocation"></script>

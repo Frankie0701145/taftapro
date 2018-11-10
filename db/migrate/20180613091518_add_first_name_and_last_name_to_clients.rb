@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddFirstNameAndLastNameToClients < ActiveRecord::Migration[5.2]
   def change
     add_column :clients, :first_name, :string

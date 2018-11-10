@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: projects
@@ -13,7 +15,7 @@
 #  request_id      :integer
 #
 
-require 'test_helper'
+require "test_helper"
 
 class ProjectTest < ActiveSupport::TestCase
   # test "the truth" do

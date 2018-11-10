@@ -1,7 +1,8 @@
-class StaticPagesController < ApplicationController
+# frozen_string_literal: true
 
+class StaticPagesController < ApplicationController
   def home
-  	@search_form = SearchServiceByLocationForm.new
+    @search_form = SearchServiceByLocationForm.new
   end
 
   def search
@@ -21,17 +22,17 @@ class StaticPagesController < ApplicationController
     @transport_services = Category.where(name: "Transport").ransack(service_cont: params[:q]).result(distinct: true).limit(5)
 
     respond_to do |format|
-      format.html {
+      format.html do
         @location = params[:search_service_by_location_form][:location]
-        @service = params[:search_service_by_location_form][:q].downcase!
+        @service = params[:search_service_by_location_form][:q].to_s
+        
+        if @location && @service
 
-        if !@location.empty? && !@service.empty?
-
-          nearby_pros = Professional.near(@location).to_a
+          nearby_pros = Professional.near(@location)
           pros_offering_this_service = Professional.where(service: @service).to_a
 
           @professionals =
-                  nearby_pros & pros_offering_this_service
+            nearby_pros & pros_offering_this_service
 
         elsif @location.empty? && !@service.empty?
 
@@ -39,18 +40,17 @@ class StaticPagesController < ApplicationController
 
         else
           flash.now[:info] = "Please enter a service that you are looking for."
-          render 'home'
+          render "home"
         end
-      }
-      format.json {
-        [@animals_services, @business_services, @carpentry_services, @design_and_web_services, @events_services, 
-          @home_improvement_services, @legal_services, @lessons_services, @mechanical_services, @personal_services,
-          @photography_services, @repair_and_technical_support_services, @security_services, @transport_services]
-      }
+      end
+      format.json do
+        [@animals_services, @business_services, @carpentry_services, @design_and_web_services, @events_services,
+         @home_improvement_services, @legal_services, @lessons_services, @mechanical_services, @personal_services,
+         @photography_services, @repair_and_technical_support_services, @security_services, @transport_services]
+      end
     end
     # render json: { animals_services: [], ... transport_services: [] }
   end
 
-  def about
-  end
+  def about; end
 end

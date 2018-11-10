@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 class SearchServiceByLocationForm
-	include ActiveModel::Model
+  include ActiveModel::Model
 
-	attr_accessor :service, :location, :q
+  attr_accessor :service, :location, :q
 
-	def initialize(service: nil, params: {})
-		@service = params[:q]
-	end
+  def initialize(service: nil, params: {})
+    @service = params[:q]
+  end
 end
