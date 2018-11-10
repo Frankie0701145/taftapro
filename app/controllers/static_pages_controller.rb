@@ -25,9 +25,9 @@ class StaticPagesController < ApplicationController
         @location = params[:search_service_by_location_form][:location]
         @service = params[:search_service_by_location_form][:q].downcase!
 
-        if !@location.empty? && !@service.empty?
+        if @location && @service
 
-          nearby_pros = Professional.near(@location).to_a
+          nearby_pros = Professional.near(@location)
           pros_offering_this_service = Professional.where(service: @service).to_a
 
           @professionals =
