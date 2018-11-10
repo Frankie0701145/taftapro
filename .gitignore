@@ -30,3 +30,6 @@ yarn.lock
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+# Ignore file containing environment variables
+config/application.yml
