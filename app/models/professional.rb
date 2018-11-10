@@ -45,7 +45,7 @@ class Professional < ApplicationRecord
   end
 
   def address
-    [city, country].compact.join(', ')
+    [city, country].compact.join(", ")
   end
 
   def address_changed?
@@ -91,11 +91,11 @@ class Professional < ApplicationRecord
 
   private
 
-  def downcase_email
-    email.downcase!
-  end
+    def downcase_email
+      email.downcase!
+    end
 
-  def downcase_service
-    service.downcase!
-  end
+    def downcase_service
+      service.downcase!
+    end
 end

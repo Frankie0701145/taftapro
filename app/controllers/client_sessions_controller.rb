@@ -12,8 +12,8 @@ class ClientSessionsController < ApplicationController
       redirect_back_or client
     else
       # render the login page again this time with a flash message
-      flash.now[:danger] = 'Invalid password or email'
-      render 'new'
+      flash.now[:danger] = "Invalid password or email"
+      render "new"
     end
   end
 

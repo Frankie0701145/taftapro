@@ -19,7 +19,7 @@
 #  index_requests_on_professional_id  (professional_id)
 #
 
-require 'test_helper'
+require "test_helper"
 
 class RequestTest < ActiveSupport::TestCase
   # test "the truth" do

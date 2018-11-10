@@ -12,11 +12,11 @@ class ClientsController < ApplicationController
   def create
     @client = Client.new(client_params)
     if @client.save
-      flash[:success] = 'You have successfully registered.'
+      flash[:success] = "You have successfully registered."
       client_login(@client)
       redirect_to @client
     else
-      render 'new'
+      render "new"
     end
   end
 
@@ -31,12 +31,12 @@ class ClientsController < ApplicationController
   def update
     @client = current_client
     if @client.update(client_edit_profile_params)
-      flash.now[:success] = 'Profile Saved successfully'
+      flash.now[:success] = "Profile Saved successfully"
       # TODO: will later add a notification system either through email or else
-      render 'edit'
+      render "edit"
     else
-      flash.now[:danger] = 'The profile was not saved'
-      render 'edit'
+      flash.now[:danger] = "The profile was not saved"
+      render "edit"
     end
   end
 
@@ -44,15 +44,15 @@ class ClientsController < ApplicationController
     @client = current_client
     if @client.authenticate(params[:client][:old_password])
       if @client.update(change_password_params)
-        flash.now[:success] = 'Password changed successfully'
+        flash.now[:success] = "Password changed successfully"
         # TODO: will later add a notification system either through email or else
-        render 'edit'
+        render "edit"
       else
-        render 'edit'
+        render "edit"
       end
     else
-      flash.now[:danger] = 'The old password is wrong'
-      render 'edit'
+      flash.now[:danger] = "The old password is wrong"
+      render "edit"
     end
   end
 
@@ -66,16 +66,16 @@ class ClientsController < ApplicationController
 
   def decline_quotation
     quotation = Quotation.find(params[:quotation_id])
-    quotation[:status] = 'declined'
+    quotation[:status] = "declined"
     if quotation.save
-      flash[:info] = 'Quotation is declined successfully'
+      flash[:info] = "Quotation is declined successfully"
       # TODO: will later add a notification system either through email or else
       redirect_to quotations_path
     end
   end
 
   def quotations
-    @quotations = Quotation.where(client_id: current_client.id).order('created_at DESC')
+    @quotations = Quotation.where(client_id: current_client.id).order("created_at DESC")
   end
 
   def quotation
@@ -84,29 +84,29 @@ class ClientsController < ApplicationController
 
   private
 
-  def client_params
-    params.require(:client).permit(:first_name, :last_name, :email, :password, :password_confirmation)
-  end
-
-  def client_edit_profile_params
-    params.require(:client).permit(:first_name, :last_name)
-  end
-
-  def change_password_params
-    params.require(:client).permit(:password, :password_confirmation)
-  end
-
-  def allow_correct_client
-    @client = Client.find(params[:id])
-    redirect_to current_client unless @client == current_client
-  end
-
-  def allow_correct_pro
-    @request = Request.find_by(id: params[:request_id])
-
-    unless @request.professional_id == current_professional.id
-      flash[:info] = 'You are not allowed to view this page.'
-      redirect_to current_professional
+    def client_params
+      params.require(:client).permit(:first_name, :last_name, :email, :password, :password_confirmation)
     end
-  end
+
+    def client_edit_profile_params
+      params.require(:client).permit(:first_name, :last_name)
+    end
+
+    def change_password_params
+      params.require(:client).permit(:password, :password_confirmation)
+    end
+
+    def allow_correct_client
+      @client = Client.find(params[:id])
+      redirect_to current_client unless @client == current_client
+    end
+
+    def allow_correct_pro
+      @request = Request.find_by(id: params[:request_id])
+
+      unless @request.professional_id == current_professional.id
+        flash[:info] = "You are not allowed to view this page."
+        redirect_to current_professional
+      end
+    end
 end

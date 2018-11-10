@@ -5,7 +5,7 @@ class RequestsController < ApplicationController
   before_action :allow_pro_users_only, only: %i[show index]
   def index
     # TODO: will setup the assocition later
-    @requests = Request.where(professional_id: current_professional.id).order('created_at DESC').paginate(page: params[:page], per_page: 3)
+    @requests = Request.where(professional_id: current_professional.id).order("created_at DESC").paginate(page: params[:page], per_page: 3)
   end
 
   def show
@@ -59,14 +59,14 @@ class RequestsController < ApplicationController
 
   private
 
-  def request_params
-    params.require(:request).permit(:description, :first_name, :last_name, :location, :service, :user_email)
-  end
-
-  def allow_pro_users_only
-    unless current_professional
-      store_location
-      redirect_to professional_login_url
+    def request_params
+      params.require(:request).permit(:description, :first_name, :last_name, :location, :service, :user_email)
     end
-  end
+
+    def allow_pro_users_only
+      unless current_professional
+        store_location
+        redirect_to professional_login_url
+      end
+    end
 end

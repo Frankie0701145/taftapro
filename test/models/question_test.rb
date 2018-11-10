@@ -17,7 +17,7 @@
 #  index_questions_on_category_id  (category_id)
 #
 
-require 'test_helper'
+require "test_helper"
 
 class QuestionTest < ActiveSupport::TestCase
   # test "the truth" do

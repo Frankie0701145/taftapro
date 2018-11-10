@@ -19,7 +19,7 @@
 #  index_quotations_on_professional_id  (professional_id)
 #
 
-require 'test_helper'
+require "test_helper"
 
 class QuotationTest < ActiveSupport::TestCase
   # test "the truth" do

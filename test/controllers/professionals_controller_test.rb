@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'test_helper'
+require "test_helper"
 
 class ProfessionalsControllerTest < ActionDispatch::IntegrationTest
   # test "should get new" do
@@ -23,9 +23,9 @@ class ProfessionalsControllerTest < ActionDispatch::IntegrationTest
   #   assert_response :success
   # end
 
-  test 'should get the professional signup page' do
+  test "should get the professional signup page" do
     get professional_signup_url
     # check to see if the returned template is the professional signup view
-    assert_template 'professionals/new'
+    assert_template "professionals/new"
   end
 end

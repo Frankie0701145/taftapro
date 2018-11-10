@@ -21,8 +21,8 @@ class ClientPasswordResetsController < ApplicationController
 
     else
       # if the email address is not found create a danger flash message and render the reset_password
-      flash.now[:danger] = 'There is no client with that email address'
-      render 'new'
+      flash.now[:danger] = "There is no client with that email address"
+      render "new"
     end
   end
 
@@ -31,38 +31,38 @@ class ClientPasswordResetsController < ApplicationController
   def update
     if params[:client][:password].empty?
       @client.errors.add(:password, "can't be empty")
-      render 'edit'
+      render "edit"
     elsif @client.update(client_params)
       client_login @client
-      flash[:success] = 'Password has been reset.'
+      flash[:success] = "Password has been reset."
       redirect_to @client
     else
-      render 'edit'
+      render "edit"
     end
   end
 
   private
 
-  # method to confirm the password and confirm password match
-  def client_params
-    params.require(:client).permit(:password, :password_confirmation)
-  end
-
-  # Before filters
-  # method to find the client
-  def get_client
-    @client = Client.find_by(email: params[:email])
-  end
-
-  # confirm a valid client
-  def valid_client
-    redirect_to root_url unless @client&.authenticated?(:reset, params[:id])
-  end
-
-  def check_expiration
-    if @client.password_reset_expired?
-      flash[:danger] = 'Password reset has expired.'
-      redirect_to new_client_password_reset_url
+    # method to confirm the password and confirm password match
+    def client_params
+      params.require(:client).permit(:password, :password_confirmation)
     end
-  end
+
+    # Before filters
+    # method to find the client
+    def get_client
+      @client = Client.find_by(email: params[:email])
+    end
+
+    # confirm a valid client
+    def valid_client
+      redirect_to root_url unless @client&.authenticated?(:reset, params[:id])
+    end
+
+    def check_expiration
+      if @client.password_reset_expired?
+        flash[:danger] = "Password reset has expired."
+        redirect_to new_client_password_reset_url
+      end
+    end
 end

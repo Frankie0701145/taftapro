@@ -28,10 +28,10 @@ class Category < ApplicationRecord
       arr_questions.each do |question_obj|
         question_one =
           Question.find_by(
-            question: question_obj['question'.to_sym],
+            question: question_obj["question".to_sym],
             category_id: service_category.id
           ) ||
-          service_category.questions.build(question: question_obj['question'.to_sym], answer_type: question_obj['answer_type'.to_sym])
+          service_category.questions.build(question: question_obj["question".to_sym], answer_type: question_obj["answer_type".to_sym])
       end
 
       puts "#{service} service created." if service_category.save
@@ -40,7 +40,7 @@ class Category < ApplicationRecord
 
   private
 
-  def downcase_service
-    service.downcase!
-  end
+    def downcase_service
+      service.downcase!
+    end
 end

@@ -12,6 +12,6 @@ class ProfessionalMailer < ApplicationMailer
     @professional = professional
     @greeting = "Hi, #{@professional.first_name}"
 
-    mail to: @professional.email, subject: 'Password Reset'
+    mail to: @professional.email, subject: "Password Reset"
   end
 end

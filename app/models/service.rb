@@ -2,6 +2,6 @@
 
 module Service
   def self.table_name_prefix
-    'service_'
+    "service_"
   end
 end

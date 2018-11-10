@@ -20,8 +20,8 @@ class ProfessionalPasswordResetsController < ApplicationController
       redirect_to root_url
     else
       # if the email address is not found create a warning flash message to tell the professional for the issue
-      flash.now[:danger] = 'There is no professional with that email address'
-      render 'new'
+      flash.now[:danger] = "There is no professional with that email address"
+      render "new"
     end
   end
 
@@ -31,41 +31,41 @@ class ProfessionalPasswordResetsController < ApplicationController
     # checking to see if the submited password is empty
     if params[:professional][:password].empty?
       @professional.errors.add(:password, "can't be empty")
-      render 'edit'
+      render "edit"
     elsif @professional.update(professional_params)
       professional_login @professional
-      flash[:success] = 'Password has been reset'
+      flash[:success] = "Password has been reset"
       redirect_to @professional
     else
-      render 'edit'
+      render "edit"
     end
   end
 
   private
 
-  # method to restrict the user input to only password and password confirmation
-  def professional_params
-    params.require(:professional).permit(:password, :password_confirmation)
-  end
-
-  # before filters
-  # retrieves the current professional
-  def get_professional
-    @professional = Professional.find_by(email: params[:email])
-  end
-
-  # confirms a valid professional
-  def valid_professional
-    unless @professional&.authenticated?(:reset, params[:id])
-      redirect_to root_url
+    # method to restrict the user input to only password and password confirmation
+    def professional_params
+      params.require(:professional).permit(:password, :password_confirmation)
     end
-  end
 
-  # checks expiration of reset reset_token
-  def check_expiration
-    if @professional.password_reset_expired?
-      flash[:danger] = 'Password reset has expired.'
-      redirect_to new_professional_password_reset_url
+    # before filters
+    # retrieves the current professional
+    def get_professional
+      @professional = Professional.find_by(email: params[:email])
     end
-  end
+
+    # confirms a valid professional
+    def valid_professional
+      unless @professional&.authenticated?(:reset, params[:id])
+        redirect_to root_url
+      end
+    end
+
+    # checks expiration of reset reset_token
+    def check_expiration
+      if @professional.password_reset_expired?
+        flash[:danger] = "Password reset has expired."
+        redirect_to new_professional_password_reset_url
+      end
+    end
 end

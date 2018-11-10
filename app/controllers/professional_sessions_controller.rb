@@ -9,12 +9,12 @@ class ProfessionalSessionsController < ApplicationController
     if professional&.authenticate(params[:professional_session][:password])
       # login the profesional
       professional_login(professional)
-      flash[:success] = 'You have successfully logged in.'
+      flash[:success] = "You have successfully logged in."
       redirect_back_or professional
     else
       # the pro does not login
-      flash.now[:danger] = 'Invalid password/email'
-      render 'new'
+      flash.now[:danger] = "Invalid password/email"
+      render "new"
     end
   end
 
