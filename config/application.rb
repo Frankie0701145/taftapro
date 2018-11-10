@@ -1,19 +1,10 @@
 # frozen_string_literal: true
-require File.expand_path('../boot', __FILE__)
 
 require_relative "boot"
 
 require "rails/all"
 require "carrierwave"
 require "carrierwave/orm/activerecord"
-
-# preload tokens in application.yml to local ENV
-config = YAML.load(File.read(File.expand_path('../application.yml', __FILE__)))
-config.merge! config.fetch(Rails.env, {})
-config.each do |key, value|
-  ENV[key] = value.to_s unless value.kind_of? Hash
-end
-
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)

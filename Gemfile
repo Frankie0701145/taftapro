@@ -7,6 +7,10 @@ ruby "2.5.1"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem "rails", "~> 5.2.0"
+
+# For environment variables 
+gem 'dotenv-rails', groups: [:development, :test]
+
 # Use postgres as the database for Active Record
 gem "pg", "~> 0.18"
 # Use Puma as the app server

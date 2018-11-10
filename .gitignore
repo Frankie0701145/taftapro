@@ -32,4 +32,4 @@ yarn.lock
 /config/master.key
 
 # Ignore file containing environment variables
-config/application.yml
+.env
