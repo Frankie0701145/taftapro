@@ -12,7 +12,8 @@
 				                <!-- Start of service input -->
 				                <div class="col-md-4 col-sm-12 search-service">
 				                    <label for="search-service">Service</label>
-				                    <%= f.text_field :q, id: "search-service", class: "form-control text-dark text-lowercase", placeholder: "Service", data: { behavior: "autocomplete" }, :required => true %>		
+				                    <%#= f.text_field :q, id: "search-service", class: "form-control text-dark text-lowercase", placeholder: "Service", data: { behavior: "autocomplete" }, :required => true %>
+				                    <%= f.select :q, Category.order(:service).select("DISTINCT(service)").collect { |c| [ c.service, c.service ] } %> 		
 				                </div>
 
 				                <!-- Start of location input -->
@@ -43,9 +44,14 @@
 </div>
 <script type='text/javascript'>
 
-	 $(function() {
-	 	$("#search-location").geocomplete();
-	 });
+$(function() {
+	$("#search-location").geocomplete();
+});
+
+
+$("#search_service_by_location_form_q").select2({
+	theme: "bootstrap"
+});  
 
 </script>
 

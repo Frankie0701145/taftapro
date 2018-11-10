@@ -24,8 +24,8 @@ class StaticPagesController < ApplicationController
     respond_to do |format|
       format.html do
         @location = params[:search_service_by_location_form][:location]
-        @service = params[:search_service_by_location_form][:q].downcase!
-
+        @service = params[:search_service_by_location_form][:q].to_s
+        
         if @location && @service
 
           nearby_pros = Professional.near(@location)

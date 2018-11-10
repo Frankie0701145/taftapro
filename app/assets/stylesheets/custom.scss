@@ -77,6 +77,21 @@ body {
 
 .select2 {
 	width: 290px !important;
+	.selection {
+		span {
+			font-family: 'Montserrat', sans-serif;
+		    height: 50px;
+		    width: 100%;
+		    border: none;
+		    -webkit-border-radius: 5px;
+		    -moz-border-radius: 5px;
+		    border-radius: 5px;
+		    text-align: center;
+		    padding-top: 12px;
+		    font-size: 18px;
+		    color: #999
+		}
+	}
 }
 
 .new_search_service_by_location_form input {
