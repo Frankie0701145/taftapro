@@ -28,7 +28,7 @@ class StaticPagesController < ApplicationController
         
         if @location && @service
 
-          nearby_pros = Professional.near(@location).to_s
+          nearby_pros = Professional.near(@location)
           pros_offering_this_service = Professional.where(service: @service).to_a
 
           @professionals =
