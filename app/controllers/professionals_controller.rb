@@ -88,7 +88,7 @@ class ProfessionalsController < ApplicationController
     end
 
     def quotation_params
-      params.require(:quotation).permit(:quotation_document, :professional_id, :client_id, :request_id)
+      params.require(:quotation).permit(:quotation_document, :professional_id, :client_id, :request_id, :amount)
     end
 
     def allow_correct_pro_and_clients

@@ -1,10 +1,10 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: quotations
 #
 #  id                 :integer          not null, primary key
+#  amount             :decimal(10, 2)
 #  details            :string
 #  quotation_document :string
 #  status             :string
