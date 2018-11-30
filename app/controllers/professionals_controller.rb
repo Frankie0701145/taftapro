@@ -66,14 +66,15 @@ class ProfessionalsController < ApplicationController
     @quotation = Quotation.new(quotation_params)
     @professional = Professional.find(params[:professional_id])
     @request = Request.find(params[:request_id])
-
+    @client_id = params[ :client_id ]
     if @quotation.save
       @request.update_attribute(:status, "Sent")
       # TODO: Email client or create notifications
       flash[:success] = "Your quotation has been sent to the client."
       redirect_to @professional
     else
-      flash.now[:danger] = "Something went wrong."
+      flash[:danger] = "The quotation did not save.Make sure to use figures and dont use commas."
+      redirect_to request_quotation_path( client_id: @client_id, request_id: @request.id)
     end
   end
 

@@ -6,7 +6,7 @@
 
 
   		<%= form_for @quotation, url: upload_quotation_path(client_id: @client.id, professional_id: @professional.id, request_id:@request.id) do |f| %>
-
+          
           <div class="form-row align-items-center px-2 py-2 mr-2">
             <div class="col-sm-4  col-md-auto">
                 <%= f.file_field :quotation_document, :required=> true %>
@@ -20,7 +20,7 @@
                   <div class="input-group-text">KSH</div>
                 </div>
 
-                <%= f.text_field :amount, :required=> true, placeholder: "10000", :id=>"inlineFormInputGroupUsername", :class => "form-control"%>
+                <%= f.number_field :amount, :required=> true, placeholder: "10000. No Commas", :id=>"inlineFormInputGroupUsername", :class => "form-control"%>
               </div>
             </div>
           </div>
