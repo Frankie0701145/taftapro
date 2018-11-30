@@ -22,4 +22,5 @@
 class Quotation < ApplicationRecord
   # belongs_to :professional
   mount_uploader :quotation_document, QuotationDocumentUploader
+  validates :amount, presence: true, :numericality => true
 end
