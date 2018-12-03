@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_03_192530) do
+ActiveRecord::Schema.define(version: 2018_12_03_195358) do
 
   create_table "answers", force: :cascade do |t|
     t.string "answer"
@@ -74,7 +74,8 @@ ActiveRecord::Schema.define(version: 2018_12_03_192530) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "request_id"
-    t.decimal "paid", precision: 10, scale: 2
+    t.decimal "paid", precision: 10, scale: 2, default: "0.0", null: false
+    t.decimal "balance", precision: 10, scale: 2, default: "0.0", null: false
   end
 
   create_table "questions", force: :cascade do |t|
