@@ -10,22 +10,24 @@
 
       <div class="col-12 px-5">
         <%=form_for(@project, url: project_path(params[:id])) do |f| %>
+          <%# <%if %> %>
+              <div class="form-check p-4">
+                <%=f.radio_button :status, "started", class: "form-check-input"%>
+                <h5><%=f.label        :status,  "Started", :value => 'started',class:"form-check-label"%></h5>
+              </div>
 
-          <div class="form-check p-4">
-            <%=f.radio_button :status, "started", class: "form-check-input"%>
-            <h5><%=f.label        :status,  "Started", :value => 'started',class:"form-check-label"%></h5>
-          </div>
+              <div class="form-check p-4">
+                <%=f.radio_button :status, "in progress", class: "form-check-input"%>
+                <h5><%=f.label    :status, "In progress", :value => 'in progress', class: "form-check-label"%></h5>
+              </div>
 
-          <div class="form-check p-4">
-            <%=f.radio_button :status, "in progress", class: "form-check-input"%>
-            <h5><%=f.label    :status, "In progress", :value => 'in progress', class: "form-check-label"%></h5>
-          </div>
-
-          <div class="form-check p-4">
-            <%=f.radio_button :status, "finished", class: "form-check-input"%>
-            <h5><%=f.label    :status, "Finished", :value => 'Finished', class: "form-check-label"%> </h5>
-          </div>
-          <%= f.submit "Save", class: "btn btn-lg btn-success mt-2"%>
+              <div class="form-check p-4">
+                <%=f.radio_button :status, "finished", class: "form-check-input"%>
+                <h5><%=f.label    :status, "Finished", :value => 'Finished', class: "form-check-label"%> </h5>
+              </div>
+              <%= f.submit "Save", class: "btn btn-lg btn-success mt-2"%>
+          <%# <%else%> %>
+          <%# <%end%> %>
         <%end%>
       </div>
 

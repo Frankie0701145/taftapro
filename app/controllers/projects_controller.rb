@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ProjectsController < ApplicationController
-  before_action :logged_in_client, only: [:edit]
+  before_action :logged_in_client, only: %i[edit update new create]
 
   def index
     if professional_logged_in?
