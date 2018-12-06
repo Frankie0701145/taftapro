@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_03_195358) do
+ActiveRecord::Schema.define(version: 2018_12_06_054251) do
 
   create_table "answers", force: :cascade do |t|
     t.string "answer"
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 2018_12_03_195358) do
     t.string "last_name"
     t.string "reset_digest"
     t.datetime "reset_sent_at"
+    t.string "phone_number"
     t.index ["email"], name: "index_clients_on_email", unique: true
   end
 
@@ -63,6 +64,7 @@ ActiveRecord::Schema.define(version: 2018_12_03_195358) do
     t.text "uniqueness_comment"
     t.date "career_start_date"
     t.string "specialization"
+    t.string "phone_number"
   end
 
   create_table "projects", force: :cascade do |t|

@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: professionals
@@ -15,6 +14,7 @@
 #  latitude           :float
 #  longitude          :float
 #  password_digest    :string
+#  phone_number       :string
 #  reset_digest       :string
 #  reset_sent_at      :datetime
 #  service            :string
