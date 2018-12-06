@@ -4,7 +4,7 @@
 # Table name: projects
 #
 #  id              :integer          not null, primary key
-#  balance         :decimal(10, 2)   default(0.0), not null
+#  debit_balance   :decimal(10, 2)   default(0.0), not null
 #  due             :datetime
 #  paid            :decimal(10, 2)   default(0.0), not null
 #  status          :string

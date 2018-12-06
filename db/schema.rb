@@ -75,7 +75,7 @@ ActiveRecord::Schema.define(version: 2018_12_03_195358) do
     t.datetime "updated_at", null: false
     t.integer "request_id"
     t.decimal "paid", precision: 10, scale: 2, default: "0.0", null: false
-    t.decimal "balance", precision: 10, scale: 2, default: "0.0", null: false
+    t.decimal "debit_balance", precision: 10, scale: 2, default: "0.0", null: false
   end
 
   create_table "questions", force: :cascade do |t|
