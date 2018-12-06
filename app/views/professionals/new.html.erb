@@ -9,24 +9,24 @@
   		<div class="row">
   			<div class="col-xs-6 col-sm-6 col-md-6">
   				<div class="form-group">
-  					<%= f.text_field :first_name, class: "form-control input-sm", placeholder: "First Name" %>
+  					<%= f.text_field :first_name, class: "form-control input-sm", placeholder: "First Name", required: true %>
   				</div>
   			</div>
   			<div class="col-xs-6 col-sm-6 col-md-6">
   				<div class="form-group">
-  					<%= f.text_field :last_name, class: "form-control input-sm", placeholder: "Last Name" %>
+  					<%= f.text_field :last_name, class: "form-control input-sm", placeholder: "Last Name", required: true %>
   				</div>
   			</div>
   		</div>
       <div class="row">
         <div class="col-xs-6 col-sm-6 col-md-6">
           <div class="form-group">
-            <%= f.email_field :email, class: "form-control input-sm", placeholder: "Email Address" %>
+            <%= f.email_field :email, class: "form-control input-sm", placeholder: "Email Address", required: true %>
           </div>
         </div>
         <div class="col-xs-6 col-sm-6 col-md-6">
           <div class="form-group">
-            <%= f.telephone_field :phone_number, class: "form-control input-sm", placeholder: "0xxxxxxxxx" %>
+            <%= f.telephone_field :phone_number, class: "form-control input-sm", placeholder: "0xxxxxxxxx", required: true %>
           </div>
         </div>
       </div>
@@ -34,12 +34,12 @@
       <div class="row">
         <div class="col-xs-6 col-sm-6 col-md-6">
   				<div class="form-group">
-  					<%= f.text_field :city, class: "form-control input-sm", placeholder: "City" %>
+  					<%= f.text_field :city, class: "form-control input-sm", placeholder: "City", required: true %>
   				</div>
   			</div>
         <div class="col-xs-6 col-sm-6 col-md-6">
   				<div class="form-group">
-  					<%= f.text_field :country, class: "form-control input-sm", placeholder: "Country" %>
+  					<%= f.text_field :country, class: "form-control input-sm", placeholder: "Country", required: true %>
   				</div>
   			</div>
       </div>
@@ -58,12 +58,12 @@
   		<div class="row">
   			<div class="col-xs-6 col-sm-6 col-md-6">
   				<div class="form-group">
-  					<%= f.password_field :password, class: "form-control input-sm", placeholder: "Password" %>
+  					<%= f.password_field :password, class: "form-control input-sm", placeholder: "Password", required: true %>
   				</div>
   			</div>
   			<div class="col-xs-6 col-sm-6 col-md-6">
   				<div class="form-group">
-  					<%= f.password_field :password_confirmation, class: "form-control input-sm", placeholder: "Confirm Password" %>
+  					<%= f.password_field :password_confirmation, class: "form-control input-sm", placeholder: "Confirm Password", required: true %>
   				</div>
   			</div>
   		</div>
