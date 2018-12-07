@@ -89,7 +89,7 @@ class ClientsController < ApplicationController
     end
 
     def client_edit_profile_params
-      params.require(:client).permit(:first_name, :last_name)
+      params.require(:client).permit(:first_name, :last_name, :phone_number)
     end
 
     def change_password_params

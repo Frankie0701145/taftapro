@@ -1,7 +1,7 @@
 <% if professional_logged_in?%>
-	<% if @professional.business_name.blank? || @professional.uniqueness_comment.blank? || @professional.career_start_date.blank? || @professional.specialization.blank? %>
+	<% if @professional.business_name.blank? || @professional.uniqueness_comment.blank? || @professional.career_start_date.blank? || @professional.specialization.blank? || @professional.phone_number.blank? %>
 		<div class="alert alert-warning text-center" role="alert">
-				Please complete your Business information to increase your chance of getting a client by clinking the following. <%=link_to "Profile", edit_professional_path%>
+				Please complete your profile information to increase your chance of getting a client by clicking the following link. <%=link_to "Profile", edit_professional_path%>
 		</div>
 	<%end%>
 <%end%>
