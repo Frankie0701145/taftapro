@@ -28,7 +28,7 @@ require "test_helper"
 
 class ProfessionalTest < ActiveSupport::TestCase
   def setup
-    @professional = Professional.new(first_name: "John", last_name: "Doe", email: "johndoe@gmail.com",
+    @professional = Professional.new(first_name: "John", last_name: "Doe", email: "johndoe@gmail.com", phone_number: "0701145512",
                                      password: "foobar", password_confirmation: "foobar", city: "Nakuru", country: "Kenya", service: "Plumbing")
   end
 

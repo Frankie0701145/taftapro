@@ -34,8 +34,8 @@ class ProfessionalsController < ApplicationController
     @professional = Professional.find(params[:id])
     @service = @professional.service
     @location = @professional.address
-    category = Category.find_by(service: @service)
-    @questions = category.questions.order(:id)
+    category = Category.find_by(service: @service) unless professional_logged_in?
+    @questions = category.questions.order(:id) unless professional_logged_in?
     # Used to track the questions that the client answers
     @client_token = SecureRandom.hex(10) unless professional_logged_in?
     @client = current_client if client_logged_in?

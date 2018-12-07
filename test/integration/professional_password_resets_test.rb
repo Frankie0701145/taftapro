@@ -7,7 +7,7 @@ class ProfessionalPasswordResetsTest < ActionDispatch::IntegrationTest
     ActionMailer::Base.deliveries.clear
     @professional = Professional.new(first_name: "John", last_name: "Doe", email: "johndoe2@gmail.com",
                                      password: "foobar", password_confirmation: "foobar", service: "plumbing",
-                                     city: "Nakuru", country: "Kenya")
+                                     city: "Nakuru", country: "Kenya", phone_number: "0701134566")
     @professional.save
   end
 
