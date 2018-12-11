@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_06_054251) do
+ActiveRecord::Schema.define(version: 2018_12_11_123032) do
 
   create_table "answers", force: :cascade do |t|
     t.string "answer"
@@ -44,6 +44,16 @@ ActiveRecord::Schema.define(version: 2018_12_06_054251) do
     t.datetime "reset_sent_at"
     t.string "phone_number"
     t.index ["email"], name: "index_clients_on_email", unique: true
+  end
+
+  create_table "payments", force: :cascade do |t|
+    t.integer "client_id"
+    t.integer "project_id"
+    t.decimal "amount", precision: 10, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "pesapal_transaction_tracking_id"
+    t.integer "professional_id"
   end
 
   create_table "professionals", force: :cascade do |t|

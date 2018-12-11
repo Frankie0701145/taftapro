@@ -22,6 +22,8 @@ Rails.application.routes.draw do
   post "/upload_quotation", to: "professionals#upload_quotation"
   post "/submit_answers", to: "answers#find_or_create_client"
   patch "/change_password/:id", to: "clients#change_password", as: "change_password"
+  get "/pesapal/callback", to: "pesa_pals#callback"
+  get "/pesapal_payment/:id", to: "pesa_pals#pesapal_payment",  as: "pesapal_payment"
   resources :clients
   resources :client_password_resets, only: %i[new create edit update]
   resources :professional_password_resets, only: %i[new create edit update]
