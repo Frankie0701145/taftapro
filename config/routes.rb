@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   patch "/change_password/:id", to: "clients#change_password", as: "change_password"
   get "/pesapal/callback", to: "pesa_pals#callback"
   get "/pesapal_payment/:id", to: "pesa_pals#pesapal_payment",  as: "pesapal_payment"
+  get "/pesapal_ipn", to: "pesa_pals#ipn"
   resources :clients
   resources :client_password_resets, only: %i[new create edit update]
   resources :professional_password_resets, only: %i[new create edit update]

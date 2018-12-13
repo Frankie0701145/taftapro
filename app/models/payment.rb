@@ -4,6 +4,8 @@
 #
 #  id                              :integer          not null, primary key
 #  amount                          :decimal(10, 2)
+#  payment_type                    :string
+#  pesapal_status                  :string
 #  created_at                      :datetime         not null
 #  updated_at                      :datetime         not null
 #  client_id                       :integer
