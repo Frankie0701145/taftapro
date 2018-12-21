@@ -4,10 +4,11 @@ class PesaPalsController < ApplicationController
       @project = Project.find(params[:id])
       @request = Request.find(@project.request_id)
       if client_logged_in?
-
+        if Rails.env.production?
           pesapal = Pesapal::Merchant.new(:production)
-
+        else
           pesapal = Pesapal::Merchant.new(:development)
+        end
 
         @client = current_client
         pesapal.config = {
@@ -55,7 +56,13 @@ class PesaPalsController < ApplicationController
       pesapal_notification_type = params[:pesapal_notification_type]
       pesapal_merchant_reference = params[:pesapal_merchant_reference]
       pesapal_transaction_tracking_id = params[:pesapal_transaction_tracking_id]
-      pesapal = Pesapal::Merchant.new
+    
+      if Rails.env.production?
+        pesapal = Pesapal::Merchant.new(:production)
+      else
+        pesapal = Pesapal::Merchant.new(:development)
+      end
+      
       @response_to_ipn = pesapal.ipn_listener(pesapal_notification_type,
 	                                           pesapal_merchant_reference,
 	                                           pesapal_transaction_tracking_id)
