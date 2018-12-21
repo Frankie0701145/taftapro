@@ -28,7 +28,7 @@ class Professional < ApplicationRecord
   attr_accessor :reset_token
 
   before_save :downcase_email, :downcase_service
-  validates :first_name, :last_name, :email, :city, :country, :service, :phone_number, presence: true
+  validates :first_name, :last_name, :email, :city, :country, :service, presence: true
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i.freeze
   validates :email, presence: true, length: { maximum: 255 },
                     format: { with: VALID_EMAIL_REGEX },
