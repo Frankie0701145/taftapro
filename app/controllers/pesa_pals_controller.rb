@@ -57,6 +57,10 @@ class PesaPalsController < ApplicationController
     end
 
     def ipn
+      puts "**************************************************"
+      puts "***********  PESAPAL IPN LISTENER *******************"
+      puts "**************************************************"
+
       pesapal_notification_type = params[:pesapal_notification_type]
       pesapal_merchant_reference = params[:pesapal_merchant_reference]
       pesapal_transaction_tracking_id = params[:pesapal_transaction_tracking_id]
@@ -67,23 +71,31 @@ class PesaPalsController < ApplicationController
         pesapal = Pesapal::Merchant.new(:development)
       end
       
-      @response_to_ipn = pesapal.ipn_listener(pesapal_notification_type,
+      response_to_ipn = pesapal.ipn_listener(pesapal_notification_type,
 	                                           pesapal_merchant_reference,
 	                                           pesapal_transaction_tracking_id)
-      payment = Payment.where(:pesapal_merchant_reference => pesapal_merchant_reference,
+      payment = Payment.where(:project_id => pesapal_merchant_reference,
                               :pesapal_transaction_tracking_id => pesapal_transaction_tracking_id).first
-      case @response_to_ipn[:status]
-      when "COMPLETED"
-        project=Project.find(pesapal_merchant_reference)
-        project.update( paid: project.debit_balance, debit_balance: 0, payment_type: "pesapal" )
-        payment.update( pesapal_status: "COMPLETED")
-      when "PENDING"
-        payment.update( pesapal_status: "PENDING")
-      when "FAILED"
-        payment.update( pesapal_status: "FAILED")
-      when "INVALID"
-        payment.update( pesapal_status: "INVALID")
+      if payment 
+        payment.check_status
+      else
+        puts "**************************************************"
+        puts "*********** PAYMENT STATUS: #{payment.status} *******************"
+        puts "**************************************************"        
       end
+      
+      # case response_to_ipn[:status]
+      # when "COMPLETED"
+      #   project = Project.find(pesapal_merchant_reference)
+      #   project.update( paid: project.debit_balance, debit_balance: 0)
+      #   payment.update( pesapal_status: "COMPLETED")
+      # when "PENDING"
+      #   payment.update( pesapal_status: "PENDING")
+      # when "FAILED"
+      #   payment.update( pesapal_status: "FAILED")
+      # when "INVALID"
+      #   payment.update( pesapal_status: "INVALID")
+      # end
     end
 
 end

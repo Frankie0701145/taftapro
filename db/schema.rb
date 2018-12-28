@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_13_072855) do
+ActiveRecord::Schema.define(version: 2018_12_28_152029) do
 
   create_table "answers", force: :cascade do |t|
     t.string "answer"
@@ -54,8 +54,8 @@ ActiveRecord::Schema.define(version: 2018_12_13_072855) do
     t.datetime "updated_at", null: false
     t.integer "pesapal_transaction_tracking_id"
     t.integer "professional_id"
-    t.string "pesapal_status"
     t.string "payment_type"
+    t.integer "status"
   end
 
   create_table "professionals", force: :cascade do |t|
