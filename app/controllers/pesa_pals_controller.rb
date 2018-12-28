@@ -12,7 +12,7 @@ class PesaPalsController < ApplicationController
 
         @client = current_client
         pesapal.config = {
-          callback_url:  pesapal_callback_url,
+          callback_url:  ENV["PESAPAL_CALLBACK_URL"],
           consumer_key: ENV["PESAPAL_CONSUMER_KEY"],
           consumer_secret: ENV["PESAPAL_CONSUMER_SECRET"]
         }
@@ -38,7 +38,7 @@ class PesaPalsController < ApplicationController
       @pesapal_transaction_tracking_id = params[:pesapal_transaction_tracking_id]
       @pesapal_merchant_reference = params[:pesapal_merchant_reference]
 
-      @project = Project.find_by(@pesapal_merchant_reference)
+      @project = Project.find(@pesapal_merchant_reference)
       if @project
         payment=Payment.new( pesapal_transaction_tracking_id: @pesapal_transaction_tracking_id, client_id: @project.client_id,
                         project_id: @project.id, professional_id: @project.professional_id, payment_type: "pesapal", amount: @project.debit_balance
