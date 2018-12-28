@@ -78,9 +78,12 @@ class PesaPalsController < ApplicationController
                               :pesapal_transaction_tracking_id => pesapal_transaction_tracking_id).first
       if payment 
         payment.check_status
-      else
         puts "**************************************************"
         puts "*********** PAYMENT STATUS: #{payment.status} *******************"
+        puts "**************************************************"        
+      else
+        puts "**************************************************"
+        puts "*********** NO PAYMENT DETECTED *******************"
         puts "**************************************************"        
       end
       
