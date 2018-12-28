@@ -46,7 +46,11 @@ class Payment < ApplicationRecord
           #Status was pending and is now completed
 
 	        project = Project.find(self.project_id)
-	        project.update(paid: project.debit_balance, debit_balance: 0)
+	        project_bal = project.debit_balance
+	        project.update_attributes(paid: project_bal, debit_balance: 0)
+			puts "**************************************************"
+	        puts "*********** WITHIN SAVE BLOCK *******************"
+	        puts "**************************************************" 
         end
       end
     end
