@@ -86,19 +86,8 @@ class PesaPalsController < ApplicationController
         puts "*********** NO PAYMENT DETECTED *******************"
         puts "**************************************************"        
       end
-      
-      # case response_to_ipn[:status]
-      # when "COMPLETED"
-      #   project = Project.find(pesapal_merchant_reference)
-      #   project.update( paid: project.debit_balance, debit_balance: 0)
-      #   payment.update( pesapal_status: "COMPLETED")
-      # when "PENDING"
-      #   payment.update( pesapal_status: "PENDING")
-      # when "FAILED"
-      #   payment.update( pesapal_status: "FAILED")
-      # when "INVALID"
-      #   payment.update( pesapal_status: "INVALID")
-      # end
+
+      render :text => response_to_ipn
     end
 
 end
