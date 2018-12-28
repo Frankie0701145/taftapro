@@ -35,6 +35,10 @@ class PesaPalsController < ApplicationController
     end
 
     def callback
+      puts "**************************************************"
+      puts "***********  PESAPAL CALLBACK *******************"
+      puts "**************************************************"
+      
       @pesapal_transaction_tracking_id = params[:pesapal_transaction_tracking_id]
       @pesapal_merchant_reference = params[:pesapal_merchant_reference]
 
