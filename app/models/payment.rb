@@ -17,7 +17,7 @@
 class Payment < ApplicationRecord
 
   def check_status
-    if self.status == Payment.status_pending
+    # if self.status == Payment.status_pending
       if Rails.env.production?
       	pesapal = Pesapal::Merchant.new(:production)
       else
@@ -62,7 +62,7 @@ class Payment < ApplicationRecord
         puts "*********** SITASEV!!! *******************"
         puts "**************************************************"       	
       end
-    end
+    # end
     self.status
   end
 
