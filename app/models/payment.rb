@@ -27,7 +27,7 @@ class Payment < ApplicationRecord
       # project_id == pesapal_merchant_reference
 
       payment_status = pesapal.query_payment_details(self.project_id, self.pesapal_transaction_tracking_id)
-      
+      debugger
       #payment_status can be either PENDING, COMPLETED, FAILED or INVALID
       if payment_status
         if payment_status.downcase == 'pending'
