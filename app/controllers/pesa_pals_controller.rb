@@ -71,9 +71,9 @@ class PesaPalsController < ApplicationController
         pesapal = Pesapal::Merchant.new(:development)
       end
       
-      response_to_ipn = pesapal.ipn_listener(pesapal_notification_type, pesapal_merchant_reference, pesapal_transaction_tracking_id)
+      @response_to_ipn = pesapal.ipn_listener(pesapal_notification_type, pesapal_merchant_reference, pesapal_transaction_tracking_id)
       
-    puts "********* STATUS: #{response_to_ipn[:status]} *********************"        
+    puts "********* STATUS: #{@response_to_ipn[:status]} *********************"        
 
       payment = Payment.where(:project_id => pesapal_merchant_reference,
                               :pesapal_transaction_tracking_id => pesapal_transaction_tracking_id).first
