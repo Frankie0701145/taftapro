@@ -26,7 +26,7 @@ class Payment < ApplicationRecord
 
       # project_id == pesapal_merchant_reference
 
-      payment_status = pesapal.query_payment_status(self.project_id, self.pesapal_transaction_tracking_id)
+      payment_status = pesapal.query_payment_details(self.project_id, self.pesapal_transaction_tracking_id)
       
       #payment_status can be either PENDING, COMPLETED, FAILED or INVALID
       if payment_status
@@ -49,7 +49,7 @@ class Payment < ApplicationRecord
 	        project_bal = project.debit_balance
 	        project.update_attributes(paid: project_bal, debit_balance: 0)
 			puts "**************************************************"
-	        puts "*********** WITHIN SAVE BLOCK *******************"
+	        puts "*********** WITHIN SAVE BLOCK IT WORKED !!!! *******************"
 	        puts "**************************************************" 
 	    else
 			puts "**************************************************"
