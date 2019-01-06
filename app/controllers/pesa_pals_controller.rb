@@ -88,7 +88,7 @@ class PesaPalsController < ApplicationController
         puts "**************************************************"        
       end
 
-      render :text => response_to_ipn
+      render :text => @response_to_ipn
     end
 
 end
