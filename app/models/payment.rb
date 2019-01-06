@@ -18,11 +18,11 @@ class Payment < ApplicationRecord
 
   def check_status
     # if self.status == Payment.status_pending
-      if Rails.env.production?
-      	pesapal = Pesapal::Merchant.new(:production)
-      else
+      # if Rails.env.production?
+      # 	pesapal = Pesapal::Merchant.new(:production)
+      # else
       	pesapal = Pesapal::Merchant.new(:development)
-      end
+      # end
 
       # project_id == pesapal_merchant_reference
 
