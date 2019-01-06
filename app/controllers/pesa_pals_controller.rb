@@ -73,7 +73,11 @@ class PesaPalsController < ApplicationController
       
       @response_to_ipn = pesapal.ipn_listener(pesapal_notification_type, pesapal_merchant_reference, pesapal_transaction_tracking_id)
       
-    puts "********* STATUS: #{@response_to_ipn[:status]} *********************"        
+      if @response_to_ipn
+       puts "*********RESPONSE TO IPN  STATUS: #{@response_to_ipn[:status]} *********************"        
+      else
+        puts " NO RESP TO IPN "
+      end
 
       payment = Payment.where(:project_id => pesapal_merchant_reference,
                               :pesapal_transaction_tracking_id => pesapal_transaction_tracking_id).first
@@ -81,7 +85,7 @@ class PesaPalsController < ApplicationController
         payment.check_status
         puts "**************************************************"
         puts "*********** PAYMENT STATUS: #{payment.status} *******************"
-        puts "*******************#{response_to_ipn[:status]}*******************************"        
+        puts "*******************#{@response_to_ipn[:status]}*******************************"        
       else
         puts "**************************************************"
         puts "*********** NO PAYMENT DETECTED *******************"
