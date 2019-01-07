@@ -26,21 +26,21 @@ class Payment < ApplicationRecord
 
       # project_id == pesapal_merchant_reference
 
-      payment_status = pesapal.query_payment_status(self.project_id, self.pesapal_transaction_tracking_id)
+      payment_status = pesapal.query_payment_details(self.project_id, self.pesapal_transaction_tracking_id)
       if payment_status 
-        puts "THIS IS THE PAYMENT STATUS #{payment_status}"
+        puts "THIS IS THE PAYMENT STATUS #{payment_status[:status]}"
       else
         puts "NO PAYMENT STATUS FOUND"
       end
       #payment_status can be either PENDING, COMPLETED, FAILED or INVALID
       if payment_status
-        if payment_status.downcase == 'pending'
+        if payment_status[:status].downcase == 'pending'
           self.status = Payment.status_pending
-        elsif payment_status.downcase == 'completed'
+        elsif payment_status[:status].downcase == 'completed'
           self.status = Payment.status_completed
-        elsif payment_status.downcase == 'failed'
+        elsif payment_status[:status].downcase == 'failed'
           self.status = Payment.status_failed
-        elsif payment_status.downcase == 'invalid'
+        elsif payment_status[:status].downcase == 'invalid'
           self.status = Payment.status_invalid
         end
       end

@@ -58,7 +58,7 @@ class PesaPalsController < ApplicationController
 
     def ipn
       puts "**************************************************"
-      puts "***********  PESAPAL IPN LISTENER *******************"
+      puts "***********  PESAPAL IPN LISTENER *************"
       puts "**************************************************"
 
       pesapal_notification_type = params[:pesapal_notification_type]
@@ -74,7 +74,7 @@ class PesaPalsController < ApplicationController
       @response_to_ipn = pesapal.ipn_listener(pesapal_notification_type, pesapal_merchant_reference, pesapal_transaction_tracking_id)
       
       if @response_to_ipn
-       puts "*********RESPONSE TO IPN  STATUS: #{@response_to_ipn[:status]} *********************"        
+       puts "*********RESPONSE TO IPN  STATUS: #{@response_to_ipn[:status]} ******"        
       else
         puts " NO RESP TO IPN "
       end
