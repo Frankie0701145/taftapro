@@ -72,10 +72,7 @@ class PesaPalsController < ApplicationController
         payment = Payment.where(:project_id => pesapal_merchant_reference,
                                 :pesapal_transaction_tracking_id => pesapal_transaction_tracking_id).first
         if payment 
-          payment.check_status
-          puts "**************************************************"
-          puts "*********** {PROBABLY USELESS} PAYMENT STATUS: #{payment.status} *******************"
-          puts "*******************#{@response_to_ipn[:status]}*******************************"        
+          payment.check_status        
         else
           puts "**************************************************"
           puts "***********  {PROBABLY USELESS} NO PAYMENT DETECTED *******************"
