@@ -71,7 +71,7 @@ class PesaPalsController < ApplicationController
         pesapal = Pesapal::Merchant.new(:development)
       # end
       
-      @response_to_ipn = pesapal.ipn_listener(pesapal_notification_type, pesapal_merchant_reference, pesapal_transaction_tracking_id)
+      @response_to_ipn = pesapal.ipn_listener(pesapal_notification_type, pesapal_merchant_reference, pesapal_transaction_tracking_id).with_indifferent_access
       
       if @response_to_ipn
        puts "*********RESPONSE TO IPN  STATUS: #{@response_to_ipn[:status]} ******"        
