@@ -21,7 +21,7 @@ class Payment < ApplicationRecord
       # if Rails.env.production?
       # 	pesapal = Pesapal::Merchant.new(:production)
       # else
-      	# pesapal = Pesapal::Merchant.new(:development)
+      	pesapal = Pesapal::Merchant.new(:development)
       # end
 
       # project_id == pesapal_merchant_reference
@@ -34,13 +34,13 @@ class Payment < ApplicationRecord
       end
       #payment_status can be either PENDING, COMPLETED, FAILED or INVALID
       if payment_status
-        if payment_status[:status].downcase == 'pending'
+        if payment_status[:status] == 'PENDING'
           self.status = Payment.status_pending
-        elsif payment_status[:status].downcase == 'completed'
+        elsif payment_status[:status] == 'COMPLETED'
           self.status = Payment.status_completed
-        elsif payment_status[:status].downcase == 'failed'
+        elsif payment_status[:status] == 'FAILED'
           self.status = Payment.status_failed
-        elsif payment_status[:status].downcase == 'invalid'
+        elsif payment_status[:status] == 'INVALID'
           self.status = Payment.status_invalid
         end
       end

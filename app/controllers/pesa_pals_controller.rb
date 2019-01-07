@@ -59,24 +59,26 @@ class PesaPalsController < ApplicationController
         pesapal_merchant_reference = params[:pesapal_merchant_reference]
         pesapal_transaction_tracking_id = params[:pesapal_transaction_tracking_id]
 
-        @response_to_ipn = pesapal.ipn_listener(pesapal_notification_type, pesapal_merchant_reference, pesapal_transaction_tracking_id).with_indifferent_access
+        # pesapal = Pesapal::Merchant.new(:development)
+
+        # @response_to_ipn = pesapal.ipn_listener(pesapal_notification_type, pesapal_merchant_reference, pesapal_transaction_tracking_id).with_indifferent_access
         
-        if @response_to_ipn
-         puts "*********RESPONSE TO IPN  STATUS: #{@response_to_ipn[:status]} ******"        
-        else
-          puts " NO RESP TO IPN "
-        end
+        # if @response_to_ipn
+        #  puts "*********RESPONSE TO IPN  STATUS: #{@response_to_ipn[:status]} ******"        
+        # else
+        #   puts " NO RESP TO IPN "
+        # end
 
         payment = Payment.where(:project_id => pesapal_merchant_reference,
                                 :pesapal_transaction_tracking_id => pesapal_transaction_tracking_id).first
         if payment 
           payment.check_status
           puts "**************************************************"
-          puts "*********** PAYMENT STATUS: #{payment.status} *******************"
+          puts "*********** {PROBABLY USELESS} PAYMENT STATUS: #{payment.status} *******************"
           puts "*******************#{@response_to_ipn[:status]}*******************************"        
         else
           puts "**************************************************"
-          puts "*********** NO PAYMENT DETECTED *******************"
+          puts "***********  {PROBABLY USELESS} NO PAYMENT DETECTED *******************"
           puts "**************************************************"        
         end    
       puts "*** END of debug block ***" 
