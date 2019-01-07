@@ -21,7 +21,7 @@ class Payment < ApplicationRecord
       # if Rails.env.production?
       # 	pesapal = Pesapal::Merchant.new(:production)
       # else
-      	pesapal = Pesapal::Merchant.new(:development)
+      	# pesapal = Pesapal::Merchant.new(:development)
       # end
 
       # project_id == pesapal_merchant_reference
