@@ -31,7 +31,7 @@ class Payment < ApplicationRecord
         }
       # project_id == pesapal_merchant_reference
 
-      payment_status = pesapal.query_payment_details(self.project_id, self.pesapal_transaction_tracking_id)
+      payment_status = pesapal.query_payment_details(self.project_id, self.pesapal_transaction_tracking_id).with_indifferent_access
       if payment_status 
         puts "THIS IS THE PAYMENT STATUS #{payment_status[:status]}"
       else
