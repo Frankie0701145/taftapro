@@ -56,7 +56,7 @@ class Payment < ApplicationRecord
           #Status was pending and is now completed
 
 	        project = Project.find(self.project_id)
-          project.update_attribute(paid: self.amount)
+          project.update_attribute(:paid, self.amount)
 
 	        project_bal = self.amount - project.paid
 	        
