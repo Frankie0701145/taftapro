@@ -106,17 +106,14 @@ class PesaPalsController < ApplicationController
       
       @response_to_ipn = pesapal.ipn_listener(pesapal_notification_type, pesapal_merchant_reference, pesapal_transaction_tracking_id).with_indifferent_access
       
-      if @response_to_ipn[:status] == "COMPLETED"
-        puts "*********RESPONSE TO IPN  STATUS: #{@response_to_ipn[:status]} ******"
+      if @response_to_ipn[:status] == "PENDING"
+        puts "*********RESPONSE TO IPN  STATUS ******"
 
         payment = Payment.where(:project_id => pesapal_merchant_reference,
                                 :pesapal_transaction_tracking_id => pesapal_transaction_tracking_id).first
-        if payment 
-          payment.update_attribute(:status, Payment.status_completed)
-
-          project = Project.find(payment.project_id)
-          project_bal = project.debit_balance
-          project.update_attributes(paid: project_bal, debit_balance: 0)
+        if payment
+          payment.update_attribute(:status, Payment.status_pending)
+          payment.check_status 
         else
           puts "**************************************************"
           puts "*********** PAYMENT NOT FOUND *******************"
