@@ -33,7 +33,7 @@ class Payment < ApplicationRecord
 
       payment_status = pesapal.query_payment_details(self.project_id, self.pesapal_transaction_tracking_id).with_indifferent_access
       if payment_status 
-        puts "THIS IS THE PAYMENT STATUS #{payment_status[:status]}"
+        puts "THIS IS THE PAYMENT STATUS #{payment_status["status"]}"
       else
 
         puts "NO PAYMENT STATUS FOUND"
@@ -58,17 +58,16 @@ class Payment < ApplicationRecord
 	        project = Project.find(self.project_id)
 	        project_bal = project.debit_balance
 	        project.update_attributes(paid: project_bal, debit_balance: 0)
-			puts "**************************************************"
+			    puts "**************************************************"
 	        puts "*********** WITHIN SAVE BLOCK IT WORKED !!!! *******************"
 	        puts "**************************************************" 
-	    else
-			puts "**************************************************"
+	      else
+			    puts "**************************************************"
 	        puts "*********** WITHIN SAVE BLOCK BUT STATUS IS NOT COMPLETED *******************"
 	        puts "**************************************************" 
-
         end
       else
-		puts "**************************************************"
+		    puts "**************************************************"
         puts "*********** SITASEV!!! *******************"
         puts "**************************************************"       	
       end
