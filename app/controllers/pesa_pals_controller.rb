@@ -55,9 +55,9 @@ class PesaPalsController < ApplicationController
       end
 
       puts "*** Beginning of debug block ***" 
-        pesapal_notification_type = params[:pesapal_notification_type]
-        pesapal_merchant_reference = params[:pesapal_merchant_reference]
-        pesapal_transaction_tracking_id = params[:pesapal_transaction_tracking_id]
+        # pesapal_notification_type = params[:pesapal_notification_type]
+        # pesapal_merchant_reference = params[:pesapal_merchant_reference]
+        # pesapal_transaction_tracking_id = params[:pesapal_transaction_tracking_id]
 
         # pesapal = Pesapal::Merchant.new(:development)
 
@@ -69,8 +69,8 @@ class PesaPalsController < ApplicationController
         #   puts " NO RESP TO IPN "
         # end
 
-        payment = Payment.where(:project_id => pesapal_merchant_reference,
-                                :pesapal_transaction_tracking_id => pesapal_transaction_tracking_id).first
+        payment = Payment.where(:project_id => @pesapal_merchant_reference,
+                                :pesapal_transaction_tracking_id => @pesapal_transaction_tracking_id).first
         if payment 
           payment.check_status        
         else
