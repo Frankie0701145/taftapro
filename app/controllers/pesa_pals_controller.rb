@@ -98,10 +98,17 @@ class PesaPalsController < ApplicationController
         pesapal = Pesapal::Merchant.new(:development)
       # end
       
+      pesapal.config = {
+        callback_url:  ENV["PESAPAL_CALLBACK_URL"],
+        consumer_key: ENV["PESAPAL_CONSUMER_KEY"],
+        consumer_secret: ENV["PESAPAL_CONSUMER_SECRET"]
+      }      
+      
       @response_to_ipn = pesapal.ipn_listener(pesapal_notification_type, pesapal_merchant_reference, pesapal_transaction_tracking_id).with_indifferent_access
       
-      if @response_to_ipn
-       puts "*********RESPONSE TO IPN  STATUS: #{@response_to_ipn[:status]} ******"        
+      if @response_to_ipn[:status] == "COMPLETED"
+       puts "*********RESPONSE TO IPN  STATUS: #{@response_to_ipn[:status]} ******"
+               
       else
         puts " NO RESP TO IPN "
       end
