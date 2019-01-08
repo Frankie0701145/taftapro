@@ -118,6 +118,7 @@ class PesaPalsController < ApplicationController
             project = Project.find(payment.project_id)
             project_bal = project.debit_balance
             project.update_attributes(paid: project_bal, debit_balance: 0)
+          end
         else
           puts "**************************************************"
           puts "*********** NO PAYMENT DETECTED *******************"
