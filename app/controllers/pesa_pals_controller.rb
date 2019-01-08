@@ -112,16 +112,14 @@ class PesaPalsController < ApplicationController
         payment = Payment.where(:project_id => pesapal_merchant_reference,
                                 :pesapal_transaction_tracking_id => pesapal_transaction_tracking_id).first
         if payment 
-          payment.status = Payment.status_completed
+          payment.update_attribute(:status, Payment.status_completed)
 
-          if payment.save
-            project = Project.find(payment.project_id)
-            project_bal = project.debit_balance
-            project.update_attributes(paid: project_bal, debit_balance: 0)
-          end
+          project = Project.find(payment.project_id)
+          project_bal = project.debit_balance
+          project.update_attributes(paid: project_bal, debit_balance: 0)
         else
           puts "**************************************************"
-          puts "*********** NO PAYMENT DETECTED *******************"
+          puts "*********** PAYMENT NOT FOUND *******************"
           puts "**************************************************"        
         end
       else
