@@ -24,12 +24,18 @@ class Payment < ApplicationRecord
       	pesapal = Pesapal::Merchant.new(:development)
       # end
 
+      pesapal.config = {
+          callback_url:  ENV["PESAPAL_CALLBACK_URL"],
+          consumer_key: ENV["PESAPAL_CONSUMER_KEY"],
+          consumer_secret: ENV["PESAPAL_CONSUMER_SECRET"]
+        }
       # project_id == pesapal_merchant_reference
 
       payment_status = pesapal.query_payment_details(self.project_id, self.pesapal_transaction_tracking_id)
       if payment_status 
         puts "THIS IS THE PAYMENT STATUS #{payment_status[:status]}"
       else
+
         puts "NO PAYMENT STATUS FOUND"
       end
       #payment_status can be either PENDING, COMPLETED, FAILED or INVALID
