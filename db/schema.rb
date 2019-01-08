@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_28_152029) do
+ActiveRecord::Schema.define(version: 2019_01_08_152725) do
 
   create_table "answers", force: :cascade do |t|
     t.string "answer"
@@ -52,10 +52,10 @@ ActiveRecord::Schema.define(version: 2018_12_28_152029) do
     t.decimal "amount", precision: 10, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "pesapal_transaction_tracking_id"
     t.integer "professional_id"
     t.string "payment_type"
     t.integer "status"
+    t.string "pesapal_transaction_tracking_id"
   end
 
   create_table "professionals", force: :cascade do |t|

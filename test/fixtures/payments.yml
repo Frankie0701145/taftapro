@@ -9,7 +9,7 @@
 #  created_at                      :datetime         not null
 #  updated_at                      :datetime         not null
 #  client_id                       :integer
-#  pesapal_transaction_tracking_id :integer
+#  pesapal_transaction_tracking_id :string
 #  professional_id                 :integer
 #  project_id                      :integer
 #
