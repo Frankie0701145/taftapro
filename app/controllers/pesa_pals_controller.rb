@@ -4,11 +4,11 @@ class PesaPalsController < ApplicationController
       @project = Project.find(params[:id])
       @request = Request.find(@project.request_id)
       if client_logged_in?
-        # if Rails.env.production?
-        #   pesapal = Pesapal::Merchant.new(:production)
-        # else
+        if Rails.env.production?
+          pesapal = Pesapal::Merchant.new(:production)
+        else
           pesapal = Pesapal::Merchant.new(:development)
-        # end
+        end
 
         @client = current_client
         pesapal.config = {
