@@ -61,15 +61,19 @@ class Payment < ApplicationRecord
 			    puts "**************************************************"
 	        puts "*********** WITHIN SAVE BLOCK IT WORKED !!!! *******************"
 	        puts "**************************************************" 
-	      # elsif self.status == Payment.status_pending
-       #    # Handle partial payments
-       #    paid_amount = self.amount
-       #    if paid_amount
-       #      project = Project.find(self.project_id)
-       #      project_bal = project.debit_balance - paid_amount
-       #      project.update_attributes(paid: project_bal, debit_balance: 0)
+	      elsif self.status == Payment.status_pending
+          # Handle partial payments
+          # paid_amount = self.amount
+          # if paid_amount > 0
+          #   project = Project.find(self.project_id)
+          #   payments = Payment.where(project_id: self.project_id)
+          #   payments.each do |payment|
 
-       #    end
+          #   end
+          #   project_bal = project.debit_balance - paid_amount
+          #   project.update_attributes(paid: project_bal, debit_balance: 0)
+
+          # end
         else
 			    puts "**************************************************"
 	        puts "*********** WITHIN SAVE BLOCK BUT STATUS IS NOT COMPLETED *******************"
