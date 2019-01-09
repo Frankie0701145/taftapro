@@ -65,7 +65,7 @@
                                 <span class="font-weight-bold pr-3">Total Amount:</span><%= number_with_precision(total_amount, precision: 2, :delimiter => ',') %>  KSH
                               </div>
                               <div class="">
-                                <span class="font-weight-bold pr-1">Debit Balance:</span>-<%= number_with_precision(project.debit_balance, precision: 2, :delimiter => ',') %> KSH
+                                <span class="font-weight-bold pr-1">Balance:</span> <%= number_with_precision(project.debit_balance, precision: 2, :delimiter => ',') %> KSH
                               </div>
                               <div class="">
                                 <span class="font-weight-bold pr-1">Paid:</span> <%= number_with_precision(project.paid, precision: 2, :delimiter => ',') %> KSH
