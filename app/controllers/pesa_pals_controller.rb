@@ -92,11 +92,11 @@ class PesaPalsController < ApplicationController
       pesapal_merchant_reference = params[:pesapal_merchant_reference]
       pesapal_transaction_tracking_id = params[:pesapal_transaction_tracking_id]
     
-      # if Rails.env.production?
-      #   pesapal = Pesapal::Merchant.new(:production)
-      # else
+      if Rails.env.production?
+        pesapal = Pesapal::Merchant.new(:production)
+      else
         pesapal = Pesapal::Merchant.new(:development)
-      # end
+      end
       
       pesapal.config = {
         callback_url:  ENV["PESAPAL_CALLBACK_URL"],
