@@ -106,12 +106,12 @@ class PesaPalsController < ApplicationController
       
       @response_to_ipn = pesapal.ipn_listener(pesapal_notification_type, pesapal_merchant_reference, pesapal_transaction_tracking_id).with_indifferent_access
       
-      payment = Payment.where(:project_id => pesapal_merchant_reference,
-                                :pesapal_transaction_tracking_id => pesapal_transaction_tracking_id).first
       
       if @response_to_ipn[:status] == "PENDING"
         puts "*********RESPONSE TO IPN =>  STATUS is PENDING ******"
 
+        payment = Payment.where(:project_id => pesapal_merchant_reference,
+                                  :pesapal_transaction_tracking_id => pesapal_transaction_tracking_id).first
         if payment
           payment.update_attribute(:status, Payment.status_pending)
           payment.check_status 
@@ -123,6 +123,8 @@ class PesaPalsController < ApplicationController
       elsif @response_to_ipn[:status] == "COMPLETED"
         puts "*********RESPONSE TO IPN =>  STATUS is COMPLETED ******"
         
+        payment = Payment.where(:project_id => pesapal_merchant_reference,
+                                  :pesapal_transaction_tracking_id => pesapal_transaction_tracking_id).first
         payment.update_attribute(:status, Payment.status_completed)
 
         #Status was pending and is now completed
