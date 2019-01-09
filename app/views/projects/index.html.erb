@@ -93,7 +93,11 @@
                       <%=link_to "View Quote", quotation_path(project.quotation_id), class: "btn btn-sm btn-primary"%>
                       <%=link_to "Your Reviews", reviews_path(project_id:project.id), class: "btn btn-sm btn-dark"%>
                       <%if client_logged_in?%>
-                        <%=link_to "Update", edit_project_path(project.id),class: "btn btn-sm btn-success" %>
+                        <% if project.debit_balance > 0 %>
+                          <%=link_to "Make payment", edit_project_path(project.id),class: "btn btn-sm btn-success" %>
+                        <% else %>
+                          <%=link_to "Update", edit_project_path(project.id),class: "btn btn-sm btn-success" %>
+                        <% end %>
                         <%= link_to "Rate", new_review_path(professional_id: pro.id, project_id: project.id), class:"btn btn-sm btn-warning"%>
                       <%end%>
                     </div>
