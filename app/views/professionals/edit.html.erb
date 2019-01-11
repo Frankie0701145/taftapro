@@ -16,14 +16,14 @@
         <div class="row p-3">
           <div class="col-xs-6 col-sm-6 col-md-6">
             <div class="form-group">
-              <%= f.text_field :first_name, class: "form-control input-sm personalInfo", placeholder: "First Name", :disabled=>true %>
               <div>First Name</div>
+              <%= f.text_field :first_name, class: "form-control input-sm personalInfo", placeholder: "First Name", :disabled=>true %>
             </div>
           </div>
           <div class="col-xs-6 col-sm-6 col-md-6">
             <div class="form-group">
-              <%= f.text_field :last_name, class: "form-control input-sm personalInfo", placeholder: "Last Name", :disabled=>true %>
               <div>Second Name</div>
+              <%= f.text_field :last_name, class: "form-control input-sm personalInfo", placeholder: "Last Name", :disabled=>true %>
             </div>
           </div>
         </div>
@@ -31,26 +31,31 @@
         <div class="row p-3">
           <div class="col-xs-6 col-sm-6 col-md-6">
             <div class="form-group">
-              <%= f.text_field :city, class: "form-control input-sm personalInfo", placeholder: "City", :disabled=>true %>
               <div>City</div>
+              <%= f.text_field :city, class: "form-control input-sm personalInfo", placeholder: "City", :disabled=>true %>
             </div>
           </div>
           <div class="col-xs-6 col-sm-6 col-md-6">
               <div class="form-group">
-                <%= f.text_field :country, class: "form-control input-sm personalInfo", placeholder: "Country", :disabled=>true %>
                 <div>Country</div>
+                <%= f.text_field :country, class: "form-control input-sm personalInfo", placeholder: "Country", :disabled=>true %>
               </div>
           </div>
         </div>
+        <!--Phone NUmber-->
+        <div class="form-group p-3">
+          <div>Phone Number</div>
+          <%= f.telephone_field :phone_number, class: "form-control input-sm personalInfo", placeholder: "0xxxxxxxxx", :disabled=>true%>
+        </div>
         <!--Service-->
         <div class="form-group p-3">
+          <div>Service</div>
           <%= f.text_field :service, class: "form-control input-sm personalInfo service", placeholder: "Service", :disabled=>true %>
           <div class="d-none" id="select-hider">
-          <%= f.select :service, Category.order(:service).select("DISTINCT(service)").collect { |c| [ c.service, c.service ] }, {} ,{ class: "service-select"} %>  
+          <%= f.select :service, Category.order(:service).select("DISTINCT(service)").collect { |c| [ c.service, c.service ] }, {} ,{ class: "service-select"} %>
           </div>
-          
-          <div>Service</div>
         </div>
+
         <div class="form-group">
           <%= f.submit "Save", class: "btn btn-success mt-2", :disabled=>true, :id=> "personalSave" %>
         </div>

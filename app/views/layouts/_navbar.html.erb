@@ -13,7 +13,7 @@
 
 				<ul class="nav navbar-nav navbar-right">
 					<% if client_logged_in? %>
-						<li><%=link_to "Logged in as, #{current_client.first_name}", '#', class: "user-name" %></li>
+						<li><%=link_to "Logged in as, #{current_client.first_name}", client_path(session[:client_id]), class: "user-name" %></li>
 						<li><%= link_to "Quotations", quotations_path %></li>
 						<li><%=link_to "Projects", projects_path%></li>
 						<li><%=link_to "Profile", edit_client_path(session[:client_id])%></li>

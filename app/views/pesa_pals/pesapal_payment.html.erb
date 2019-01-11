@@ -1,0 +1,19 @@
+
+<div class="container">
+	<div  id="loader"></div>
+  <div class="row offset-1 py-4">
+
+      <iframe onload="spinnerFunction()" src="<%=@order_url%>" width="" height="500px" class="col-12 border-0"></iframe>
+
+  </div>
+</div>
+
+<script>
+	function spinnerFunction() {
+	    setTimeout(showPage, 1000);
+	}
+
+	function showPage() {
+	  document.getElementById("loader").style.display = "none";
+	}
+</script>

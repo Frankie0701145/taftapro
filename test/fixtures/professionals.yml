@@ -13,6 +13,7 @@
 #  latitude           :float
 #  longitude          :float
 #  password_digest    :string
+#  phone_number       :string
 #  reset_digest       :string
 #  reset_sent_at      :datetime
 #  service            :string
@@ -41,3 +42,12 @@ two:
   email: MyString
   latitude: 1.5
   longitude: 1.5
+joe:
+  first_name: Joe
+  last_name: Doe
+  city: Nakuru
+  country: Kenya
+  service: plumbing
+  phone_number: 0701145533
+  password_digest: <%= Professional.digest("password") %>
+  email: duckduck@gmail.com

@@ -34,8 +34,8 @@ class ProfessionalsController < ApplicationController
     @professional = Professional.find(params[:id])
     @service = @professional.service
     @location = @professional.address
-    category = Category.find_by(service: @service)
-    @questions = category.questions.order(:id)
+    category = Category.find_by(service: @service) unless professional_logged_in?
+    @questions = category.questions.order(:id) unless professional_logged_in?
     # Used to track the questions that the client answers
     @client_token = SecureRandom.hex(10) unless professional_logged_in?
     @client = current_client if client_logged_in?
@@ -66,29 +66,30 @@ class ProfessionalsController < ApplicationController
     @quotation = Quotation.new(quotation_params)
     @professional = Professional.find(params[:professional_id])
     @request = Request.find(params[:request_id])
-
+    @client_id = params[ :client_id ]
     if @quotation.save
       @request.update_attribute(:status, "Sent")
       # TODO: Email client or create notifications
       flash[:success] = "Your quotation has been sent to the client."
       redirect_to @professional
     else
-      flash.now[:danger] = "Something went wrong."
+      flash[:danger] = "The quotation did not save.Make sure to use figures and dont use commas."
+      redirect_to request_quotation_path( client_id: @client_id, request_id: @request.id)
     end
   end
 
   private
 
     def professional_params
-      params.require(:professional).permit(:first_name, :last_name, :email, :password, :password_confirmation, :service, :city, :country)
+      params.require(:professional).permit(:first_name, :last_name, :email, :password, :password_confirmation, :service, :city, :country, :phone_number)
     end
 
     def professional_edit_profile_params
-      params.require(:professional).permit(:first_name, :last_name, :service, :city, :country, :uniqueness_comment, :business_name, :career_start_date, :specialization)
+      params.require(:professional).permit(:first_name, :last_name, :service, :city, :country, :uniqueness_comment, :business_name, :career_start_date, :specialization, :phone_number)
     end
 
     def quotation_params
-      params.require(:quotation).permit(:quotation_document, :professional_id, :client_id, :request_id)
+      params.require(:quotation).permit(:quotation_document, :professional_id, :client_id, :request_id, :amount)
     end
 
     def allow_correct_pro_and_clients

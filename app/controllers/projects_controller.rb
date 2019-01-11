@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ProjectsController < ApplicationController
-  before_action :logged_in_client, only: [:edit]
+  before_action :logged_in_client, only: %i[edit update new create]
 
   def index
     if professional_logged_in?
@@ -44,8 +44,9 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.new(project_params)
     @project.status = "started"
+    @quotation = Quotation.find(@project.quotation_id)
+    @project.debit_balance = @quotation.amount
     if @project.save
-      @quotation = Quotation.find(@project.quotation_id)
       @quotation.update_attribute(:status, "accepted")
       # TODO: will setup a notification to the professional later
       flash[:success] = "Project started successfully"

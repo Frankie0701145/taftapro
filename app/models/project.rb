@@ -1,11 +1,12 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: projects
 #
 #  id              :integer          not null, primary key
+#  debit_balance   :decimal(10, 2)   default(0.0), not null
 #  due             :datetime
+#  paid            :decimal(10, 2)   default(0.0), not null
 #  status          :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null

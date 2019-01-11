@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: clients
@@ -9,6 +8,7 @@
 #  first_name      :string
 #  last_name       :string
 #  password_digest :string
+#  phone_number    :string
 #  reset_digest    :string
 #  reset_sent_at   :datetime
 #  created_at      :datetime         not null

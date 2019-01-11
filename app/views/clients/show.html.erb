@@ -1,18 +1,22 @@
 <div class="top_padder">
-
+		<%if @client.phone_number.blank? || @client.first_name.blank? || @client.last_name.blank? %>
+			<div class="alert alert-warning text-center" role="alert">
+					Please complete your profile information by clicking the following link. <%=link_to "Profile", edit_client_path%>
+			</div>
+		<%end%>
 	  <div class="row">
-	    <div class="col-md-6 offset-md-3 text-center">
+	    <div class="col-md-7 offset-md-3 text-center">
 	      <h1>Welcome, <%= @client.first_name %>!</h1>
 	      <p>Find a professional to help you do almost anything.</p>
 	    </div>
 	  </div>
 
 	  <div class="row">
-	    <div class="col-md-6 offset-md-3 mt-7">
+	    <div class="col-md-7 offset-md-3 mt-7">
 	      <%= form_for SearchServiceByLocationForm.new, url: search_path, local: true, method: :get do |f| %>
-	      <div class="input-group">
-		        <%= f.text_field :q, class: "form-control", id: "serviceField", placeholder: "Service", data: { behavior: "autocomplete" } %>
-		        <%= f.text_field :location, class: "form-control", placeholder: "City, Country", id: "geo-input", :required => true %>
+	      <div class="input-group align-items-center">
+		        <%= f.select :q, Category.order(:service).select("DISTINCT(service)").collect { |c| [ c.service, c.service ] } %>
+		        <%= f.text_field :location, id: "search-location", class: "form-control text-dark", placeholder: "City, Country" %>
 		        <div class="input-group-append">
 		          <%= f.submit "Find Professional", class: "btn btn-info" %>
 		        </div>
@@ -26,4 +30,7 @@
   $(function() {
     $("#geo-input").geocomplete();
   });
+	$("#search_service_by_location_form_q").select2({
+		theme: "bootstrap"
+	});
 </script>

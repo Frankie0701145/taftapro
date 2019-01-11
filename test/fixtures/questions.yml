@@ -19,12 +19,12 @@
 
 # one:
 #   question: MyText
-#   type: 
+#   type:
 #   answer: MyString
 #   category: one
 
 # two:
 #   question: MyText
-#   type: 
+#   type:
 #   answer: MyString
 #   category: two

@@ -3,12 +3,12 @@
   <div class="row justify-content-around align-items-center">
 
         <div class="col-3">
-            <h1>Projects</h>
+            <h1>Projects</h1>
         </div>
 
             <div class="col-2">
               <% if client_logged_in?%>
-                <%=link_to "Start Project",root_url, class: "btn btn-primary btn-sm"%>
+                <%=link_to "Start Project",root_path, class: "btn btn-primary btn-sm"%>
               <%end%>
             </div>
 
@@ -44,12 +44,39 @@
                       <%end%>
                     </div>
 
-                    <div class="col-12 pr-2 py-3 text">
-                      <% service = Request.find(project.request_id).service%>
-                      <h4 class="font-weight-bold"><%=service%></h4>
+                    <div class="col-12 pr-2 py-3 text border">
+                      <div class="row">
+                        <%
+                          service = Request.find(project.request_id).service
+                          total_amount = project.debit_balance + project.paid
+                        %>
+                          <div class="col-6">
+                              <h4 class="font-weight-bold"><%=service%></h4>
+                              <% if client_logged_in? && project.debit_balance <= 0 %>
+                                <span class="font-weight-bold">Professional No:</span> <%= pro.phone_number %>
+                              <% elsif professional_logged_in? && project.debit_balance <= 0 %>
+                                <span class="font-weight-bold">Client No:</span> <%= client.phone_number %>
+                              <%end%>
+                              <span class="font-weight-bold">Project ID:</span> <%= project.id %>
+                          </div>
+                          <div class="col-6 pr-2">
+
+                              <div class="">
+                                <span class="font-weight-bold pr-3">Total Amount:</span><%= number_with_precision(total_amount, precision: 2, :delimiter => ',') %>  KSH
+                              </div>
+                              <div class="">
+                                <span class="font-weight-bold pr-1">Balance:</span> <%= number_with_precision(project.debit_balance, precision: 2, :delimiter => ',') %> KSH
+                              </div>
+                              <div class="">
+                                <span class="font-weight-bold pr-1">Paid:</span> <%= number_with_precision(project.paid, precision: 2, :delimiter => ',') %> KSH
+                              </div>
+
+                          </div>
+                      </div>
+
+
+
                     </div>
-
-
 
                     <div class="col-12 pr-2 py-2">
 
@@ -66,8 +93,12 @@
                       <%=link_to "View Quote", quotation_path(project.quotation_id), class: "btn btn-sm btn-primary"%>
                       <%=link_to "Your Reviews", reviews_path(project_id:project.id), class: "btn btn-sm btn-dark"%>
                       <%if client_logged_in?%>
-                        <%=link_to "Update", edit_project_path(project.id),class: "btn btn-sm btn-success" %>
-                        <%= link_to "Rate", new_review_path(professional_id:pro.id, project_id:project.id), class:"btn btn-sm btn-warning"%>
+                        <% if project.debit_balance > 0 %>
+                          <%=link_to "Make payment", edit_project_path(project.id),class: "btn btn-sm btn-success" %>
+                        <% else %>
+                          <%=link_to "Update", edit_project_path(project.id),class: "btn btn-sm btn-success" %>
+                        <% end %>
+                        <%= link_to "Rate", new_review_path(professional_id: pro.id, project_id: project.id), class:"btn btn-sm btn-warning"%>
                       <%end%>
                     </div>
 
@@ -80,7 +111,7 @@
        </div>
    <%else%>
         <div class="row my-4 justify-content-center">
-          <h3>There are no projects.</h3>
+          <h3 id="noProject" >There are no projects.</h3>
         </div>
    <%end%>
 </div>
