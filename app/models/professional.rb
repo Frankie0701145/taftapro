@@ -16,6 +16,7 @@
 #  longitude          :float
 #  password_digest    :string
 #  phone_number       :string
+#  picture            :string
 #  reset_digest       :string
 #  reset_sent_at      :datetime
 #  service            :string
@@ -40,6 +41,8 @@ class Professional < ApplicationRecord
   after_validation :geocode, if: :address_changed?
   has_one  :quotation, dependent: :destroy
   has_many :reviews, dependent: :destroy
+  mount_uploader :picture, PictureUploader
+  validate :picture_size
 
   def full_name
     "#{first_name} #{last_name}"
@@ -99,4 +102,11 @@ class Professional < ApplicationRecord
     def downcase_service
       service.downcase!
     end
+
+    # Validates the size of an uploaded picture.
+    def picture_size
+     if picture.size > 3.megabytes
+      errors.add(:picture, "should be less than 3MB")
+      end
+    end    
 end

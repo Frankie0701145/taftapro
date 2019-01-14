@@ -15,6 +15,7 @@
 #  longitude          :float
 #  password_digest    :string
 #  phone_number       :string
+#  picture            :string
 #  reset_digest       :string
 #  reset_sent_at      :datetime
 #  service            :string

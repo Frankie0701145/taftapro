@@ -39,7 +39,8 @@ gem "select2-rails"
 gem "rubocop-rails_config"
 
 # Use ActiveStorage variant
-# gem 'mini_magick', '~> 4.8'
+gem 'mini_magick', '~> 4.8'
+gem 'fog', '1.38.0'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
