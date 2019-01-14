@@ -3,6 +3,7 @@
 # Table name: professionals
 #
 #  id                 :integer          not null, primary key
+#  bio                :text
 #  business_name      :string
 #  career_start_date  :date
 #  city               :string
