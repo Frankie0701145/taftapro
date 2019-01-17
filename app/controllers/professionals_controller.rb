@@ -1,8 +1,9 @@
-# frozen_string_literal: true
+require "google/cloud/storage"
 
 class ProfessionalsController < ApplicationController
   before_action :logged_in_professional, only: %i[edit update]
   before_action :allow_correct_pro_and_clients, only: [:show]
+
 
   def new
     @professional = Professional.new
@@ -52,8 +53,21 @@ class ProfessionalsController < ApplicationController
   end
 
   def update
+    storage = Google::Cloud::Storage.new
+    bucket  = storage.bucket ENV["IMAGES_BUCKET"]
+
+    file_path = params[:file][:tempfile].path
+    file_name = params[:file][:filename]
+
+    # Upload file to Google Cloud Storage bucket
+    file = bucket.create_file file_path, file_name, acl: "public"
+
     @professional = current_professional
     if @professional.update(professional_edit_profile_params)
+
+      # The public URL can be used to directly access the uploaded file via HTTP
+      @professional.update_attribute(:picture, file.public_url) if file
+      
       flash.now[:success] = "Profile Saved successfully"
       render "edit"
     else
