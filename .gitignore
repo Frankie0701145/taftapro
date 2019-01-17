@@ -33,3 +33,4 @@ yarn.lock
 
 # Ignore files containing environment variables
 .env.production.local
+/config/secrets/*

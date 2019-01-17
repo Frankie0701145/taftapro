@@ -53,11 +53,11 @@ class ProfessionalsController < ApplicationController
   end
 
   def update
-    storage = Google::Cloud::Storage.new
+    storage = Google::Cloud::Storage.new project_id: ENV["GOOGLE_STORAGE_PROJECT_ID"]
     bucket  = storage.bucket ENV["IMAGES_BUCKET"]
 
-    file_path = params[:file][:tempfile].path
-    file_name = params[:file][:filename]
+    file_path = params[:professional][:picture].tempfile.path
+    file_name = params[:professional][:picture].original_filename
 
     # Upload file to Google Cloud Storage bucket
     file = bucket.create_file file_path, file_name, acl: "public"
@@ -66,8 +66,8 @@ class ProfessionalsController < ApplicationController
     if @professional.update(professional_edit_profile_params)
 
       # The public URL can be used to directly access the uploaded file via HTTP
-      @professional.update_attribute(:picture, file.public_url) if file
-      
+      @professional.update_attribute(:picture_url, file.public_url) if file
+
       flash.now[:success] = "Profile Saved successfully"
       render "edit"
     else

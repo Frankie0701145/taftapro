@@ -17,6 +17,7 @@
 #  password_digest    :string
 #  phone_number       :string
 #  picture            :string
+#  picture_url        :string
 #  reset_digest       :string
 #  reset_sent_at      :datetime
 #  service            :string
