@@ -42,7 +42,7 @@ gem "google-cloud-storage"
 
 # Use ActiveStorage variant
 gem 'mini_magick', '~> 4.8'
-# gem 'fog', '1.38.0'
+gem 'fog', '1.38.0'
 # gem "aws-sdk-s3", require: false
 
 # Use Capistrano for deployment
