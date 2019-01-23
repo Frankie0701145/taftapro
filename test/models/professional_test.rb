@@ -11,13 +11,13 @@
 #  country            :string
 #  email              :string
 #  first_name         :string
+#  google_picture_url :string
 #  last_name          :string
 #  latitude           :float
 #  longitude          :float
 #  password_digest    :string
 #  phone_number       :string
 #  picture            :string
-#  picture_url        :string
 #  reset_digest       :string
 #  reset_sent_at      :datetime
 #  service            :string

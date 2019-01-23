@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_17_233727) do
+ActiveRecord::Schema.define(version: 2019_01_23_232102) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(version: 2019_01_17_233727) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "professional_id"
+    t.string "pesapal_status"
     t.string "payment_type"
     t.integer "status"
     t.string "pesapal_transaction_tracking_id"
@@ -100,7 +101,7 @@ ActiveRecord::Schema.define(version: 2019_01_17_233727) do
     t.string "phone_number"
     t.text "bio"
     t.string "picture"
-    t.string "picture_url"
+    t.string "google_picture_url"
   end
 
   create_table "projects", force: :cascade do |t|

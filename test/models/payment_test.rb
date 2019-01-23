@@ -5,6 +5,7 @@
 #  id                              :integer          not null, primary key
 #  amount                          :decimal(10, 2)
 #  payment_type                    :string
+#  pesapal_status                  :string
 #  status                          :integer
 #  created_at                      :datetime         not null
 #  updated_at                      :datetime         not null
