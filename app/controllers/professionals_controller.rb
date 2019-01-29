@@ -53,7 +53,7 @@ class ProfessionalsController < ApplicationController
   end
 
   def update
-    storage = Google::Cloud::Storage.new project_id: ENV["GOOGLE_STORAGE_PROJECT_ID"], credentials: JSON.parse(ENV["GOOGLE_APPLICATION_CREDENTIALS"]) 
+    storage = Google::Cloud::Storage.new project_id: ENV["GOOGLE_STORAGE_PROJECT_ID"]
     bucket  = storage.bucket ENV["IMAGES_BUCKET"]
 
     file_path = params[:professional][:picture].tempfile.path
