@@ -19,6 +19,7 @@
 					</div>
 
 					<div class="col-sm-4">
+						<%= image_tag(@professional.google_picture_url, size: "270") if @professional.google_picture_url %>
 					</div>
 
 					<!--The professional profile section-->
@@ -46,8 +47,15 @@
 		<div class="row">
 				<div class="col-12">
 						<hr/>
+						<h4>Biography</h4>
+						<div>
+							<p>
+								<%= "#{@professional.bio}" %>
+							</p>
+						</div>						
+						<hr/>
 						<h4>Business Quote</h4>
-						<div class="">
+						<div >
 							<p>
 								<%= "#{@professional.uniqueness_comment}" %>
 							</p>

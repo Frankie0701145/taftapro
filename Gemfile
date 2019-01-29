@@ -38,8 +38,10 @@ gem "select2-rails"
 # For code style
 gem "rubocop-rails_config"
 
+gem "google-cloud-storage"
+
 # Use ActiveStorage variant
-# gem 'mini_magick', '~> 4.8'
+gem 'mini_magick', '~> 4.8'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

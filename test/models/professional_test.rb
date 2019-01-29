@@ -4,17 +4,20 @@
 # Table name: professionals
 #
 #  id                 :integer          not null, primary key
+#  bio                :text
 #  business_name      :string
 #  career_start_date  :date
 #  city               :string
 #  country            :string
 #  email              :string
 #  first_name         :string
+#  google_picture_url :string
 #  last_name          :string
 #  latitude           :float
 #  longitude          :float
 #  password_digest    :string
 #  phone_number       :string
+#  picture            :string
 #  reset_digest       :string
 #  reset_sent_at      :datetime
 #  service            :string
