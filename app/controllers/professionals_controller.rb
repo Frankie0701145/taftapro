@@ -58,7 +58,7 @@ class ProfessionalsController < ApplicationController
     else
       storage = Google::Cloud::Storage.new project_id: ENV["GOOGLE_STORAGE_PROJECT_ID"]
     end
-    
+
     bucket  = storage.bucket ENV["IMAGES_BUCKET"]
 
     file_path = params[:professional][:picture].tempfile.path
@@ -72,7 +72,7 @@ class ProfessionalsController < ApplicationController
 
       # The public URL can be used to directly access the uploaded file via HTTP
       puts "****** #{file.public_url} ******"
-      @professional.update_attribute(:google_picture_url, file.public_url)
+      @professional.update_attribute(:google_picture_url, URI::encode(file.public_url))
 
       flash.now[:success] = "Profile Saved successfully"
       render "edit"
