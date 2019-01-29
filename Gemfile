@@ -42,8 +42,6 @@ gem "google-cloud-storage"
 
 # Use ActiveStorage variant
 gem 'mini_magick', '~> 4.8'
-gem 'fog-google'
-# gem "aws-sdk-s3", require: false
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
