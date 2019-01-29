@@ -70,9 +70,6 @@ class ProfessionalsController < ApplicationController
     @professional = current_professional
     if @professional.update(professional_edit_profile_params)
 
-      # The public URL can be used to directly access the uploaded file via HTTP
-      puts "****** #{file.public_url} ******"
-
       flash.now[:success] = "Profile Saved successfully"
       render "edit"
     else
@@ -80,7 +77,7 @@ class ProfessionalsController < ApplicationController
       render "edit"
     end
     
-    puts "Attempting to update g_pic_url with #{file.public_url}"  
+    # The public URL can be used to directly access the uploaded file via HTTP
     @professional.update_attribute(:google_picture_url, URI::encode(file.public_url))
   end
 
