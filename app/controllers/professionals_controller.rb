@@ -71,7 +71,7 @@ class ProfessionalsController < ApplicationController
     if @professional.update(professional_edit_profile_params)
 
       # The public URL can be used to directly access the uploaded file via HTTP
-      @professional.update_attribute(:google_picture_url, file.public_url) if file
+      @professional.update_attribute(:google_picture_url, file.public_url)
 
       flash.now[:success] = "Profile Saved successfully"
       render "edit"
