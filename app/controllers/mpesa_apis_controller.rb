@@ -1,0 +1,2 @@
+class MpesaApisController < ApplicationController
+end
