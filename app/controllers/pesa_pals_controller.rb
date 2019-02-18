@@ -54,21 +54,6 @@ class PesaPalsController < ApplicationController
         flash[:danger] =  "Something went wrong, please contact us."
       end
 
-      puts "*** Beginning of debug block ***"
-        # pesapal_notification_type = params[:pesapal_notification_type]
-        # pesapal_merchant_reference = params[:pesapal_merchant_reference]
-        # pesapal_transaction_tracking_id = params[:pesapal_transaction_tracking_id]
-
-        # pesapal = Pesapal::Merchant.new(:development)
-
-        # @response_to_ipn = pesapal.ipn_listener(pesapal_notification_type, pesapal_merchant_reference, pesapal_transaction_tracking_id).with_indifferent_access
-
-        # if @response_to_ipn
-        #  puts "*********RESPONSE TO IPN  STATUS: #{@response_to_ipn[:status]} ******"
-        # else
-        #   puts " NO RESP TO IPN "
-        # end
-
         payment = Payment.where(:project_id => @pesapal_merchant_reference,
                                 :pesapal_transaction_tracking_id => @pesapal_transaction_tracking_id).first
         if payment
