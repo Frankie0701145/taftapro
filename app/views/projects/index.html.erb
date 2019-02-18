@@ -51,13 +51,19 @@
                           total_amount = project.debit_balance + project.paid
                         %>
                           <div class="col-6">
-                              <h4 class="font-weight-bold"><%=service%></h4>
+                            <div class="row">
+                              <h4 class="font-weight-bold px-1"><%=service%></h4>
+                            </div>
+                            <div class="row">
                               <% if client_logged_in? && project.debit_balance <= 0 %>
-                                <span class="font-weight-bold">Professional No:</span> <%= pro.phone_number %>
+                                <span class="font-weight-bold px-1">Professional No: </span> <%= pro.phone_number %>
                               <% elsif professional_logged_in? && project.debit_balance <= 0 %>
-                                <span class="font-weight-bold">Client No:</span> <%= client.phone_number %>
+                                <span class="font-weight-bold px-1">Client No:</span> <%= client.phone_number %>
                               <%end%>
-                              <span class="font-weight-bold">Project ID:</span> <%= project.id %>
+                            </div>
+                            <div class="row">
+                              <span class="font-weight-bold px-1">Project ID:</span> <%= project.id %>
+                            </div>
                           </div>
                           <div class="col-6 pr-2">
 
@@ -65,7 +71,7 @@
                                 <span class="font-weight-bold pr-3">Total Amount:</span><%= number_with_precision(total_amount, precision: 2, :delimiter => ',') %>  KSH
                               </div>
                               <div class="">
-                                <span class="font-weight-bold pr-1">Balance:</span> <%= number_with_precision(project.debit_balance, precision: 2, :delimiter => ',') %> KSH
+                                <span class="font-weight-bold pr-1">Debit Balance:</span> <%= number_with_precision(project.debit_balance, precision: 2, :delimiter => ',') %> KSH
                               </div>
                               <div class="">
                                 <span class="font-weight-bold pr-1">Paid:</span> <%= number_with_precision(project.paid, precision: 2, :delimiter => ',') %> KSH

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_23_232102) do
+ActiveRecord::Schema.define(version: 2019_02_17_204017) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -78,6 +78,10 @@ ActiveRecord::Schema.define(version: 2019_01_23_232102) do
     t.string "payment_type"
     t.integer "status"
     t.string "pesapal_transaction_tracking_id"
+    t.string "trans_id"
+    t.datetime "trans_time"
+    t.string "msisdn"
+    t.string "mpesa_status"
   end
 
   create_table "professionals", force: :cascade do |t|
