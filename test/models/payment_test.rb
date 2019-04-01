@@ -2,7 +2,7 @@
 #
 # Table name: payments
 #
-#  id                              :integer          not null, primary key
+#  id                              :bigint(8)        not null, primary key
 #  amount                          :decimal(10, 2)
 #  payment_type                    :string
 #  pesapal_status                  :string
