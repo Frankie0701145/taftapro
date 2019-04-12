@@ -26,9 +26,9 @@ class Payment < ApplicationRecord
       end
 
       pesapal.config = {
-          callback_url:  ENV["PESAPAL_CALLBACK_URL"],
-          consumer_key: ENV["PESAPAL_CONSUMER_KEY"],
-          consumer_secret: ENV["PESAPAL_CONSUMER_SECRET"]
+          callback_url:  Rails.application.credentials[:PESAPAL_CALLBACK_URL],
+          consumer_key: Rails.application.credentials[:PESAPAL_CONSUMER_KEY],
+          consumer_secret: Rails.application.credentials[:PESAPAL_CONSUMER_SECRET]
         }
       # project_id == pesapal_merchant_reference
 

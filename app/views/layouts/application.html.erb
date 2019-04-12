@@ -20,7 +20,7 @@
     <%= yield %>
 
      
-    <script data-turbolinks-eval="false" src="https://maps.googleapis.com/maps/api/js?key=<%=ENV["GOOGLE_API_KEY"]%>&amp;libraries=places"></script>
+    <script data-turbolinks-eval="false" src="https://maps.googleapis.com/maps/api/js?key=<%=Rails.application.credentials[:GOOGLE_API_KEY]%>&amp;libraries=places"></script>
   </body>
 </html>
 

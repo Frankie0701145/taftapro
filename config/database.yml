@@ -35,6 +35,6 @@ production:
   adapter: postgresql
   encoding: unicode
   pool: 5
-  username: <%= ENV["DB_USERNAME"] %>
-  password: <%= ENV["DB_PASSWORD"] %>
+  username: <%= Rails.application.credentials.DB_USERNAME %>
+  password: <%= Rails.application.credentials.DB_PASSWORD  %>
   database: taftapro_production
