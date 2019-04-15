@@ -54,12 +54,12 @@ class ProfessionalsController < ApplicationController
 
   def update
     if Rails.env.production?
-      storage = Google::Cloud::Storage.new project_id: ENV["GOOGLE_STORAGE_PROJECT_ID"], credentials: JSON.parse(ENV["GOOGLE_APPLICATION_CREDENTIALS"])
+      storage = Google::Cloud::Storage.new project_id: Rails.application.credentials[:GOOGLE_STORAGE_PROJECT_ID], credentials: JSON.parse(Rails.application.credentials[:GOOGLE_APPLICATION_CREDENTIALS])
     else
-      storage = Google::Cloud::Storage.new project_id: ENV["GOOGLE_STORAGE_PROJECT_ID"]
+      storage = Google::Cloud::Storage.new project_id: Rails.application.credentials[:GOOGLE_STORAGE_PROJECT_ID]
     end
 
-    bucket  = storage.bucket ENV["IMAGES_BUCKET"]
+    bucket  = storage.bucket Rails.application.credentials[:IMAGES_BUCKET]
 
     file_path = params[:professional][:picture].tempfile.path
     file_name = params[:professional][:picture].original_filename
