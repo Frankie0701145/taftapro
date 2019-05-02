@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   get "/quotation/:id", to: "clients#quotation", as: "quotation"
   put "/decline_quotation", to: "clients#decline_quotation"
   post "/upload_quotation", to: "professionals#upload_quotation"
+  post "/upload_picture/:id", to: "professionals#upload_picture", as: "upload_picture"
   post "/submit_answers", to: "answers#find_or_create_client"
   patch "/change_password/:id", to: "clients#change_password", as: "change_password"
   get "/pesapalcallback", to: "pesa_pals#callback"
