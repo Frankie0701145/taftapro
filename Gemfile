@@ -40,6 +40,8 @@ gem "rubocop-rails_config"
 
 gem "google-cloud-storage"
 
+gem 'fog-aws'
+
 # Use ActiveStorage variant
 gem 'mini_magick', '~> 4.8'
 
@@ -85,8 +87,6 @@ group :test do
   # Easy installation and use of chromedriver to run system tests with Chrome
   # gem 'chromedriver-helper'
 end
-group :production do
-  gem "fog-aws"
-end
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
