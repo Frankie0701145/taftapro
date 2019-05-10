@@ -67,11 +67,9 @@ class ProfessionalsController < ApplicationController
   end
 
   def upload_picture
-     if Rails.env.production?
-       storage = Google::Cloud::Storage.new project_id: Rails.application.credentials[:GOOGLE_STORAGE_PROJECT_ID], credentials: JSON.parse(Rails.application.credentials[:GOOGLE_APPLICATION_CREDENTIALS])
-     else
-       storage = Google::Cloud::Storage.new project_id: Rails.application.credentials[:GOOGLE_STORAGE_PROJECT_ID]
-     end 
+    
+    storage = Google::Cloud::Storage.new project_id: Rails.application.credentials[:GOOGLE_STORAGE_PROJECT_ID], credentials: JSON.parse(Rails.application.credentials[:GOOGLE_APPLICATION_CREDENTIALS])
+    
     bucket  = storage.bucket Rails.application.credentials[:IMAGES_BUCKET]
     file_path = params[:professional][:picture].tempfile.path
     file_name = params[:professional][:picture].original_filename
