@@ -1,3 +1,4 @@
+
 <div class="row my-4">
 
 	<div class="col-md-8 offset-md-1">
@@ -27,7 +28,7 @@
 				%>
 				<tr>
 					<td><%= link_to pro_name, professional %></td>
-					<td><%= link_to File.basename(quotation.quotation_document_url), quotation.quotation_document_url %></td>
+					<td><%= link_to File.basename(quotation.quotation_document_url).split('?')[0], quotation.quotation_document_url %></td>
 					<td><%=number_with_precision(quotation.amount, precision: 2)%>KSH</td>
 					<td><%= link_to quotation.request_id, request_path(quotation.request_id) if current_professional%></td>
 					<td><%=quotation.created_at.in_time_zone("Nairobi").strftime("%B %d, %Y at %I:%M:%p")%></td>

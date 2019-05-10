@@ -19,7 +19,7 @@
                 %>
                 <tr>
                   <td><%= link_to pro_name, professional %></td>
-                  <td><%= link_to File.basename(@quotation.quotation_document_url), @quotation.quotation_document_url %></td>
+                  <td><%= link_to File.basename(@quotation.quotation_document_url).split("?")[0], @quotation.quotation_document_url %></td>
                   <td><%= link_to @quotation.request_id, request_path(@quotation.request_id)%></td>
                   <td><%=@quotation.created_at.in_time_zone("Nairobi").strftime("%B %d, %Y at %I:%M:%p")%></td>
                 </tr>

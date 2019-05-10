@@ -53,20 +53,7 @@ class ProfessionalsController < ApplicationController
   end
 
   def update
-    if Rails.env.production?
-      storage = Google::Cloud::Storage.new project_id: ENV["GOOGLE_STORAGE_PROJECT_ID"], credentials: JSON.parse(ENV["GOOGLE_APPLICATION_CREDENTIALS"])
-    else
-      storage = Google::Cloud::Storage.new project_id: ENV["GOOGLE_STORAGE_PROJECT_ID"]
-    end
-
-    bucket  = storage.bucket ENV["IMAGES_BUCKET"]
-
-    file_path = params[:professional][:picture].tempfile.path
-    file_name = params[:professional][:picture].original_filename
-
-    # Upload file to Google Cloud Storage bucket
-    file = bucket.create_file file_path, file_name, acl: "public"
-
+    
     @professional = current_professional
     if @professional.update(professional_edit_profile_params)
 
@@ -77,6 +64,27 @@ class ProfessionalsController < ApplicationController
       render "edit"
     end
     
+  end
+
+  def upload_picture
+     if Rails.env.production?
+       storage = Google::Cloud::Storage.new project_id: Rails.application.credentials[:GOOGLE_STORAGE_PROJECT_ID], credentials: JSON.parse(Rails.application.credentials[:GOOGLE_APPLICATION_CREDENTIALS])
+     else
+       storage = Google::Cloud::Storage.new project_id: Rails.application.credentials[:GOOGLE_STORAGE_PROJECT_ID]
+     end 
+    bucket  = storage.bucket Rails.application.credentials[:IMAGES_BUCKET]
+    file_path = params[:professional][:picture].tempfile.path
+    file_name = params[:professional][:picture].original_filename
+    # Upload file to Google Cloud Storage bucket
+    file = bucket.create_file file_path, file_name, acl: "public"
+    @professional = current_professional
+    if @professional.update(professional_upload_picture_params)
+       flash.now[:success] = "Profile Saved successfully"
+       render "edit"
+    else
+       flash.now[:danger] = "The profile was not saved"
+       render "edit"
+    end
     # The public URL can be used to directly access the uploaded file via HTTP
     @professional.update_attribute(:google_picture_url, URI::encode(file.public_url))
   end
@@ -104,9 +112,11 @@ class ProfessionalsController < ApplicationController
     end
 
     def professional_edit_profile_params
-      params.require(:professional).permit(:first_name, :last_name, :service, :city, :country, :uniqueness_comment, :business_name, :career_start_date, :specialization, :phone_number, :bio, :picture)
+      params.require(:professional).permit(:first_name, :last_name, :service, :city, :country, :uniqueness_comment, :business_name, :career_start_date, :specialization, :phone_number, :bio)
     end
-
+    def professional_upload_picture_params
+      params.require(:professional).permit(:picture)
+    end
     def quotation_params
       params.require(:quotation).permit(:quotation_document, :professional_id, :client_id, :request_id, :amount)
     end

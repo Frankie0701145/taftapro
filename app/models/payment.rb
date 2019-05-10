@@ -2,7 +2,7 @@
 #
 # Table name: payments
 #
-#  id                              :integer          not null, primary key
+#  id                              :bigint(8)        not null, primary key
 #  amount                          :decimal(10, 2)
 #  mpesa_status                    :string
 #  msisdn                          :string
@@ -30,9 +30,9 @@ class Payment < ApplicationRecord
       end
 
       pesapal.config = {
-          callback_url:  ENV["PESAPAL_CALLBACK_URL"],
-          consumer_key: ENV["PESAPAL_CONSUMER_KEY"],
-          consumer_secret: ENV["PESAPAL_CONSUMER_SECRET"]
+          callback_url:  Rails.application.credentials[:PESAPAL_CALLBACK_URL],
+          consumer_key: Rails.application.credentials[:PESAPAL_CONSUMER_KEY],
+          consumer_secret: Rails.application.credentials[:PESAPAL_CONSUMER_SECRET]
         }
       # project_id == pesapal_merchant_reference
 

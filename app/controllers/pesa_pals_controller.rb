@@ -12,9 +12,9 @@ class PesaPalsController < ApplicationController
 
         @client = current_client
         pesapal.config = {
-          callback_url:  ENV["PESAPAL_CALLBACK_URL"],
-          consumer_key: ENV["PESAPAL_CONSUMER_KEY"],
-          consumer_secret: ENV["PESAPAL_CONSUMER_SECRET"]
+          callback_url: Rails.application.credentials[:PESAPAL_CALLBACK_URL],
+          consumer_key: Rails.application.credentials[:PESAPAL_CONSUMER_KEY],
+          consumer_secret: Rails.application.credentials[:PESAPAL_CONSUMER_SECRET]
         }
 
         description = "Payment for project id #{@project.id}"
@@ -84,9 +84,10 @@ class PesaPalsController < ApplicationController
       end
 
       pesapal.config = {
-        callback_url:  ENV["PESAPAL_CALLBACK_URL"],
-        consumer_key: ENV["PESAPAL_CONSUMER_KEY"],
-        consumer_secret: ENV["PESAPAL_CONSUMER_SECRET"]
+        callback_url: Rails.application.credentials[:PESAPAL_CALLBACK_URL],
+        consumer_key: Rails.application.credentials[:PESAPAL_CONSUMER_KEY],
+        consumer_secret: Rails.application.credentials[:PESAPAL_CONSUMER_SECRET]
+
       }
 
       @response_to_ipn = pesapal.ipn_listener(pesapal_notification_type, pesapal_merchant_reference, pesapal_transaction_tracking_id).with_indifferent_access

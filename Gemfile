@@ -40,6 +40,8 @@ gem "rubocop-rails_config"
 
 gem "google-cloud-storage"
 
+gem 'fog-aws'
+
 # Use ActiveStorage variant
 gem 'mini_magick', '~> 4.8'
 
