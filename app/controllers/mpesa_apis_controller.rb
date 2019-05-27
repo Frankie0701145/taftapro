@@ -11,7 +11,7 @@ class MpesaApisController < ApplicationController
       # found the project
       payment = Payment.new(trans_id: params[:TransID], client_id: project.client_id,
         project_id: project.id, professional_id: project.professional_id, payment_type: "mpesa",
-        amount: params[:TransAmount], trans_time: params[:TransTime], msisdn:params[:MSISDN],
+        amount: params[:TransAmount], msisdn:params[:MSISDN],
         mpesa_status: "pending", status: Payment.status_pending
       )
       if payment.save
@@ -29,7 +29,7 @@ class MpesaApisController < ApplicationController
   def confirmation_callback
     payment = Payment.where(trans_id: params[:TransID], project_id: params[:BillRefNumber]).first
     if payment
-      payment.update_attributes(status:  Payment.status_completed, mpesa_status: "completed")
+      payment.update_attributes(status:  Payment.status_completed, mpesa_status: "completed", trans_time: params[:TransTime])
       project = Project.find_by(id: params[:BillRefNumber])
       if project
         project_debit_balance = project.debit_balance - payment.amount
