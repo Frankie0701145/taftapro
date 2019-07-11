@@ -68,13 +68,13 @@ class ProfessionalsController < ApplicationController
 
   def upload_picture
     
-    storage = Google::Cloud::Storage.new project_id: Rails.application.credentials[:GOOGLE_STORAGE_PROJECT_ID], credentials: JSON.parse(Rails.application.credentials[:GOOGLE_APPLICATION_CREDENTIALS])
+    #storage = Google::Cloud::Storage.new project_id: Rails.application.credentials[:GOOGLE_STORAGE_PROJECT_ID], credentials: JSON.parse(Rails.application.credentials[:GOOGLE_APPLICATION_CREDENTIALS])
     
-    bucket  = storage.bucket Rails.application.credentials[:IMAGES_BUCKET]
-    file_path = params[:professional][:picture].tempfile.path
-    file_name = params[:professional][:picture].original_filename
+    #bucket  = storage.bucket Rails.application.credentials[:IMAGES_BUCKET]
+    #file_path = params[:professional][:picture].tempfile.path
+    #file_name = params[:professional][:picture].original_filename
     # Upload file to Google Cloud Storage bucket
-    file = bucket.create_file file_path, file_name, acl: "public"
+    #file = bucket.create_file file_path, file_name, acl: "public"
     @professional = current_professional
     if @professional.update(professional_upload_picture_params)
        flash.now[:success] = "Profile Saved successfully"
@@ -83,8 +83,6 @@ class ProfessionalsController < ApplicationController
        flash.now[:danger] = "The profile was not saved"
        render "edit"
     end
-    # The public URL can be used to directly access the uploaded file via HTTP
-    @professional.update_attribute(:google_picture_url, URI::encode(file.public_url))
   end
 
   def upload_quotation
