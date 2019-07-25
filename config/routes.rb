@@ -26,8 +26,8 @@ Rails.application.routes.draw do
   get "/pesapalcallback", to: "pesa_pals#callback"
   get "/pesapal_payment/:id", to: "pesa_pals#pesapal_payment",  as: "pesapal_payment"
   get "/pesapal_ipn", to: "pesa_pals#ipn"
-  post "/randomisedMbecaConfUrl", to: "mpesa_apis#confirmation_callback", as: "mpesaconfirmationcallback"
-  post "/randomisedMbecaValUrl", to: "mpesa_apis#validation_callback", as: "mpesavalidationcallback"
+  post "/randomisedConfUrl/:id", to: "mpesa_apis#confirmation_callback", as: "mpesaconfirmationcallback"
+  post "/randomisedValUrl/:id", to: "mpesa_apis#validation_callback", as: "mpesavalidationcallback"
   resources :clients
   resources :client_password_resets, only: %i[new create edit update]
   resources :professional_password_resets, only: %i[new create edit update]

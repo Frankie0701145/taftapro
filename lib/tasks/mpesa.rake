@@ -23,18 +23,18 @@ class MpesaWrapper
     end
     def register_confirmation_and_validation_url confirmation_url,validation_url,short_code, access_token
 
-      uri = URI('https://api.safaricom.co.ke')
+      uri = URI('https://api.safaricom.co.ke/mpesa/c2b/v1/registerurl')
 
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = true
       http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
-      request = Net::HTTP::Get.new(uri)
+      request = Net::HTTP::Post.new(uri)
       request["accept"] = 'application/json'
       request["content-type"] = 'application/json'
       request["authorization"] = "Bearer #{access_token}"
       request.body = "{\"ShortCode\":\"#{short_code}\",
-          \"ResponseType\":\"Cancel\",
+          \"ResponseType\":\"Cancelled\",
           \"ConfirmationURL\":\"#{confirmation_url}\",
           \"ValidationURL\":\"#{validation_url}\"}"
 
