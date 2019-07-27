@@ -1,7 +1,12 @@
 class MpesaApisController < ApplicationController
   #skipped the csrf in this controller
   skip_before_action :verify_authenticity_token
+  def mpesa_payment
+    @project_id = params[:id]
+    @shortcode = Rails.application.credentials[:MPESA_SHORT_CODE]
+    @project_debit_balance = Project.where( id: @project_id).pluck(:debit_balance)[0]
 
+  end
   #endpoint to validate the mpesa transaction
   def validation_callback
     #first check to see if there is a project with that project id which is the BillRefNumber

@@ -1,0 +1,66 @@
+<div class="container">
+    <div class="row justify-content-center">
+       <div class="col-9 mt-3">
+            <div class="row justify-content-center">
+                <div class="col-4">
+                    <%= image_tag("mpesa.jpeg", width:"55px", height:"55px", class:"card-img-top", alt: "Mpesa") %>
+                </div>
+            </div>
+            <div class="row p-3">
+
+                  <h6 class="pt-2">STEP 1</h6>
+                  <div class="container border-top pt-3">
+                    <div class="row justify-content-between">
+                      <div class="col-3">
+                        <%= image_tag("phone.jpg", width:"140px", height:"140px", class:"card-img-top", alt: "Mpesa" )%>
+                      </div>
+                      <div class="col-7 pt-4">
+                        <h5 class="text-success">Select PayBill</h5>
+                        <p>Go to your Safaricom menu and select M-Pesa,then lipa na Mpesa.</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <h6 class="pt-2">STEP 2</h6>
+                  <div class="container border-top pt-3">
+                    <div class="row justify-content-between">
+                      <div class="col-3">
+                            <%= image_tag("phone.jpg", width:"140px", height:"140px", class:"card-img-top", alt: "Mpesa" )%>
+                      </div>
+                      <div class="col-7 pt-4">
+                        <h5 class="text-success">Enter business number <%=@shortcode%></h5>
+                        <p>
+                          Enter the project Id as the account Number.
+                        </p>
+                        <p>
+                          <span class="text-primary">Project Id=<%=@project_id%>.</span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <h6 class="pt-2">STEP 3</h6>
+                  <div class="container border-top pt-3">
+                    <div class="row justify-content-between">
+
+                        <div class="col-3">
+                            <%= image_tag("phone.jpg", width:"140px", height:"140px", class:"card-img-top", alt: "Mpesa" )%>
+                        </div>
+
+                        <div class="col-7 pt-4">
+                          <h5 class="text-success">Confirm your payment</h5>
+                          <p>
+                            Enter your payment amount, then your M-PESA PIN. confirm all detailes and press ok. Payment Amount.
+                          </p>
+                          <p class="pt-0 mt-0">
+                            <span class="text-primary">
+                              <%=number_with_precision(@project_debit_balance, precision: 2, :delimiter => ',')%> KSH
+                            <span>
+                          </p>
+                        </div>
+                    </div>
+                  </div>
+            </div>
+        </div>
+    </div>
+</div>
