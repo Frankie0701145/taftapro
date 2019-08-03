@@ -12,6 +12,7 @@ assets:precompile
 autoprefixer:info
 cache_digests:dependencies
 cache_digests:nested_dependencies
+categories:create_categories_services_and_questions
 db:create
 db:drop
 db:environment:set
@@ -29,6 +30,7 @@ db:structure:dump
 db:structure:load
 db:version
 dev:cache
+erd
 geocode:all
 geocoder:maxmind:geolite:download
 geocoder:maxmind:geolite:extract
@@ -37,6 +39,8 @@ geocoder:maxmind:geolite:load
 initializers
 log:clear
 middleware
+mpesa:development:register_confirmation_and_validation_url
+mpesa:production:register_confirmation_and_validation_url
 notes
 notes:custom
 remove_annotation
