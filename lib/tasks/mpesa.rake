@@ -81,6 +81,7 @@ namespace :mpesa do
         Confirmation_url = Rails.application.credentials[:MPESA_CONFIRMATION_URL]
         Validation_url = Rails.application.credentials[:MPESA_VALIDATION_URL]
         Short_code = Rails.application.credentials[:MPESA_SHORT_CODE]
+        puts "Validation url: #{Validation_url}", "Confirmation url: #{Confirmation_url}"
         puts "consumer_key:#{Consumer_key} consumer_secret: #{Consumer_secret}"
         response_body = MpesaWrapper.generate_access_token(Consumer_key, Consumer_secret, URL_accesstoken)
         puts response_body
