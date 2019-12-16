@@ -2,7 +2,7 @@
 #
 # Table name: payments
 #
-#  id                              :bigint(8)        not null, primary key
+#  id                              :integer          not null, primary key
 #  amount                          :decimal(10, 2)
 #  mpesa_status                    :string
 #  msisdn                          :string

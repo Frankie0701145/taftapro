@@ -3,7 +3,7 @@
 #
 # Table name: questions
 #
-#  id          :bigint(8)        not null, primary key
+#  id          :integer          not null, primary key
 #  answer      :string
 #  answer_type :string
 #  question    :text

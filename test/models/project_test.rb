@@ -3,7 +3,7 @@
 #
 # Table name: projects
 #
-#  id              :bigint(8)        not null, primary key
+#  id              :integer          not null, primary key
 #  debit_balance   :decimal(10, 2)   default(0.0), not null
 #  due             :datetime
 #  paid            :decimal(10, 2)   default(0.0), not null

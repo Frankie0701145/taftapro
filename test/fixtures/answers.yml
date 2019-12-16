@@ -2,7 +2,7 @@
 #
 # Table name: answers
 #
-#  id                 :bigint(8)        not null, primary key
+#  id                 :integer          not null, primary key
 #  answer             :string
 #  client_token       :string
 #  professional_email :string

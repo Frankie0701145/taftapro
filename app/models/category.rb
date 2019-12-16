@@ -3,7 +3,7 @@
 #
 # Table name: categories
 #
-#  id         :bigint(8)        not null, primary key
+#  id         :integer          not null, primary key
 #  name       :string
 #  service    :string
 #  created_at :datetime         not null

@@ -2,7 +2,7 @@
 #
 # Table name: professionals
 #
-#  id                 :bigint(8)        not null, primary key
+#  id                 :integer          not null, primary key
 #  bio                :text
 #  business_name      :string
 #  career_start_date  :date

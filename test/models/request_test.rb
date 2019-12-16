@@ -3,7 +3,7 @@
 #
 # Table name: requests
 #
-#  id              :bigint(8)        not null, primary key
+#  id              :integer          not null, primary key
 #  location        :string
 #  service         :string
 #  status          :string           default("Not Sent")
